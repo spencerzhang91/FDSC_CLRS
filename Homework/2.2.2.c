@@ -22,8 +22,7 @@ typedef struct {Date mrd;} Married;
     
 typedef struct {    
     enum marriage_state {
-        S, M,
-        D, W
+        S, M, D, W
     };
     
     union states{

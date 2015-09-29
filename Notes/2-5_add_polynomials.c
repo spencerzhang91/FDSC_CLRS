@@ -1,7 +1,9 @@
 /* Function adding two polynomials */
 /* Code list 2-5 and list 2-6 together become a program */
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX 1000
+#define COMPARE(a, b) ((a)>=(b))? ((a)==(b)? 0: 1): -1
 
 typedef struct {
     float coef;
@@ -16,11 +18,11 @@ int avail = 0;         // global variable...
 void padd(int starta, int finisha, int startb, int finishb,
           int *startd, int *finishd);
           
-void attach(float coefficient, int exponet);
+void attach(float coefficient, int exponent);
 
 int main(void)
 {
-    
+    // for now not doing anything...
     return 0;
 }
 
@@ -60,5 +62,17 @@ void padd(int starta, int finisha, int startb, int finishb,
     for (; startb <= finishb; startb++)
         attach(terms[startb].coef, terms[startb].expon);
     *finishd = avail - 1;
+}
+
+void attach(float coefficient, int exponent)
+{
+    // add a new term to the polynomial
+    if (avail >= MAX)
+    {
+        fprintf(stderr, "Too many terms in the polynomial\n");
+        exit(1);
+    }
+    terms[avail].coef = coefficient;
+    terms[avail].expon = exponent;   
 }
 

@@ -31,7 +31,7 @@ void transpose(term a[], term b[])
 		for (i = 0; i < a[0].col; i++)			// transpose according to a's col (col by col)
 			for (j = 0; j < n; j++)				// for all elements...
 				if (a[j].col == i) 				// if it is in a's current col
-				{								// then transpose it into b's row
+				{								// then transpose it into b's current row
 					b[curb].row = a[j].col;		
 					b[curb].col = a[j].row;
 					b[curb].val = a[j].val;

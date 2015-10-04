@@ -2,7 +2,7 @@
 /* code list 2-7 */
 #include <stdio.h>
 #define MAX 100
-#define N 10
+#define N 5
 
 typedef struct {
 	int col;
@@ -13,7 +13,14 @@ typedef struct {
 void transpose(term a[], term b[]);
 int main(void)
 {
-	term a[N], b[N];
+	term a[N] = {{2,2,1},{0,0,0},{0,1,2},{1,0,0},{1,1,0}};
+	term b[N] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+	transpose(a, b);
+	
+	//for (int i = 0; i < N; i++)
+		//if (a[i].val)
+			//printf("row: %d  col: %d -> val: %d\n", b[i].row, b[i].col, b[i].val);
+	
 	return 0;
 }
 
@@ -29,12 +36,14 @@ void transpose(term a[], term b[])
 	{
 		curb = 1;
 		for (i = 0; i < a[0].col; i++)			// transpose according to a's col (col by col)
-			for (j = 0; j < n; j++)				// for all elements...
+			for (j = 0; j <= n; j++)				// for all elements...
 				if (a[j].col == i) 				// if it is in a's current col
 				{								// then transpose it into b's current row
-					b[curb].row = a[j].col;		
+					b[curb].row = a[j].col;
 					b[curb].col = a[j].row;
 					b[curb].val = a[j].val;
+					printf("a::= row: %d  col: %d -> val: %d\n", a[j].row, a[j].col, a[j].val);
+					printf("b::= row: %d  col: %d -> val: %d\n", b[curb].row, b[curb].col, b[curb].val);
 					curb++;
 				}
 	}	

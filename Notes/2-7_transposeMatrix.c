@@ -13,8 +13,8 @@ typedef struct {
 void transpose(term a[], term b[]);
 int main(void)
 {
-	term a[N] = {{2,2,1},{0,0,0},{0,1,2},{1,0,0},{1,1,0}};
-	term b[N] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+	term a[N] = {{2,2,1},{0,1,2}};
+	term b[N];
 	transpose(a, b);
 	
 	//for (int i = 0; i < N; i++)

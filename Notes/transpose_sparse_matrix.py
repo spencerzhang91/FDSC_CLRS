@@ -60,31 +60,37 @@ def transpose_fast(matrix: list)->list:
     matrix.
     '''
     info = Element(matrix[0].col, matrix[0].row, matrix[0].val)
-    new_matrix = [0] * (matrix[0].val + 1)  # info as [0] and other 3 vals as [1][2][3]
+    new_matrix = [0] * (matrix[0].val + 1)      # info as [0] and other 3 vals as [1][2][3]
     starting_pos = [0] * matrix[0].col
-    row_elements = [0] * matrix[0].col      # non-zero elements in origin's each col
-                                            # which means in new matrix's each row
+    row_elements = [0] * matrix[0].col          # non-zero elements in origin's each col
+                                                # which means in new matrix's each row
     new_matrix[0] = info
-    starting_pos[0] = 1                     # new matrix's first element is 'info' too
+    starting_pos[0] = 1                         # new matrix's first element is 'info' too
     if info.val:
         for i in range(1, matrix[0].val + 1):
             row_elements[matrix[i].col] += 1
+        
         for i in range(1, matrix[0].col):
             starting_pos[i] = starting_pos[i-1] + row_elements[i-1]
-        for i in range(1, matrix[0].val + 1):
+        
+        for i in range(1, matrix[0].val + 1):   # because origin is sorted according to row
             j = starting_pos[matrix[i].col]
+            if new_matrix[j]:
+                j += 1
             new_matrix[j] = Element(matrix[i].col, matrix[i].row, matrix[i].val)
+                
+            
     return new_matrix
         
         
 
 if __name__ == '__main__':
     
-    M1 = [Element(6,8,3), Element(1,3,3), Element(3,2,-5), Element(4,5,2)]
-    print('M1:\n', M1)
+    M1 = [Element(6,8,4), Element(1,3,3), Element(1,5,1), Element(3,2,-5), Element(4,5,2)]
+    print('M1:', M1)
     M2 = transpose_sparse(M1)
     M3 = transpose_ordered(M1)
-    print('M2:\n', M2)
-    print('M3:\n', M3)
+    #print('M2:\n', M2)
+    #print('M3:\n', M3)
     M4 = transpose_fast(M1)
-    print('M4:\n', M4)
+    print('M4:', M4)

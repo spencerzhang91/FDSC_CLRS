@@ -3,7 +3,7 @@ class Element:
     '''
     A class represent a non-zero element of a sparse matrix
     '''
-    def __init__(self, row, col, val):
+    def __init__(self, row=0, col=0, val=0):
         self.row = row
         self.col = col
         self.val = val
@@ -21,17 +21,24 @@ def transpose_sparse(matrix: list) -> list:
     '''
     A function to transpose sparse matrix
     '''
-    
-
-
-
+    info = Element()
+    info.row = matrix[0].col
+    info.col = matrix[0].row
+    info.val = matrix[0].val
+    new_matrix = [info]
+    for i in range(1,len(matrix)):
+        new_matrix.append(Element(matrix[i].col,
+                                  matrix[i].row,
+                                  matrix[i].val))
+    return new_matrix
 
 
 
 
 if __name__ == '__main__':
     
-    M1 = [Element(6,6,3), Element(1,1,3), Element(4,2,-5), Element(5,5,2)]
+    M1 = [Element(6,8,3), Element(1,1,3), Element(4,2,-5), Element(5,5,2)]
+    print(M1)
     M2 = transpose_sparse(M1)
     print(M2)
     

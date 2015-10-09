@@ -1,5 +1,6 @@
 /* code list 2-9 sparse matrix multiplication */
 #define MAX 10
+#define COMPARE(x, y) ((x)>(y))? (((x)==(y))? 0: 1): -1
 #include <stdio.h>
 
 typedef struct {                                                        // The same struct definition as 2-7

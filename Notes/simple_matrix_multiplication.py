@@ -32,8 +32,8 @@ def mul_matrix(m1:list, m2:list)->list:
 
 if __name__ == '__main__':
 
-    M1 = [[1,1,1],[1,1,1]]
-    M2 = [[1,1],[1,1],[1,1]]
+    M1 = [[0,0,0],[0,1,0]]
+    M2 = [[0,0,0,1],[0,1,0,0],[0,0,0,0]]
     res = mul_matrix(M1, M2)
     print(res)
     

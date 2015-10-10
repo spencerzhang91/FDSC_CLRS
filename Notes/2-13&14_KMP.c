@@ -44,8 +44,8 @@ int pmatch(char *string, char *pat)
     return (j == lenp)? (i-lenp): -1;
 }
 
-void fail(char *pat)
-{
+void fail(char *pat)                                        // the failure funtion of a pattern is decided by
+{                                                           // pattern itself
     /* compute the pattern's failure funtion */
     int n = strlen(pat);
     int i;

@@ -14,9 +14,11 @@ char pat[MAX_PATTERN_SIZE];
 
 int main(void)
 {
-    int res;
-    res = test(1,2);
-    printf("the result is %d\n", res);
+    char string[] = "abcabcde";
+    char pat[] = "abcd";
+    fail(pat);                                              // calculate failure funtion
+    printf("The matching result is %d\n",
+            pmatch(string, pat));
     
     return 0;
 }
@@ -40,5 +42,23 @@ int pmatch(char *string, char *pat)
             j = failure[j-1]+1;
     }
     return (j == lenp)? (i-lenp): -1;
+}
+
+void fail(char *pat)
+{
+    /* compute the pattern's failure funtion */
+    int n = strlen(pat);
+    int i;
+    failure[0] = -1;
+    for (int j = 1; j < n; j++)
+    {
+        i = failure[j-1];
+        while ((pat[j] != pat[i+1]) && (i >= 0))
+            i = failure[i];
+        if (pat[j] == pat[i+1])
+            failure[j] = i + 1;
+        else
+            failure[j] = -1;
+    }
 }
 

@@ -4,9 +4,9 @@
 #include <string.h>
 void fail(char *pattern, int *fa, int plen);
 
-int main(void)
+int main(void)                                                          // test function
 {
-    char *pat = "abcabca";
+    char *pat = "ababacabab";
     int pat_length = strlen(pat);
     int failure_array[pat_length];
     

@@ -36,11 +36,11 @@ int pmatch(char *string, char *pat)
             i++;
             j++;
         }
-        else if (j == 0)                                    // not matching the pattern but haven't 
-            i++;                                            // come to end of string yet
-        else                                                // have come to the end of string, not match
-            j = failure[j-1]+1;
-    }
+        else if (j == 0)                                    // if mismatch happens at the beginning of pattern,
+            i++;                                            // then move to next char of string and try match with pattern again
+        else                                                // if mismatch happens in the middle of pattern,
+            j = failure[j-1]+1;                             // then get j index from failure function and decide from which index
+    }                                                       // should pattern be compared with string's mismatching char again
     return (j == lenp)? (i-lenp): -1;
 }
 

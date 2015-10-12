@@ -10,5 +10,9 @@ typedef struct {
 
 int main(void)
 {
+    element A[2] = {{2,3,1}, {1,1,1}};
+    element B[3] = {{3,4,2}, {0,4,1}, {1,1,1}};
+    printf("Matrix A's only non-zero element: %d\n", A[1].val);
     
+    return 0;
 }

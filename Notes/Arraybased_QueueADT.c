@@ -1,4 +1,4 @@
-/* Queue ADT implementation */
+/* Circular array based Queue ADT implementation */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

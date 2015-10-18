@@ -5,14 +5,15 @@
 #define ElementType int
 #define MAXSIZE 10
 
-typedef struct {
+struct Node{
 	ElementType data;
-	Node *next;
-} Node;
+	struct Node *next;
+};
 
 typedef struct {
-	Node *front, *rear;
-	int cursize = 0;
+	struct Node *front;
+    struct Node *rear;
+	int cursize;
 	int maxsize;
 } Qnode;
 
@@ -26,7 +27,11 @@ ElementType dequeue(Queue Q);
 
 int main(void) 									// test fucntion
 {
-	
+	Queue NewQ = CreateQueue(MAXSIZE);
+	if (IsFull(NewQ))
+		printf("The queue is full.\n");
+	if (IsEmpty(NewQ))
+		printf("The queue is empty.\n");
 	return 0;
 }
 
@@ -50,13 +55,13 @@ bool IsEmpty(Queue Q)
 
 void enqueue(Queue Q, ElementType item)
 {
-	Node *rearcell;
+	struct Node *rearcell;
 	ElementType rearelem = item;
 	if (IsFull(Q))
 		printf("The queue is full.\n");
 	else
 	{
-		rearcell = (Node *)malloc(sizeof(Node));
+		rearcell = (struct Node *)malloc(sizeof(struct Node));
 		rearcell->data = rearelem;
 		if (Q->cursize == 0)
 			Q->front = Q->rear = rearcell;
@@ -71,7 +76,7 @@ void enqueue(Queue Q, ElementType item)
 
 ElementType dequeue(Queue Q)
 {
-	Node *frontcell;
+	struct Node *frontcell;
 	ElementType frontelem;
 	if (IsEmpty(Q))
 	{

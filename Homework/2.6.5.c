@@ -17,7 +17,6 @@ int main(void)
 
 char *strch1(char *string, char ch)
 {
-    int str_len = 0;
     while (string != '\0')
     {
     	string++;

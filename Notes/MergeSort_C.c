@@ -1,4 +1,5 @@
 /* C implementation of merge sort algorithm */
+/* dirver's license application code is like: 粤Abc#********/
 #include <stdio.h>
 #include <stdlib.h>
 #define ElementType int

@@ -8,7 +8,8 @@
 
 void path(void);
 
-typedef struct {                             // move struct (8 directions)
+typedef struct {
+/* move struct (8 directions) */
 	short int vert;
 	short int horiz;
 } offsets;

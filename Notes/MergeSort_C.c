@@ -11,12 +11,12 @@ void display(ElementType *array, int len);
 
 int main(void)
 {
-	ElementType array[MAXLEN] = {10, 4, 2, 14, 44, 1};
+    ElementType array[MAXLEN] = {10, 4, 2, 14, 44, 1};
     display(array, MAXLEN);
     MergeSort(array, MAXLEN);
     display(array, MAXLEN);
 
-	return 0;
+    return 0;
 }
 
 void Msort(ElementType *A, ElementType *temp, int left, int right)
@@ -54,23 +54,23 @@ void Merge(ElementType *A, ElementType *temp, int lpos, int rpos, int rend)
     /* main loop */
     while (lpos <= lend && rpos <= rend)
     {
-    	if (A[lpos] <= A[rpos])
-    		temp[temppos++] = A[lpos++];
-    	else
-    		temp[temppos++] = A[rpos++];
+        if (A[lpos] <= A[rpos])
+            temp[temppos++] = A[lpos++];
+        else
+            temp[temppos++] = A[rpos++];
     }
     while (lpos <= lend)
-    	temp[temppos++] = A[lpos++];
+        temp[temppos++] = A[lpos++];
     while (rpos <= rend)
-    	temp[temppos++] = A[rpos++];
+        temp[temppos++] = A[rpos++];
     /* copy temp array back to A */
     for (i = 0; i < numelements; i++, rend--)
-    	A[rend] = temp[rend];
+        A[rend] = temp[rend];
 }
 
 void display(ElementType *array, int len)
 {
-	for (int i = 0; i < len; i++)
-		printf("%d ", array[i]);
-	printf("\n");
+    for (int i = 0; i < len; i++)
+        printf("%d ", array[i]);
+    printf("\n");
 }

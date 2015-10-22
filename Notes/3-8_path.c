@@ -1,5 +1,6 @@
 /* A maze solving function */
 /* code list 3-8 from page 74 */
+
 void path(void)
 {
     /* output a path through the maze if such a path exists */
@@ -51,3 +52,5 @@ void path(void)
     else
         printf("The maze does not have a path.\n");
 }
+
+

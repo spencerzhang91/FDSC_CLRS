@@ -8,8 +8,3 @@ def count(string):
     print(len(freq))
     return freq
 
-if __name__ == "__main__":
-    s = "To be or not to be, it's a question."
-    d = count(s)
-    for key in d.keys():
-        print(key, '->', d[key])

@@ -3,4 +3,8 @@ Maze solving algorithm discription
 Step 1: Convert a maze into a 2D array. (with entrance and exit marked out)
 Step 2: Create a mark array to record visited walkable cell.
 Step 3: Save all possible moves of one cell to another in a 'movement' array.
-Step 4: Move to UP direction first, push next cell to stack.
+
+Step 4: Always move to UP direction first, if not match with exit cell and have directions left not tried, push this cell to top of stack.
+Step 5: If all possible movement of one cell is tried but not lead to exit, mark it in the mark array and pop it from stack.(Inner loop)
+Step 6: Current cell become the cell on top of stack.
+Outer Loop: While not found and have cells left unvisited, repeat step 4 to step 6.

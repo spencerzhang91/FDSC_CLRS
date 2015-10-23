@@ -12,7 +12,7 @@ void path(void)
     stack[0].row = 1;
     stack[0].col = 1;
     stack[0].dir = 1;
-    while (top > -1 && !found)
+    while (top > -1 && !found) // while still have cells unvisited and not found
     {
         position = delete(&top);
         row = position.row;

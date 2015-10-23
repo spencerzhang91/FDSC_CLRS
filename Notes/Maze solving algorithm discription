@@ -1,0 +1,6 @@
+Maze solving algorithm discription
+
+Step 1: Convert a maze into a 2D array. (with entrance and exit marked out)
+Step 2: Create a mark array to record visited walkable cell.
+Step 3: Save all possible moves of one cell to another in a 'movement' array.
+Step 4: Move to UP direction first, push next cell to stack.

@@ -5,7 +5,7 @@
 
 typedef struct {
 	ElementType *data;
-	int elementnum;
+	int currentnum;
 } Set;
 
 ElementType Create(int len);
@@ -15,5 +15,11 @@ bool Is_In(Set dataset, ElementType ele);
 void Uniont(Set database1, Set database2);
 void Inerception(Set database1, Set database1);
 void Difference(Set database1, Set database2);
+
+int main(void)
+{
+	return 0;
+}
+
 
 

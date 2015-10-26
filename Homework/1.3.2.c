@@ -36,7 +36,7 @@ Set Create(int len)
 
 void Insert(Set dataset, ElementType ele)
 {
-    if (dataset->currentnum < dataset->volume)
+    if (dataset->currentnum < dataset->volume && !Is_In(dataset, ele))
     {
         dataset->data[dataset->currentnum] = ele;
         dataset->currentnum++;

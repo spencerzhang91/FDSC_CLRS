@@ -1,5 +1,6 @@
 /* Excercise 1.3.2: Implementation of a set ADT*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #define ElementType int
 #define MAXNUM 100;
@@ -10,7 +11,7 @@ struct set{
     int volume;
 };
 
-typedef set *Set;
+typedef struct set *Set;
 
 Set Create(int len);
 void Insert(Set dataset, ElementType ele);
@@ -22,6 +23,10 @@ Set Difference(Set dataset1, Set dataset2);
 
 int main(void)
 {
+    Set s1 = Create(10);
+    Insert(s1, 10);
+    bool x = Is_In(s1, 10);
+    printf("%d", x);
     return 0;
 }
 
@@ -47,13 +52,14 @@ void Insert(Set dataset, ElementType ele)
 
 void Remove(Set dataset, ElementType ele)
 {
-    for (int i = 0; i < dataset->currentnum; i++)
+    int i, j;
+    for (i = 0; i < dataset->currentnum; i++)
     {
-        if (dataset[i] == ele)
+        if (dataset->data[i] == ele)
         {
-            for (int j = i; j < dataset->currentnum -1; j++)
-                dataset[j] = dataset[j+1];
-            dataset[j] = NULL;
+            for (j = i; j < dataset->currentnum -1; j++)
+                dataset->data[j] = dataset->data[j+1];
+            dataset->data[j] = '\0';
         }
     }
     printf("The element is not in the set.\n");
@@ -87,7 +93,7 @@ Set Inerception(Set dataset1, Set dataset2)
     Set res = (Set)calloc(1, sizeof(struct set));
     res->data = (ElementType *)calloc(size, sizeof(ElementType));
     for (int i = 0; i < dataset1->volume; i++)
-        if (Is_in(dataset2, dataset1->data[i]))
+        if (Is_In(dataset2, dataset1->data[i]))
             Insert(res, dataset1->data[i]);
     return res;
 }
@@ -99,8 +105,8 @@ Set Difference(Set dataset1, Set dataset2)
     res->data = (ElementType *)calloc(dataset1->volume + dataset2->volume,
                                sizeof(ElementType));
     for (int i = 0; i < dataset1->volume; i++)
-    	if (!Is_in(dataset2, dataset1->data[i]))
-    		Insert(res, dataset1->data[i])
+    	if (!Is_In(dataset2, dataset1->data[i]))
+    		Insert(res, dataset1->data[i]);
 
     return res;
 }

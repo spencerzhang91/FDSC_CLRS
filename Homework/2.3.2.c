@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef PolyNode *Polynomial;
+typedef struct PolyNode *Polynomial; // define a pointer to struct
 struct PolyNode {
     int coef;
     int expo;
@@ -11,14 +11,14 @@ struct PolyNode {
 };
 
 void printpoly(Polynomial P);
-void readpoly(void);
-void mult(Polynomial P1, Polynomial P2);
-void attach(int coef, int expo, Polynomial *prear);
+Polynomial readpoly(void);
+Polynomial mult(Polynomial P1, Polynomial P2);
+void attach(int coef, int expo, Polynomial *prear); // add node to polynomial
 
 int main(void)
 {
-    Polynomial P1 = readpoly(void);
-    Polynomial P2 = readpoly(void);
+    Polynomial P1 = readpoly();
+    Polynomial P2 = readpoly();
     Polynomial PM;
     PM = mult(P1, P2);
     printpoly(PM);
@@ -47,12 +47,12 @@ void printpoly(Polynomial P)
     printf("\n");
 }
 
-void readpoly(void)
+Polynomial readpoly(void)
 {
     int coef, expo, N;
     Polynomial P, rear, t;
 
-    scanf("%d", &N);
+    scanf("%d", &N); // read first integer which represent total items of polynomial
     P = (Polynomial)malloc(sizeof(struct PolyNode));
     P->next = NULL;
     rear = P;
@@ -64,9 +64,10 @@ void readpoly(void)
     t = P;
     P = P->next;
     free(t);
+    return P;
 }
 
-void mult(Polynomial P1, Polynomial P2)
+Polynomial mult(Polynomial P1, Polynomial P2)
 {
     Polynomial P, rear, t1, t2, t;
     int c, e;

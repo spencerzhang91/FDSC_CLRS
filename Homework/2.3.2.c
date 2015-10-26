@@ -28,12 +28,23 @@ int main(void)
 
 void printpoly(Polynomial P)
 {
+	int flag = 0;
 	Polynomial temp = P;
-	while (temp->next)
+	if (!temp)
+		printf("0 0\n");
+	else
 	{
-		printf("%d %d ", temp->coef, temp->expo);
-		temp = temp->next;
+		while (temp)
+		{
+			if (!flag)
+				flag = 1;
+			else
+				printf(" ");
+			printf("%d %d", temp->coef, temp->expo);
+			temp = temp->next;
+		}
 	}
+	printf("\n");
 }
 
 void readpoly(void)

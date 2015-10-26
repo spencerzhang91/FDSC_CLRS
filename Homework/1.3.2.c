@@ -1,5 +1,6 @@
-/* Excercise 1.3.2: Implementation of a set */
+/* Excercise 1.3.2: Implementation of a set ADT*/
 #include <stdio.h>
+#include <stdbool.h>
 #define ElementType int
 #define MAXNUM 100;
 

@@ -7,7 +7,7 @@
 struct set{
     ElementType *data;
     int currentnum;
-    int totoallen;
+    int volume;
 };
 
 typedef set *Set;
@@ -27,7 +27,7 @@ int main(void)
 
 Set Create(int len)
 {
-    Set dataset = (Set)calloc(1, sizeof(Set));
+    Set dataset = (Set)calloc(1, sizeof(struct set));
     dataset->data = (ElementType *)calloc(len, sizeof(ElementType));
     dataset->currentnum = 0;
     dataset->volume = len;
@@ -69,7 +69,7 @@ bool Is_In(Set dataset, ElementType ele)
 
 Set Union(Set dataset1, Set dataset2)
 {
-    Set res = (Set)calloc(1, sizeof(Set));
+    Set res = (Set)calloc(1, sizeof(struct set));
     res->data = (ElementType *)calloc(dataset1->volume + dataset2->volume,
                                sizeof(ElementType));
 
@@ -84,7 +84,7 @@ Set Union(Set dataset1, Set dataset2)
 Set Inerception(Set dataset1, Set dataset2)
 {
     int size = (dataset1->volume >= dataset2->volume)? dataset1->volume: dataset2->volume;
-    Set res = (Set)calloc(1, sizeof(Set));
+    Set res = (Set)calloc(1, sizeof(struct set));
     res->data = (ElementType *)calloc(size, sizeof(ElementType));
     for (int i = 0; i < dataset1->volume; i++)
         if (Is_in(dataset2, dataset1->data[i]))
@@ -95,7 +95,7 @@ Set Inerception(Set dataset1, Set dataset2)
 Set Difference(Set dataset1, Set dataset2)
 {
     /* returns a set that contains elements in dataset1 but not in dataset2 */
-    Set res = (Set)calloc(1, sizeof(Set));
+    Set res = (Set)calloc(1, sizeof(struct set));
     res->data = (ElementType *)calloc(dataset1->volume + dataset2->volume,
                                sizeof(ElementType));
     for (int i = 0; i < dataset1->volume; i++)

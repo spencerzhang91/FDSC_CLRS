@@ -1,0 +1,30 @@
+/* C Implementation of Linked List ADT */
+/* code list 4.2 on page 90 */
+#include <stdio.h>
+#include <stdlib.h>
+#define IsEmpty(x) (!(x))
+
+struct Node {
+	int data;
+	struct Node *next;
+};
+
+typedef struct Node *Linked;
+
+
+int main(void)
+{
+	return 0;
+}
+
+Linked create2(void)
+{
+	/* create linked list with two nodes */
+	Linked head = (Linked)malloc(sizeof(struct Node));
+	Linked tail = (Linked)malloc(sizeof(struct Node));
+	head->data = 1;
+	head->next = tail;
+	tail->data = 2;
+	tail->next = NULL;
+	return head;
+}

@@ -1,8 +1,8 @@
 /* C Implementation of Linked List ADT */
-/* code list 4.2 on page 90 */
+/* code list 4.2 on page 90 to 93 */
 #include <stdio.h>
 #include <stdlib.h>
-#define IsEmpty(x) (!(x))
+#define VAL 10;
 
 struct Node {
 	int data;
@@ -10,12 +10,6 @@ struct Node {
 };
 
 typedef struct Node *Linked;
-
-
-int main(void)
-{
-	return 0;
-}
 
 Linked create2(void)
 {
@@ -27,4 +21,28 @@ Linked create2(void)
 	tail->data = 2;
 	tail->next = NULL;
 	return head;
+}
+
+void InsertA(Linket *ptr, Linked node)
+{
+	/* insert after node if list is not empty */
+	Linked temp = (Linked)malloc(sizeof(struct Node));
+	temp->data = VAL;
+	if (*ptr)
+	{
+		temp->next = node->next;
+		node->next = temp;
+	}
+	else
+	{
+		temp->next = NULL;
+		*ptr = temp;
+	}
+}
+
+void InsertB(Linked list, struct Node target, struct Node innode)
+{
+	/* A function that insert node 'innode' after node 'target'
+	of linked list 'list'*/
+
 }

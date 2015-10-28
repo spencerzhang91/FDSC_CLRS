@@ -16,6 +16,7 @@ Linked InsertB(Linked ptr, Linked node);
 void display(Linked ptr);
 void delete(Linked *ptr, Linked trail);
 Linked find(Linked list, int num);
+void deletenum(Linked *list, int num);
 
 int main(void)
 {
@@ -34,6 +35,18 @@ int main(void)
 
     if (find(newtwo, 1))
         printf("Found.\n");
+
+    deletenum(&newtwo, 1);
+    display(newtwo);
+    
+    deletenum(&newtwo, 2);
+    display(newtwo);
+    
+    deletenum(&newtwo, 10);
+    display(newtwo);
+    
+    deletenum(&newtwo, 10);
+    display(newtwo);
 
     return 0;    
 }
@@ -119,4 +132,28 @@ Linked find(Linked list, int num)
             list = list->next;
     }
     return NULL;
+}
+
+void deletenum(Linked *list, int num)
+{
+    Linked curr = find(*list, num);
+    if (curr)
+    {
+        if (curr == *list)
+        {
+            Linked temp = *list;
+            *list = (*list)->next;
+            free(temp);            
+        }
+        else
+        {
+            Linked prev = *list;
+            while (prev->next != curr)
+                prev = prev->next;
+            prev->next = curr->next;
+            curr->next = NULL;
+            free(curr);
+        }
+    }
+    printf("Not in list or list is empty.\n");
 }

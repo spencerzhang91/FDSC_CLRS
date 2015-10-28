@@ -94,7 +94,7 @@ void display(Linked list)
 
 void delete(Linked *ptr, Linked trail)
 {
-    Linked temp;
+    Linked temp = (Linked)malloc(sizeof(struct Node));
     if (trail)
     {
         temp = trail->next;

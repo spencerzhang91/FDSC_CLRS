@@ -17,6 +17,7 @@ void display(Linked ptr);
 void delete(Linked *ptr, Linked trail);
 Linked find(Linked list, int num);
 void deletenum(Linked *list, int num);
+int length(Linked list);
 
 int main(void)
 {
@@ -29,6 +30,8 @@ int main(void)
     Linked newtwo;
     newtwo = InsertB(TwoNode, TwoNode);
     display(newtwo);
+    int len = length(newtwo);
+    printf("length of newtwo is %d\n", len);
 
     delete(&newtwo, newtwo->next);
     display(newtwo);
@@ -156,4 +159,16 @@ void deletenum(Linked *list, int num)
         }
     }
     printf("Not in list or list is empty.\n");
+}
+
+
+int length(Linked list)
+{
+    int len = 0;
+    while (list)
+    {
+        len++;
+        list = list->next;
+    }
+    return len;
 }

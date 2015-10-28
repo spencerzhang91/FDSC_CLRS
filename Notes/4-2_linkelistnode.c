@@ -10,7 +10,9 @@ struct Node {
 };
 
 typedef struct Node *Linked;
+
 Linked create2(void);
+Linked CreateList(int len);
 void InsertA(Linked *ptr, Linked node);
 Linked InsertB(Linked ptr, Linked node);
 void display(Linked ptr);
@@ -51,6 +53,9 @@ int main(void)
     deletenum(&newtwo, 10);
     display(newtwo);
 
+    printf("New test below:\n");
+    Linked newlist = CreateList(10);
+    display(newlist);
     return 0;    
 }
 
@@ -171,4 +176,27 @@ int length(Linked list)
         list = list->next;
     }
     return len;
+}
+
+Linked CreateList(int len)
+{
+    /* create a linked list with len nodes */
+    if (len <= 0)
+        printf("Invalid list length!\n");
+    else
+    {
+        Linked ptrl = (Linked)malloc(sizeof(struct Node));
+        ptrl->data = 0; ptrl->next = NULL;
+        Linked temp = ptrl;
+        len--;
+        while (len > 0)
+        {
+            Linked curr = (Linked)malloc(sizeof(struct Node));
+            curr->data = 0; curr->next = NULL;
+            temp->next = curr;
+            temp = temp->next;
+            len--;
+        }
+        return ptrl;
+    }
 }

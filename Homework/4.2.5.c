@@ -11,10 +11,17 @@ typedef struct Node *Linked;
 
 Linked CreateList(int len);
 void SkipDelete(Linked *list);
+void display(Linked ptr);
 
 int main(void)
 {
-	Linked List = CreateList(10)
+	Linked List = CreateList(10);
+    display(List);
+    SkipDelete(&List);
+    display(List);
+
+    return 0;
+
 }    
 
 Linked CreateList(int len)
@@ -43,6 +50,30 @@ Linked CreateList(int len)
 
 void SkipDelete(Linked *list)
 {
-	int listlen = length(list);
-	// to be done before Thursday
+	if (*list)
+    {
+        Linked temp = *list;
+        *list = (*list)->next;
+        free(temp);
+    }
+    Linked ptr = *list;
+    while (ptr && ptr->next)
+    {
+        Linked temp = ptr->next;
+        ptr->next = temp->next;
+        ptr = ptr->next;
+        free(temp);
+    }
+}
+
+void display(Linked list)
+{
+    Linked temp = list;
+    while (temp)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+        
+    printf("\n");
 }

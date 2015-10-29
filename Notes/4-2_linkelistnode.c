@@ -21,6 +21,7 @@ void delete(Linked *ptr, Linked trail);
 Linked find(Linked list, int num);
 void deletenum(Linked *list, int num);
 int length(Linked list);
+Linked MergeLists(Linked list1, Linked list2);
 
 int main(void)
 {
@@ -57,6 +58,13 @@ int main(void)
     printf("New test below:\n");
     Linked newlist = CreateList(10);
     display(newlist);
+    
+    printf("Merge test below:\n");
+    Linked listone = CreateList(10);
+    Linked listtwo = CreateList(5);
+    Linked result = MergeLists(listone, listtwo);
+    display(result);
+    
     return 0;    
 }
 
@@ -200,4 +208,33 @@ Linked CreateList(int len)
         }
         return ptrl;
     }
+}
+
+Linked MergeLists(Linked list1, Linked list2)
+{
+    Linked result = (Linked)malloc(sizeof(struct Node));
+    while (list1 && list2)
+    {
+        if (list1->data <= list2->data)
+        {
+            Insert(result, list1->data);
+            list1 = list1->next;
+        }
+        else
+        {
+            Insert(result, list2->data);
+            list2 = list2->next;
+        }
+    }
+    while (list1)
+    {
+        Insert(result, list1->data);
+        list1 = list1->next;
+    }
+    while (list2)
+    {
+        Insert(result, list2->data);
+        list2 = list2->next;
+    }
+    return result;
 }

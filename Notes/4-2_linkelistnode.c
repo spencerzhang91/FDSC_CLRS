@@ -1,5 +1,6 @@
 /* C Implementation of Linked List ADT */
 /* code list 4.2 on page 90 to 93 */
+/* Functions of Excercise 4.2 is added */
 #include <stdio.h>
 #include <stdlib.h>
 #define VAL 10;

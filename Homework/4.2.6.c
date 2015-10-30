@@ -1,29 +1,32 @@
 /* Excercise 4.2.6 */
-Linked MergeLists(Linked list1, Linked list2)
+Linked weave(Linked list1, Linked list2)
 {
-    /* create a new list while remainning original ones */
-    Linke head = (Linked)malloc(sizeof(struct Node));
-    head->data = NULL; head->next = NULL;
-    Linked ptr = head;
+    /* weave two linked lists */
+    Linked newlist = (Linked)malloc(sizeof(struct Node));
+    newlist->data = NULL; newlist->next = NULL;
+    Linked curr = newlist;
+    int flag = 1;
     while (list1 && list2)
     {
-        if (list1->data <= list2->data)
+        if (flag == 1)
         {
-            ptr->next = list1;
+            curr->next = list1;
             list1 = list1->next;
-            ptr = ptr->next;
+            curr = curr->next;
+            flag = 0;
         }
         else
         {
-            ptr->next = list2;
+            curr->next = list2;
             list2 = list2->next;
-            ptr = ptr->next;
+            curr = curr->next;
+            flag = 1;
         }
     }
     if (list1)
-        ptr->next = list1;
+        curr->next = list1;
     if (list2)
-        ptr->next = list2;
-
-    return head;
+        curr->next = list2;
+    newlist = newlist->next;
+    return newlist;
 }

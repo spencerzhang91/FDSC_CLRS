@@ -27,7 +27,7 @@ Linked weave(Linked list1, Linked list2);
 
 int main(void)
 {
-    /*Linked TwoNode = create2();
+    Linked TwoNode = create2();
     display(TwoNode);   
     InsertA(&TwoNode, TwoNode);
     display(TwoNode);  
@@ -58,9 +58,9 @@ int main(void)
     display(listone);
     display(listtwo);
     Linked result = MergeLists(listone, listtwo);
-    display(result); */
+    display(result);
     printf("Weave test below:\n");
-    Linked list1 = CreateList(5);
+    Linked list1 = CreateList(8);
     Linked list2 = CreateList(5);
     display(list1); display(list2);
     Linked wtf = weave(list1, list2);
@@ -245,19 +245,30 @@ Linked weave(Linked list1, Linked list2)
 {
     /* weave two linked lists */
     Linked newlist = (Linked)malloc(sizeof(struct Node));
-    newlist = list1;
+    newlist->data = NULL; newlist->next = NULL;
     Linked curr = newlist;
+    int flag = 1;
     while (list1 && list2)
     {
-        list1 = list1->next;
-        curr->next = list2;
-        list2 = list2->next;
-        curr->next = list1;
-        curr = curr->next;
+        if (flag == 1)
+        {
+            curr->next = list1;
+            list1 = list1->next;
+            curr = curr->next;
+            flag = 0;
+        }
+        else
+        {
+            curr->next = list2;
+            list2 = list2->next;
+            curr = curr->next;
+            flag = 1;
+        }
     }
     if (list1)
         curr->next = list1;
     if (list2)
         curr->next = list2;
+    newlist = newlist->next;
     return newlist;
 }

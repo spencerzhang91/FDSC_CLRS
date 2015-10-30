@@ -1,6 +1,7 @@
 /* C Implementation of Linked List ADT */
 /* code list 4.2 on page 90 to 93 */
 /* Functions of Excercise 4.2 is added */
+/* Test module for all excerciese associate with linked list... */
 #include <stdio.h>
 #include <stdlib.h>
 #define VAL 10;
@@ -22,50 +23,48 @@ Linked find(Linked list, int num);
 void deletenum(Linked *list, int num);
 int length(Linked list);
 Linked MergeLists(Linked list1, Linked list2);
+Linked weave(Linked list1, Linked list2);
 
 int main(void)
 {
-    Linked TwoNode = create2();
-    display(TwoNode);
-    
+    /*Linked TwoNode = create2();
+    display(TwoNode);   
     InsertA(&TwoNode, TwoNode);
-    display(TwoNode);
-    
+    display(TwoNode);  
     Linked newtwo;
     newtwo = InsertB(TwoNode, TwoNode);
     display(newtwo);
     int len = length(newtwo);
     printf("length of newtwo is %d\n", len);
-
     delete(&newtwo, newtwo->next);
     display(newtwo);
-
     if (find(newtwo, 1))
         printf("Found.\n");
-
+    printf("Delete num test below:\n");
     deletenum(&newtwo, 1);
     display(newtwo);
-    
     deletenum(&newtwo, 2);
     display(newtwo);
-    
     deletenum(&newtwo, 10);
     display(newtwo);
-    
     deletenum(&newtwo, 10);
     display(newtwo);
-
     printf("New test below:\n");
     Linked newlist = CreateList(10);
     display(newlist);
-    
     printf("Merge test below:\n");
     Linked listone = CreateList(5);
     Linked listtwo = CreateList(5);
     display(listone);
     display(listtwo);
     Linked result = MergeLists(listone, listtwo);
-    display(result);
+    display(result); */
+    printf("Weave test below:\n");
+    Linked list1 = CreateList(5);
+    Linked list2 = CreateList(5);
+    display(list1); display(list2);
+    Linked wtf = weave(list1, list2);
+    display(wtf);
     
     return 0;    
 }
@@ -240,4 +239,25 @@ Linked MergeLists(Linked list1, Linked list2)
         ptr->next = list2;
 
     return head;
+}
+
+Linked weave(Linked list1, Linked list2)
+{
+    /* weave two linked lists */
+    Linked newlist = (Linked)malloc(sizeof(struct Node));
+    newlist = list1;
+    Linked curr = newlist;
+    while (list1 && list2)
+    {
+        list1 = list1->next;
+        curr->next = list2;
+        list2 = list2->next;
+        curr->next = list1;
+        curr = curr->next;
+    }
+    if (list1)
+        curr->next = list1;
+    if (list2)
+        curr->next = list2;
+    return newlist;
 }

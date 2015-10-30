@@ -24,6 +24,7 @@ void deletenum(Linked *list, int num);
 int length(Linked list);
 Linked MergeLists(Linked list1, Linked list2);
 Linked weave(Linked list1, Linked list2);
+Linked weave2(Linked list1, Linked list2);
 
 int main(void)
 {
@@ -63,7 +64,7 @@ int main(void)
     Linked list1 = CreateList(8);
     Linked list2 = CreateList(5);
     display(list1); display(list2);
-    Linked wtf = weave(list1, list2);
+    Linked wtf = weave2(list1, list2);
     display(wtf);
     
     return 0;    
@@ -245,7 +246,7 @@ Linked weave(Linked list1, Linked list2)
 {
     /* weave two linked lists */
     Linked newlist = (Linked)malloc(sizeof(struct Node));
-    newlist->data = NULL; newlist->next = NULL;
+    newlist->data; newlist->next = NULL;
     Linked curr = newlist;
     int flag = 1;
     while (list1 && list2)
@@ -264,6 +265,29 @@ Linked weave(Linked list1, Linked list2)
             curr = curr->next;
             flag = 1;
         }
+    }
+    if (list1)
+        curr->next = list1;
+    if (list2)
+        curr->next = list2;
+    newlist = newlist->next;
+    return newlist;
+}
+
+Linked weave2(Linked list1, Linked list2)
+{
+    /* weave two linked lists (without using flag) */
+    Linked newlist = (Linked)malloc(sizeof(struct Node));
+    newlist->data; newlist->next = NULL;
+    Linked curr = newlist;
+    while (list1 && list2)
+    {
+        curr->next = list1;
+        list1 = list1->next;
+        curr = curr->next;
+        curr->next = list2;
+        list2 = list2->next;
+        curr = curr->next;
     }
     if (list1)
         curr->next = list1;

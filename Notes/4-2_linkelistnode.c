@@ -60,8 +60,10 @@ int main(void)
     display(newlist);
     
     printf("Merge test below:\n");
-    Linked listone = CreateList(10);
+    Linked listone = CreateList(5);
     Linked listtwo = CreateList(5);
+    display(listone);
+    display(listtwo);
     Linked result = MergeLists(listone, listtwo);
     display(result);
     
@@ -194,14 +196,15 @@ Linked CreateList(int len)
         printf("Invalid list length!\n");
     else
     {
+        int i = 0;
         Linked ptrl = (Linked)malloc(sizeof(struct Node));
-        ptrl->data = 0; ptrl->next = NULL;
+        ptrl->data = i; ptrl->next = NULL;
         Linked temp = ptrl;
         len--;
         while (len > 0)
         {
             Linked curr = (Linked)malloc(sizeof(struct Node));
-            curr->data = 0; curr->next = NULL;
+            curr->data = i++; curr->next = NULL;
             temp->next = curr;
             temp = temp->next;
             len--;
@@ -212,29 +215,29 @@ Linked CreateList(int len)
 
 Linked MergeLists(Linked list1, Linked list2)
 {
-    Linked result = (Linked)malloc(sizeof(struct Node));
+    /* create a new list while remainning original ones */
+    Linked head = (Linked)malloc(sizeof(struct Node));
+    head->data; head->next = NULL;
+    Linked ptr = head;
     while (list1 && list2)
     {
         if (list1->data <= list2->data)
         {
-            append(result, list1->data);
+            ptr->next = list1;
             list1 = list1->next;
+            ptr = ptr->next;
         }
         else
         {
-            append(result, list2->data);
+            ptr->next = list2;
             list2 = list2->next;
+            ptr = ptr->next;
         }
     }
-    while (list1)
-    {
-        append(result, list1->data);
-        list1 = list1->next;
-    }
-    while (list2)
-    {
-        append(result, list2->data);
-        list2 = list2->next;
-    }
-    return result;
+    if (list1)
+        ptr->next = list1;
+    if (list2)
+        ptr->next = list2;
+
+    return head;
 }

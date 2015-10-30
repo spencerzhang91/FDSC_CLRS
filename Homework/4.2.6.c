@@ -27,10 +27,3 @@ Linked MergeLists(Linked list1, Linked list2)
 
     return head;
 }
-
-void MergeList(Linked list1, Linked list2)
-{
-	/* original lists gone, merged into new one */
-
-	
-}

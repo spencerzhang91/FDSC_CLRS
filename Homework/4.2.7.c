@@ -2,7 +2,8 @@
 Linked weave(Linked list1, Linked list2)
 {
     /* weave two linked lists */
-    Linked newlist = list1;
+    Linked newlist = (Linked)malloc(sizeof(struct Node));
+    newlist->data = NULL; newlist->next = NULL;
     Linked curr = newlist;
     int flag = 1;
     while (list1 && list2)
@@ -26,5 +27,6 @@ Linked weave(Linked list1, Linked list2)
         curr->next = list1;
     if (list2)
         curr->next = list2;
+    newlist = newlist->next;
     return newlist;
 }

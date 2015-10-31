@@ -23,7 +23,8 @@ bool isPalindrome(char *s)
 		return true;
 
 	for(char* p = s + strlen(s) -1; p>s;)
-		if(isalnum(*s) && isalnum(*p) && tolower(*(s++)) != tolower(*(p--)))
+		if(isalnum(*s) && isalnum(*p) &&
+            tolower(*(s++)) != tolower(*(p--)))
 			return false;
     	else if(!isalnum(*s))
     		s++;

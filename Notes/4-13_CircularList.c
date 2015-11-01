@@ -18,5 +18,19 @@ Linked get_node(void)
 void ret_node(Linked ptr)
 {
 	/* return a node to the available list */
+	ptr->next = avail;
+	avail = ptr;
+}
 
+void cerase(Linked *ptr) // why the fuck can delete a list in O(1) time?
+{
+	/* erase the circular list ptr */
+	Linked temp;
+	if (*ptr)
+	{
+		temp = (*ptr)->next;
+		(*ptr)->next = avail;
+		avail = temp;
+		*ptr = NULL;
+	}
 }

@@ -58,3 +58,15 @@ void attach(float coefficient, int exponent, Linked ptr)
 	(*ptr)->next = temp;
 	*ptr = temp;
 }
+
+void erase(Linked *ptr)
+{
+	/* erase the polynomial pointed to by ptr */
+	Linked temp;
+	while (*ptr)
+	{
+		temp = *ptr;
+		*ptr = (*ptr)->next;
+		free(temp);
+	}
+}

@@ -30,12 +30,23 @@ Linked MergeLists(Linked list1, Linked list2);
 Linked weave(Linked list1, Linked list2);
 Linked weave2(Linked list1, Linked list2);
 
+Linked searchnum(Linked list, int num);
+void cdeletenum(Linked *list, int num);
+
 int main(void)
 {
     Linked list = CreateCList(10);
     displaycircular(list);
     Linked list2 = CreateList(10);
     display(list2);
+    
+    if (searchnum(list, 22))
+        printf("Yes!\n");
+    else
+        printf("No!\n");
+        
+    cdeletenum(&list, 9);
+    displaycircular(list);
     
     return 0;    
 }
@@ -305,4 +316,49 @@ Linked weave2(Linked list1, Linked list2)
         curr->next = list2;
     newlist = newlist->next;
     return newlist;
+}
+
+Linked searchnum(Linked list, int num)
+{
+    Linked temp = list->next;
+    while (temp != list)
+    {
+        if (temp->data == num)
+            return temp;
+        else
+            temp = temp->next;
+    }
+    return NULL;
+}
+
+void cdeletenum(Linked *list, int num)
+{
+    Linked curr = (*list)->next;
+    Linked prev = *list;
+    if (prev->data == num)
+    {
+        Linked temp = prev;
+        while (temp->next != prev)
+            temp = temp->next;
+        temp->next = prev->next;
+        *list = (*list)->next;
+        free(prev);
+        return;
+    }
+    while (curr != *list)
+    {
+        if (curr->data == num)
+        {
+            Linked temp = curr;
+            prev->next = temp->next;
+            temp->next = NULL;
+            free(temp);
+            return;
+        }
+        else
+        {
+            curr = curr->next;
+            prev = prev->next;
+        }
+    }
 }

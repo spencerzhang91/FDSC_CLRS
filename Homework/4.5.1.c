@@ -16,4 +16,5 @@ Linked searchnum(Linked list, int num)
         else
             temp = temp->next;
     }
+    return NULL;
 }

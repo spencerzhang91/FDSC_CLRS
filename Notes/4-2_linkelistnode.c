@@ -1,6 +1,6 @@
 /* C Implementation of Linked List ADT */
 /* code list 4.2 on page 90 to 93 */
-/* Functions of Excercise 4.2 is added */
+/* Functions of Excercise 4.2 and 4.5 is added */
 /* Test module for all excerciese associate with linked list... */
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,9 +15,13 @@ typedef struct Node *Linked;
 
 Linked create2(void);
 Linked CreateList(int len);
+Linked CreateCList(int len); // create circular list
+
 void InsertA(Linked *ptr, Linked node);
 Linked InsertB(Linked ptr, Linked node);
 void display(Linked ptr);
+void displaycircular(Linked ptr); // display circular list
+
 void delete(Linked *ptr, Linked trail);
 Linked find(Linked list, int num);
 void deletenum(Linked *list, int num);
@@ -28,44 +32,8 @@ Linked weave2(Linked list1, Linked list2);
 
 int main(void)
 {
-    Linked TwoNode = create2();
-    display(TwoNode);   
-    InsertA(&TwoNode, TwoNode);
-    display(TwoNode);  
-    Linked newtwo;
-    newtwo = InsertB(TwoNode, TwoNode);
-    display(newtwo);
-    int len = length(newtwo);
-    printf("length of newtwo is %d\n", len);
-    delete(&newtwo, newtwo->next);
-    display(newtwo);
-    if (find(newtwo, 1))
-        printf("Found.\n");
-    printf("Delete num test below:\n");
-    deletenum(&newtwo, 1);
-    display(newtwo);
-    deletenum(&newtwo, 2);
-    display(newtwo);
-    deletenum(&newtwo, 10);
-    display(newtwo);
-    deletenum(&newtwo, 10);
-    display(newtwo);
-    printf("New test below:\n");
-    Linked newlist = CreateList(10);
-    display(newlist);
-    printf("Merge test below:\n");
-    Linked listone = CreateList(5);
-    Linked listtwo = CreateList(5);
-    display(listone);
-    display(listtwo);
-    Linked result = MergeLists(listone, listtwo);
-    display(result);
-    printf("Weave test below:\n");
-    Linked list1 = CreateList(8);
-    Linked list2 = CreateList(5);
-    display(list1); display(list2);
-    Linked wtf = weave2(list1, list2);
-    display(wtf);
+    Linked list = CreateCList(10);
+    display(list);
     
     return 0;    
 }
@@ -120,6 +88,21 @@ void display(Linked list)
 {
     Linked temp = list;
     while (temp)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+        
+    printf("\n");
+}
+
+void displaycircular(Linked list)
+{
+    if (!list->next)
+        printf("%d /n", list->data);
+
+    Linked temp = list->next;
+    while (temp != list)
     {
         printf("%d ", temp->data);
         temp = temp->next;
@@ -209,6 +192,31 @@ Linked CreateList(int len)
             temp = temp->next;
             len--;
         }
+        return ptrl;
+    }
+}
+
+Linked CreateCList(int len)
+{
+    /* create a linked list with len nodes */
+    if (len <= 0)
+        printf("Invalid list length!\n");
+    else
+    {
+        int i = 0;
+        Linked ptrl = (Linked)malloc(sizeof(struct Node));
+        ptrl->data = i; ptrl->next = NULL;
+        Linked temp = ptrl;
+        len--;
+        while (len > 0)
+        {
+            Linked curr = (Linked)malloc(sizeof(struct Node));
+            curr->data = i++; curr->next = NULL;
+            temp->next = curr;
+            temp = temp->next;
+            len--;
+        }
+        temp->next = ptrl;
         return ptrl;
     }
 }

@@ -22,14 +22,14 @@ int main(void)
 
 void invert(linked list)
 {
-	Linked prev, curr;
-	curr = NULL;
-	while (list)
-	{
-		prev = curr;
-		curr = list;
-		list = list->next;
-		curr->next = prev;
-	}
-	return curr;
+    Linked prev, curr;
+    curr = NULL;
+    while (list)
+    {
+        prev = curr;
+        curr = list;
+        list = list->next;
+        curr->next = prev;
+    }
+    return curr;
 }

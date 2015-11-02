@@ -33,7 +33,9 @@ Linked weave2(Linked list1, Linked list2);
 int main(void)
 {
     Linked list = CreateCList(10);
-    display(list);
+    displaycircular(list);
+    Linked list2 = CreateList(10);
+    display(list2);
     
     return 0;    
 }
@@ -100,7 +102,7 @@ void displaycircular(Linked list)
 {
     if (!list->next)
         printf("%d /n", list->data);
-
+    printf("%d ", list->data);
     Linked temp = list->next;
     while (temp != list)
     {
@@ -183,7 +185,7 @@ Linked CreateList(int len)
         Linked ptrl = (Linked)malloc(sizeof(struct Node));
         ptrl->data = i; ptrl->next = NULL;
         Linked temp = ptrl;
-        len--;
+        len--; i++;
         while (len > 0)
         {
             Linked curr = (Linked)malloc(sizeof(struct Node));
@@ -207,7 +209,7 @@ Linked CreateCList(int len)
         Linked ptrl = (Linked)malloc(sizeof(struct Node));
         ptrl->data = i; ptrl->next = NULL;
         Linked temp = ptrl;
-        len--;
+        len--; i++;
         while (len > 0)
         {
             Linked curr = (Linked)malloc(sizeof(struct Node));

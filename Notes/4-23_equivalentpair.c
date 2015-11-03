@@ -17,7 +17,7 @@ int main(void)
 	Linked seq[MAXSIZE];
 	Linked x, y, top;
 	int i, j, n;
-	printf("Enter the size (<= %d) ", MAXSIZE);
+	printf("Enter the size (<= %d): \n", MAXSIZE);
 	scanf("%d", &n);
 	/* initialize out and seq */
 	for (i = 0; i < n; i++)
@@ -33,14 +33,14 @@ int main(void)
 		x = (Linked)malloc(sizeof(struct Node));
 		if (ISFULL(x))
 		{
-			fprintf("The memory is full.\n");
+			fprintf(stderr, "The memory is full.\n");
 			exit(1);
 		}
 		x->data = j; x->next = seq[i]; seq[i] = x;
 		x = (Linked)malloc(sizeof(struct Node));
 		if (ISFULL(x))
 		{
-			fprintf("The memory is full.\n");
+			fprintf(stderr, "The memory is full.\n");
 			exit(1);
 		}
 		x->data = i; x->next = seq[j]; seq[j] = x;

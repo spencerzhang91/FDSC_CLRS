@@ -8,19 +8,7 @@ struct Node {
     Linked next;
 };
 
-void invert(Linked list);
-
-int main(void)
-{
-    Linked temp = (Linked)malloc(sizeof(struct Node));
-    temp->val = 3;
-    temp->next = NULL;
-    
-    printf("%d\n", temp->val);
-    return 0;
-}
-
-void invert(linked list)
+Linked invert(linked list)
 {
     Linked prev, curr;
     curr = NULL;

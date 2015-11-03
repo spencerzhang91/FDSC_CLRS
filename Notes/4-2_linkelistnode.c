@@ -32,6 +32,7 @@ Linked weave2(Linked list1, Linked list2);
 
 Linked searchnum(Linked list, int num);
 void cdeletenum(Linked *list, int num);
+void InvertCircularList(Linked *list);
 
 int main(void)
 {
@@ -47,7 +48,7 @@ int main(void)
         
     cdeletenum(&list, 9);
     displaycircular(list);
-    
+    InvertCircularList(&list);
     return 0;    
 }
 
@@ -361,4 +362,21 @@ void cdeletenum(Linked *list, int num)
             prev = prev->next;
         }
     }
+}
+
+void InvertCircularList(Linked *list)
+{
+    Linked prev, curr, flag;
+    flag = *list;
+    prev = *list;
+    curr = *list;
+    *list = (*list)->next;
+    while (*list != flag)
+    {
+        prev = curr;
+        curr = *list;
+        *list = (*list)->next;
+        curr->next = prev;
+    }
+    flag->next = *list;
 }

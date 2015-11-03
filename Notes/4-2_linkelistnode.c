@@ -20,7 +20,7 @@ Linked CreateCList(int len); // create circular list
 void InsertA(Linked *ptr, Linked node);
 Linked InsertB(Linked ptr, Linked node);
 void display(Linked ptr);
-void displaycircular(Linked ptr); // display circular list
+void displaycircular(Linked ptr); // display circular list (ptr is head node)
 
 void delete(Linked *ptr, Linked trail);
 Linked find(Linked list, int num);
@@ -33,6 +33,8 @@ Linked weave2(Linked list1, Linked list2);
 Linked searchnum(Linked list, int num);
 void cdeletenum(Linked *list, int num);
 void InvertCircularList(Linked *list);
+Linked concatenate(Linked list1, Linked list2); /* this two circular list's
+                                                 pointer point to last node */
 
 int main(void)
 {
@@ -40,15 +42,9 @@ int main(void)
     displaycircular(list);
     Linked list2 = CreateList(10);
     display(list2);
-    
-    if (searchnum(list, 22))
-        printf("Yes!\n");
-    else
-        printf("No!\n");
-        
-    cdeletenum(&list, 9);
-    displaycircular(list);
-    InvertCircularList(&list);
+    Linked list3 = CreateCList(4);
+    Linked newlist = concatenate(list, list3);
+    displaycircular(newlist);
     return 0;    
 }
 
@@ -379,4 +375,13 @@ void InvertCircularList(Linked *list)
         curr->next = prev;
     }
     flag->next = *list;
+}
+
+Linked concatenate(Linked list1, Linked list2)
+{
+    Linked head1 = list1->next;
+    Linked head2 = list2->next;
+    list1->next = head2;
+    list2->next = head1;
+    return list2;
 }

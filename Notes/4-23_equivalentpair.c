@@ -65,6 +65,7 @@ int main(void)
 					{
 						printf("%5d", j);
 						out[j] = false;
+						/* next three lines are reversing link field */
 						y = x->next;
 						x->next = top;
 						top = x; x = y;

@@ -7,19 +7,22 @@ struct Node {
     Linked next;
 };
 
-void InvertCircularList(Linked *list)
+void InvertCircularList(Linked *list) // here *list point to 'head'
 {
-    Linked prev, curr, flag;
+    Linked prev, curr, flag, temp;
     flag = *list;
-    prev = *list;
+    prev = NULL;
     curr = *list;
-    *list = (*list)->next;
-    while (*list != flag)
+    temp = (*list)->next;
+    if (!temp)
+        return;
+    
+    while (temp != flag)
     {
         prev = curr;
-        curr = *list;
-        *list = (*list)->next;
+        curr = temp;
+        temp = temp->next;
         curr->next = prev;
     }
-    flag->next = *list;
+    (*list)->next = curr;
 }

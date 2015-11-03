@@ -38,13 +38,20 @@ Linked concatenate(Linked list1, Linked list2); /* this two circular list's
 
 int main(void)
 {
-    Linked list = CreateCList(10);
+    /* Linked list = CreateCList(10);
     displaycircular(list);
     Linked list2 = CreateList(10);
     display(list2);
     Linked list3 = CreateCList(4);
     Linked newlist = concatenate(list, list3);
-    displaycircular(newlist);
+    displaycircular(newlist); */
+    
+    printf("Invert circular list test:\n");
+    Linked list4 = CreateCList(5);
+    displaycircular(list4);
+    InvertCircularList(&list4);
+    displaycircular(list4);
+    
     return 0;    
 }
 
@@ -360,21 +367,24 @@ void cdeletenum(Linked *list, int num)
     }
 }
 
-void InvertCircularList(Linked *list)
+void InvertCircularList(Linked *list) // here *list point to 'head'
 {
-    Linked prev, curr, flag;
+    Linked prev, curr, flag, temp;
     flag = *list;
-    prev = *list;
+    prev = NULL;
     curr = *list;
-    *list = (*list)->next;
-    while (*list != flag)
+    temp = (*list)->next;
+    if (!temp)
+        return;
+    
+    while (temp != flag)
     {
         prev = curr;
-        curr = *list;
-        *list = (*list)->next;
+        curr = temp;
+        temp = temp->next;
         curr->next = prev;
     }
-    flag->next = *list;
+    (*list)->next = curr;
 }
 
 Linked concatenate(Linked list1, Linked list2)

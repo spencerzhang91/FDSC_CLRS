@@ -18,6 +18,11 @@ int main(void)
 {
     Linked head = CreateDCList(10);
     displaycircular(head);
+    Linked newnode1 = (Linked)malloc(sizeof(struct Node));
+    newnode1->data = 39;
+    newnode1->left = newnode1->right = NULL;
+    dinsert(head, newnode1);
+    displaycircular(head);
 
     return 0;
 }

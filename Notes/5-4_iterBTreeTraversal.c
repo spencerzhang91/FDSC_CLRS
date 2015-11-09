@@ -1,4 +1,6 @@
 /* 5-4 iterative implementation of traversal of binary tree */
+/* This file need to be compared with file '5-4_BinaryTree_IterTraversal.c'
+since this two is identical in nature and comparable in implementation */
 #include <stdio.h>
 #include <stdlib.h>
 #define MAXSIZE 100

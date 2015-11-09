@@ -1,4 +1,5 @@
 /* C implementation of Linked List based Stack ADT */
+/* A more modern and reusable implementation */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

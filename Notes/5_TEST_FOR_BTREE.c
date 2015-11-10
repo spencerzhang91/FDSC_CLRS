@@ -164,25 +164,23 @@ void iter_postorder(BTree root)
     {
         while (tree)
         {
-            if (tree->left && tree->left != visited)
+            push(S, tree);
+            tree = tree->left;
+        }
+        if (!IsEmpty(S))
+        {
+            tree = pop(S);
+            if (!tree->right)
             {
-                push(S, tree);
-                tree = tree->left;
-            }
-            else if (tree->right && tree->right != visited)
+                printf("%d ", tree->data);
+                tree = NULL;
+            } 
+            else
             {
                 push(S, tree);
                 tree = tree->right;
             }
-            else
-            {
-                printf("%d ", tree->data);
-                visited = tree;
-                tree = NULL;
-            }
-        }
-        if (!IsEmpty(S))
-            tree = pop(S);
+        }     
     }
 }
 

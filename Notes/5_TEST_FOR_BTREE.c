@@ -59,8 +59,7 @@ int main(void)
 	node7->left = NULL; node7->right = NULL;
 
 	iter_postorder(root);
-	puts("\n");
-	postorder(root);
+
 	return 0;
 }
 
@@ -156,18 +155,21 @@ void iter_inorder(BTree root)
 
 void iter_postorder(BTree root)
 {
+    // still something wrong here...
+    // and I don't know what the fuck happened here...
     Stack S = CreateStack(MAXSIZE);
     BTree tree = root;
+    BTree visited;
     while (tree || !IsEmpty(S))
     {
         while (tree)
         {
-            if (tree->left)
+            if (tree->left && tree->left != visited)
             {
                 push(S, tree);
                 tree = tree->left;
             }
-            else if (tree->right)
+            else if (tree->right && tree->right != visited)
             {
                 push(S, tree);
                 tree = tree->right;
@@ -175,6 +177,7 @@ void iter_postorder(BTree root)
             else
             {
                 printf("%d ", tree->data);
+                visited = tree;
                 tree = NULL;
             }
         }

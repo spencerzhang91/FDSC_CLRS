@@ -14,7 +14,7 @@ class TreeNode:
     def __repr__(self):
         return str(self.val)
 
-tree = ('a', ('b', 'd', 'e'), ('c', 'f', 'g'))
+tree = ('a', ('b', 'd', ('e', ('f', None, 'g'), None)), 'c')
 
 def CreateBTree(infoset):
     '''
@@ -39,12 +39,17 @@ def CreateBTree(infoset):
         root.right = CreateBTree(rightsub)
     return root
 
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.val, end=' ')
+
 if __name__ == '__main__':
     
     test = CreateBTree(tree)
 
-    print('test:', test)
-    print('test.left:', test.left)
+    postorder(test)
 
 
 

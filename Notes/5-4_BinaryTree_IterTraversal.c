@@ -43,19 +43,40 @@ void iter_inorder(BTree root)
     BTree tree = root;
     while (tree || isEmpty(S))
     {
-        push(S, tree);                 // push tree node into stack when still have left child
-        tree = tree->left;
-    }
-    if (!isEmpty(S))
-    {
-        tree = pop(S);                 // pop out tree node when no more left child
-        printf("%4d", tree->data);     // which means move back upper level and print
-        tree = tree->right;            // then, to the right sub tree and repeat
+        while (tree)
+        {
+            push(S, tree);                 // push tree node into stack when still have left child
+            tree = tree->left;
+        }
+        if (!isEmpty(S))
+        {
+            tree = pop(S);                 // pop out tree node when no more left child
+            printf("%4d", tree->data);     // which means move back upper level and print
+            tree = tree->right;            // then, to the right sub tree and repeat
+        }
     }
 }
 
 void iter_postorder(BTree root)
 {
 	S = CreateStack(MAXSIZE);
-	// yet done
+    BTree tree = root;
+	// yet done11
+    while (tree || isEmpty(S))
+    {
+        if (tree->left)
+        {
+            push(S, tree);
+            tree = tree->left;
+        }
+        else (tree->right)
+        {
+            push(S, tree);
+            tree = tree->right;
+        }
+    }
+    if (!isEmpty(S))
+    {
+
+    }
 }

@@ -11,8 +11,7 @@ def transpose(matrix):
         for row in matrix:
             nrow.append(row[i])
         nmatrix.append(nrow)
-        nrow = []
-            
+        nrow = [] 
     return nmatrix
 
     

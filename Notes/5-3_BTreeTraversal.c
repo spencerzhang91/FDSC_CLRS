@@ -1,12 +1,12 @@
 /* 5-1,2,3 inorder, preorder and postorder traversal of binary tree */
-typedef struct Node *TreeNode;
-struct Node {
+typedef struct treeNode *BTree;
+struct treeNode {
     int data;
-    TreeNode left;
-    TreeNode right;
+    BTree left;
+    BTree right;
 };
 
-void inorder(TreeNode ptr)
+void inorder(BTree ptr)
 {
     if (ptr)
     {
@@ -16,7 +16,7 @@ void inorder(TreeNode ptr)
     }
 }
 
-void postorder(TreeNode ptr)
+void postorder(BTree ptr)
 {
     if (ptr)
     {
@@ -26,7 +26,7 @@ void postorder(TreeNode ptr)
     }
 }
 
-void preorder(TreeNode ptr)
+void preorder(BTree ptr)
 {
     if (ptr)
     {

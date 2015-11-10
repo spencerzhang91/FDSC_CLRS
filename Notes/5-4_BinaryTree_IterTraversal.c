@@ -59,24 +59,29 @@ void iter_inorder(BTree root)
 
 void iter_postorder(BTree root)
 {
-	S = CreateStack(MAXSIZE);
+    S = CreateStack(MAXSIZE);
     BTree tree = root;
-	// yet done11
     while (tree || isEmpty(S))
     {
-        if (tree->left)
+        while (tree)
         {
-            push(S, tree);
-            tree = tree->left;
+            if (tree->left)
+            {
+                push(S, tree);
+                tree = tree->left;
+            }
+            else if (tree->right)
+            {
+                push(S, tree);
+                tree = tree->right;
+            }
+            else
+            {
+                printf("%4d", tree->data);
+                tree = NULL;
+            }
         }
-        else (tree->right)
-        {
-            push(S, tree);
-            tree = tree->right;
-        }
-    }
-    if (!isEmpty(S))
-    {
-
+        if (!isEmpty(S))
+            tree = pop(S);
     }
 }

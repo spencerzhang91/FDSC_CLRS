@@ -45,11 +45,30 @@ def postorder(root):
         postorder(root.right)
         print(root.val, end=' ')
 
+        
+def levelOrderTraversal(root):
+    '''
+    A function that traverse a binary tree in level order.
+    '''
+    queue, seque = [root], []
+    curr = root
+    while queue:
+        curr = queue[0]
+        if curr.left:
+            queue.append(curr.left)
+        if curr.right:
+            queue.append(curr.right)
+        print(curr, end=' ')
+        queue.pop(0)
+        
+
 if __name__ == '__main__':
     
     test = CreateBTree(tree)
 
     postorder(test)
+    print()
+    levelOrderTraversal(test)
 
 
 

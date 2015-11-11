@@ -29,4 +29,32 @@ void iter_postorder(BTree root)
     }
 }
 
-/* not using a marker solution */
+/* my own solution */
+void iter_postorder(BTree root)
+{
+	S = CreateStack(MAXSIZE);
+    BTree tree = root;
+    BTree visited;
+	push(S, tree);
+    while (tree || isEmpty(S))
+    {
+        if (tree->left && tree->left != visited)
+        {
+            push(S, tree->left);
+            tree = tree->left;
+        }
+        else if (tree->right && tree->right != visited)
+        {
+            push(S, tree->right);
+            tree = tree->right;
+        }
+        else
+            break;
+    }
+    if (!isEmpty(S))
+    {
+        printf("%d ", tree->data);
+        visited = tree;
+        tree = pop(S);
+    }
+}

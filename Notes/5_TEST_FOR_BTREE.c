@@ -36,6 +36,7 @@ void display(Stack S);
 void iter_preorder(BTree root);
 void iter_inorder(BTree root);
 void iter_postorder(BTree root);
+void iter_postorder2(BTree root);
 void inorder(BTree ptr);
 void preorder(BTree ptr);
 void postorder(BTree ptr);
@@ -60,7 +61,7 @@ int main(void)
 	node5->left = NULL; node5->right = NULL; node6->left = NULL; node6->right = NULL;
 	node7->left = NULL; node7->right = NULL;
 
-	iter_postorder(root);
+	iter_postorder2(root);
 	return 0;
 }
 
@@ -180,6 +181,51 @@ void iter_postorder(BTree root)
                 lastvisited = pop(S);
             }
         }
+    }
+}
+
+/* no visited flag solution */
+void iter_postorder2(BTree root)
+{
+    Stack S = CreateStack(MAXSIZE);
+    BTree prev = NULL; // previously traversed(not necessarily printed) node
+    push(S, root);
+    BTree curr = NULL;
+    while (!IsEmpty(S))
+    {
+        curr = pop(S);
+        push(S, curr);
+        if (!prev || prev->left == curr || prev->right == curr)
+        {
+            // traversing down the tree
+            if (curr->left)
+                push(S, curr->left);
+            else if (curr->right)
+                push(S, curr->right);
+            else
+            {
+                printf("%d ", curr->data);
+                pop(S);
+            }
+        }
+        else if (curr->left == prev)
+        {
+            // traversing up the tree from left sub tree
+            if (curr->right)
+                push(S, curr->right);
+            else
+            {
+                printf("%d ", curr->data);
+                pop(S);
+            }
+        }
+        else if (curr->right == prev)
+        {
+            // traversing up the tree from right sub tree
+            printf("%d ", curr->data);
+            pop(S);
+        }
+        prev = curr;
     }
 }
 

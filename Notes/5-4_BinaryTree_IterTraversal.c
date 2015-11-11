@@ -59,6 +59,8 @@ void iter_inorder(BTree root)
 
 void iter_postorder(BTree root)
 {
+    /* standard solution from wiki
+    see more solution in file 5-4_iter_postorder.c */
     Stack S = CreateStack(MAXSIZE);
     BTree lastvisited = NULL;
     BTree peeknode = NULL;

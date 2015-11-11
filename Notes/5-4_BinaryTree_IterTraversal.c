@@ -3,6 +3,7 @@
 /* This file need to be compared with file '5-4_iterBTreeTraversal.c'
 since this two is identical in nature and comparable in implementation
 I personaly reckon this version as better implemented */
+
 #define MAXSIZE 10                     // the maxsize of tree nodes
 
 typedef struct treeNode *BTree;
@@ -20,7 +21,7 @@ void iter_preorder(BTree root)
 {
     S = CreateStack(MAXSIZE);          // create and initialize stack
     BTree tree = root;
-    while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
+    while (tree || !isEmpty(S))        // using 'while' is more readable than 'for'
     {
         while (tree)
         {
@@ -28,7 +29,7 @@ void iter_preorder(BTree root)
             push(S, tree);             // push visited node into stack
             tree = tree->left;         // move all the way to left
         }
-        if (!IsEmpty(S))
+        if (!isEmpty(S))
         {
             tree = pop(S);             // when there's no more left subtree,
             tree = tree->right;        // to the right
@@ -40,14 +41,14 @@ void iter_inorder(BTree root)
 {
     S = CreateStack(MAXSIZE);
     BTree tree = root;
-    while (tree || !IsEmpty(S))
+    while (tree || isEmpty(S))
     {
         while (tree)
         {
             push(S, tree);                 // push tree node into stack when still have left child
             tree = tree->left;
         }
-        if (!IsEmpty(S))
+        if (!isEmpty(S))
         {
             tree = pop(S);                 // pop out tree node when no more left child
             printf("%4d", tree->data);     // which means move back upper level and print
@@ -58,29 +59,29 @@ void iter_inorder(BTree root)
 
 void iter_postorder(BTree root)
 {
-    S = CreateStack(MAXSIZE);
+	S = CreateStack(MAXSIZE);
     BTree tree = root;
-    while (tree || !IsEmpty(S))
+    BTree visited;
+	push(S, tree);
+    while (tree || isEmpty(S))
     {
-        while (tree)
+        if (tree->left && tree->left != visited)
         {
-            if (tree->left)
-            {
-                push(S, tree);
-                tree = tree->left;
-            }
-            else if (tree->right)
-            {
-                push(S, tree);
-                tree = tree->right;
-            }
-            else
-            {
-                printf("%4d", tree->data);
-                tree = NULL;
-            }
+            push(S, tree->left);
+            tree = tree->left;
         }
-        if (!IsEmpty(S))
-            tree = pop(S);
+        else if (tree->right && tree->right != visited)
+        {
+            push(S, tree->right);
+            tree = tree->right;
+        }
+        else
+            break;
+    }
+    if (!isEmpty(S))
+    {
+        printf("%d ", tree->data);
+        visited = tree;
+        tree = pop(S);
     }
 }

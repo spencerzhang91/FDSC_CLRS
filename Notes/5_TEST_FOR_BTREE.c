@@ -5,6 +5,8 @@
 #define ElementType BTree
 #define MAX_STACK_SIZE 100
 #define MAXSIZE 100
+#define LEFT 0
+#define RIGHT 1
 
 /* binary tree ADT struct definition */
 typedef struct treeNode *BTree;
@@ -59,7 +61,6 @@ int main(void)
 	node7->left = NULL; node7->right = NULL;
 
 	iter_postorder(root);
-
 	return 0;
 }
 
@@ -153,34 +154,32 @@ void iter_inorder(BTree root)
     }
 }
 
+#define LEFT 0
+#define RIGHT 1
 void iter_postorder(BTree root)
 {
-    // still something wrong here...
-    // and I don't know what the fuck happened here...
     Stack S = CreateStack(MAXSIZE);
-    BTree tree = root;
-    BTree visited;
-    while (tree || !IsEmpty(S))
+    BTree lastvisited = NULL;
+    BTree peeknode = NULL;
+    while (!IsEmpty(S) || root)
     {
-        while (tree)
+        if (root)
         {
-            push(S, tree);
-            tree = tree->left;
+            push(S, root);
+            root = root->left;
         }
-        if (!IsEmpty(S))
+        else
         {
-            tree = pop(S);
-            if (!tree->right)
-            {
-                printf("%d ", tree->data);
-                tree = NULL;
-            } 
+            peeknode = pop(S);
+            push(S, peeknode); // not now to pop out so push back
+            if (peeknode->right && lastvisited != peeknode->right)
+                root = peeknode->right;
             else
             {
-                push(S, tree);
-                tree = tree->right;
+                printf("%d ", peeknode->data);
+                lastvisited = pop(S);
             }
-        }     
+        }
     }
 }
 

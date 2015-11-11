@@ -29,32 +29,47 @@ void iter_postorder(BTree root)
     }
 }
 
-/* my own solution */
-void iter_postorder(BTree root)
+/* no visited flag solution */
+void iter_postorder2(BTree root)
 {
-	S = CreateStack(MAXSIZE);
-    BTree tree = root;
-    BTree visited;
-	push(S, tree);
-    while (tree || isEmpty(S))
+    Stack S = CreateStack(MAXSIZE);
+    BTree prev = NULL; // previously traversed(not necessarily printed) node
+    push(S, root);
+    BTree curr = NULL;
+    while (!IsEmpty(S))
     {
-        if (tree->left && tree->left != visited)
+        curr = pop(S);
+        push(S, curr);
+        if (!prev || prev->left == curr || prev->right == curr)
         {
-            push(S, tree->left);
-            tree = tree->left;
+            // traversing down the tree
+            if (curr->left)
+                push(S, curr->left);
+            else if (curr->right)
+                push(S, curr->right);
+            else
+            {
+                printf("%d ", curr->data);
+                pop(S);
+            }
         }
-        else if (tree->right && tree->right != visited)
+        else if (curr->left == prev)
         {
-            push(S, tree->right);
-            tree = tree->right;
+            // traversing up the tree from left sub tree
+            if (curr->right)
+                push(S, curr->right);
+            else
+            {
+                printf("%d ", curr->data);
+                pop(S);
+            }
         }
-        else
-            break;
-    }
-    if (!isEmpty(S))
-    {
-        printf("%d ", tree->data);
-        visited = tree;
-        tree = pop(S);
+        else if (curr->right == prev)
+        {
+            // traversing up the tree from right sub tree
+            printf("%d ", curr->data);
+            pop(S);
+        }
+        prev = curr;
     }
 }

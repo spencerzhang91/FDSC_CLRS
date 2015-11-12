@@ -43,6 +43,7 @@ void preorder(BTree ptr);
 void postorder(BTree ptr);
 BTree CreateBTree(char *preorder, char *inorder); // yet done
 BTree copy(BTree origin);
+bool isEqual(BTree t1, BTree t2);
 
 int main(void)
 {
@@ -66,6 +67,7 @@ int main(void)
 	iter_postorder2(root);
 	BTree copied = copy(root);
 	iter_postorder2(copied);
+	printf("It is %s\n", (isEqual(root, copied))?"equal": "not equal");
 	return 0;
 }
 
@@ -286,4 +288,10 @@ BTree copy(BTree origin)
         return temp;
     }
     return NULL;
+}
+
+bool isEqual(BTree t1, BTree t2)
+{
+    return (!t1 && !t2) || (t1 && t2 && (t1->data == t2->data) &&
+    isEqual(t1->left, t2->left) && isEqual(t1->right, t2->right));
 }

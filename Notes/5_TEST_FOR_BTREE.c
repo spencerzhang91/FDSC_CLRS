@@ -38,18 +38,21 @@ void iter_preorder(BTree root);
 void iter_inorder(BTree root);
 void iter_postorder(BTree root);
 void iter_postorder2(BTree root);
+
 void inorder(BTree ptr);
 void preorder(BTree ptr);
 void postorder(BTree ptr);
 BTree CreateBTree(char *preorder, char *inorder); // yet done
 BTree copy(BTree origin);
 bool isEqual(BTree t1, BTree t2);
+void countleaf(BTree root, int *count);
+int iter_countleaf(BTree root);
 
 int main(void)
 {
 	BTree root = (BTree)malloc(sizeof(struct treeNode));
 	root->data = 100;
-	BTree node0 = (BTree)malloc(sizeof(struct treeNode)); node0->data = 0;
+
 	BTree node1 = (BTree)malloc(sizeof(struct treeNode)); node1->data = 1;
 	BTree node2 = (BTree)malloc(sizeof(struct treeNode)); node2->data = 2;
 	BTree node3 = (BTree)malloc(sizeof(struct treeNode)); node3->data = 3;
@@ -65,9 +68,12 @@ int main(void)
 	node7->left = NULL; node7->right = NULL;
 
 	iter_postorder2(root);
-	BTree copied = copy(root);
-	iter_postorder2(copied);
-	printf("It is %s\n", (isEqual(root, copied))?"equal": "not equal");
+	int leaves = 0;
+	int leaves2 = iter_countleaf(root);
+    countleaf(root, &leaves);
+	printf("\nrecursive counted leaf number: %d\n", leaves);
+	printf("iterative counted leaf number: %d\n", leaves2);
+	
 	return 0;
 }
 
@@ -235,6 +241,7 @@ void iter_postorder2(BTree root)
     }
 }
 
+
 BTree CreateBTree(char *preorder, char *inorder)
 {
 	/* This function use preorder and inorder traversal sequence of a tree to
@@ -294,4 +301,46 @@ bool isEqual(BTree t1, BTree t2)
 {
     return (!t1 && !t2) || (t1 && t2 && (t1->data == t2->data) &&
     isEqual(t1->left, t2->left) && isEqual(t1->right, t2->right));
+}
+
+void countleaf(BTree root, int *count)
+{
+    if (root)
+    {
+        countleaf(root->left, count);
+        countleaf(root->right, count);
+        if (!root->left && !root->right)
+            (*count)++;
+    }
+}
+
+int iter_countleaf(BTree root)
+{
+    Stack S = CreateStack(MAXSIZE);
+    BTree lastvisited = NULL;
+    BTree peeknode = NULL;
+    int leaves = 0;
+    while (!IsEmpty(S) || root)
+    {
+        if (root)
+        {
+            push(S, root);
+            root = root->left;
+        }
+        else
+        {
+            peeknode = pop(S);
+            push(S, peeknode); // not now to pop out so push back
+            if (peeknode->right && lastvisited != peeknode->right)
+                root = peeknode->right;
+            else
+            {
+                printf("%d ", peeknode->data);
+                if (!peeknode->left && !peeknode->right)
+                	leaves++;
+                lastvisited = pop(S);
+            }
+        }
+    }
+    return leaves;
 }

@@ -47,6 +47,7 @@ BTree copy(BTree origin);
 bool isEqual(BTree t1, BTree t2);
 void countleaf(BTree root, int *count);
 int iter_countleaf(BTree root);
+void swaptree(BTree root);
 
 int main(void)
 {
@@ -68,11 +69,9 @@ int main(void)
 	node7->left = NULL; node7->right = NULL;
 
 	iter_postorder2(root);
-	int leaves = 0;
-	int leaves2 = iter_countleaf(root);
-    countleaf(root, &leaves);
-	printf("\nrecursive counted leaf number: %d\n", leaves);
-	printf("iterative counted leaf number: %d\n", leaves2);
+	swaptree(root);
+	puts("\n");
+	iter_postorder2(root);
 	
 	return 0;
 }
@@ -343,4 +342,16 @@ int iter_countleaf(BTree root)
         }
     }
     return leaves;
+}
+
+void swaptree(BTree root)
+{
+    if (!root)
+        return;
+    BTree temp;
+    temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+    swaptree(root->left);
+    swaptree(root->right);
 }

@@ -14,7 +14,7 @@ class TreeNode:
     def __repr__(self):
         return str(self.val)
 
-tree = ('a', ('b', 'd', ('e', ('f', None, 'g'), None)), 'c')
+tree = ('a', ('b', ('c', 'e', ('f',None,('h','i',None))), ('d',None,'g')), None)
 
 def CreateBTree(infoset):
     '''
@@ -45,6 +45,18 @@ def postorder(root):
         postorder(root.right)
         print(root.val, end=' ')
 
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val, end=' ')
+        inorder(root.right)
+
+def preorder(root):
+    if root:
+        print(root.val, end=' ')
+        preorder(root.left)
+        preorder(root.right)
+
         
 def levelOrderTraversal(root):
     '''
@@ -66,8 +78,9 @@ if __name__ == '__main__':
     
     test = CreateBTree(tree)
 
-    postorder(test)
-    print()
+    preorder(test); print()
+    inorder(test); print()
+    postorder(test);print()
     levelOrderTraversal(test)
 
 

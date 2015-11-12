@@ -7,6 +7,7 @@
 #define MAXSIZE 100
 #define LEFT 0
 #define RIGHT 1
+#define IS_FULL(x) ((x)==NULL)?1: 0
 
 /* binary tree ADT struct definition */
 typedef struct treeNode *BTree;
@@ -41,6 +42,7 @@ void inorder(BTree ptr);
 void preorder(BTree ptr);
 void postorder(BTree ptr);
 BTree CreateBTree(char *preorder, char *inorder); // yet done
+BTree copy(BTree origin);
 
 int main(void)
 {
@@ -62,6 +64,8 @@ int main(void)
 	node7->left = NULL; node7->right = NULL;
 
 	iter_postorder2(root);
+	BTree copied = copy(root);
+	iter_postorder2(copied);
 	return 0;
 }
 
@@ -264,4 +268,22 @@ void preorder(BTree ptr)
         inorder(ptr->left);
         inorder(ptr->right);
     }
+}
+
+BTree copy(BTree origin)
+{
+    if (origin)
+    {
+        BTree temp = (BTree)malloc(sizeof(struct treeNode));
+        if (IS_FULL(temp))
+        {
+            fprintf(stderr, "The memory is full.\n");
+            exit(1);
+        }
+        temp->left = copy(origin->left);
+        temp->right = copy(origin->right);
+        temp->data = origin->data;
+        return temp;
+    }
+    return NULL;
 }

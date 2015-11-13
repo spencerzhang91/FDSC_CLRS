@@ -72,7 +72,8 @@ def levelOrderTraversal(root):
             queue.append(curr.right)
         print(curr, end=' ')
         queue.pop(0)
-        
+
+      
 
 if __name__ == '__main__':
     

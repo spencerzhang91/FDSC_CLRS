@@ -26,7 +26,7 @@ void tinorder(threaded_pointer tree)
 	threaded_pointer temp = tree;
 	for (;;)
 	{
-		temp = insucc(temp);
+		temp = insucc(temp); 
 		if (temp == tree) break;
 		printf("%d ", temp->data);
 	}

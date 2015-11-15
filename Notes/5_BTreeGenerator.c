@@ -23,16 +23,20 @@ struct treeNode {
 BTree createBTree(char *array, int len)
 {
 	/* generate a binary tree */
-	int i;
-	for (i = 1; i * 2 + 1 < len; i++)
+	Queue Q = (Queue)malloc(len * sizeof(struct queue))
+	int i = 1;
+	BTree parent = makenode(array[i]);
+
+	while (i * 2 + 1 < len)
 	{
-		BTree parent = makenode(array[i]);
+		
 		BTree leftchild = makenode(array[i*2]);
 		BTree rightchild = makenode(array[i*2+1]);
 		if (leftchild)
 			parent->left = leftchild;
 		if (rightchild)
 			parent->right = rightchild;
+		i++;
 	}
 
 }

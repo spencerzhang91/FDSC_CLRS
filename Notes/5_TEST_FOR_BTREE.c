@@ -8,6 +8,7 @@
 #define LEFT 0
 #define RIGHT 1
 #define IS_FULL(x) ((x)==NULL)?1: 0
+#define N 10
 
 /* binary tree ADT struct definition */
 typedef struct treeNode *BTree;
@@ -73,7 +74,7 @@ void swaptree(BTree root);
 
 /* binary tree creation and helper function */
 BTree createBTree(char *array, int len);
-BTree makenode(ElementType data);
+BTree makenode(char data);
 
 int main(void)
 {
@@ -98,7 +99,10 @@ int main(void)
 	swaptree(root);
 	puts("\n");
 	iter_postorder2(root);*/
-	
+    char info2[N+1] = "0abcd##e#f";
+	BTree testree = createBTree(info2, N+1);
+	iter_preorder(testree);
+    
 	return 0;
 }
 
@@ -157,6 +161,7 @@ Queue CreateQueue(int maxsize)
     Queue temp = (Queue)malloc(sizeof(Qnode));
     temp->front = temp->rear = NULL;
     temp->maxsize = maxsize;
+    temp->cursize = 0;
     return temp;
 }
 
@@ -175,7 +180,11 @@ void enqueue(Queue Q, ElementType item)
     struct Node *rearcell;
     ElementType rearelem = item;
     if (QIsFull(Q))
-        printf("The queue is full.\n");
+    {
+        printf("The queue is Full.\n");
+        exit(1);
+    }
+        
     else
     {
         rearcell = (struct Node *)malloc(sizeof(struct Node));
@@ -198,8 +207,7 @@ ElementType dequeue(Queue Q)
     if (QIsEmpty(Q))
     {
         printf("The queue is empty.\n");
-        ElementType error = -1;
-        return error; 
+        return NULL; 
     }
     else
     {
@@ -441,36 +449,41 @@ void swaptree(BTree root)
 BTree createBTree(char *array, int len)
 {
     /* generate a binary tree */
+    BTree parent;
     Queue Q = CreateQueue(len);
     int i = 1;
     BTree root = makenode(array[i]);
+    //printf("[Line 456] root->data: %c\n", root->data);
     enqueue(Q, root);
+    //printf("[Line 458] root->data: %c\n", root->data);
 
-    while (i * 2 + 1 < len)
+    while (Q && (i*2+1 < len))
     {
-        while (Q)
+        parent = dequeue(Q);
+        //printf("[Line 465] i: %d\n", i);        
+        BTree leftchild = makenode(array[i*2]);
+        BTree rightchild = makenode(array[i*2+1]);
+        if (leftchild)
         {
-            parent = dequeue(Q);
-        
-            BTree leftchild = makenode(array[i*2]);
-            BTree rightchild = makenode(array[i*2+1]);
-            if (leftchild)
-            {
-                parent->left = leftchild;
-                enqueue(Q, leftchild);
-            }
-            if (rightchild)
-            {
-                parent->right = rightchild;
-                enqueue(Q, rightchilde);
-            }
-            i++;
+            parent->left = leftchild;
+            //printf("[Line 471] leftchild->data: %c | i: %d\n", leftchild->data, i);
+            enqueue(Q, leftchild);
+            //printf("[Line 473] leftchild->data: %c | i: %d\n", leftchild->data, i);
         }
+        if (rightchild)
+        {
+            parent->right = rightchild;
+            //printf("[Line 478] rightchild->data: %c | i: %d\n", rightchild->data, i);
+            enqueue(Q, rightchild);
+            //printf("[Line 480] rightchild->data: %c | i: %d\n", rightchild->data, i);
+        }
+        ++i;
     }
-    return root;
+
+return root;
 }
 
-BTree makenode(ElementType data)
+BTree makenode(char data)
 {
     /* create a tree node and return its pointer if data is not '#' */
     if (data != '#')

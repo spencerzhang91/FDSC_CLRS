@@ -59,7 +59,10 @@ void enqueue(Queue Q, ElementType item)
     struct Node *rearcell;
     ElementType rearelem = item;
     if (QIsFull(Q))
-        printf("The queue is full.\n");
+    {
+        printf("The queue is Full.\n");
+        exit(1);
+    }   
     else
     {
         rearcell = (struct Node *)malloc(sizeof(struct Node));

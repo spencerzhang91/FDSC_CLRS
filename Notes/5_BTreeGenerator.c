@@ -27,32 +27,28 @@ BTree createBTree(char *array, int len)
     Queue Q = CreateQueue(len);
     int i = 1;
     BTree root = makenode(array[i]);
-    //printf("[Line 456] root->data: %c\n", root->data);
     enqueue(Q, root);
-    //printf("[Line 458] root->data: %c\n", root->data);
 
     while (Q && (i*2+1 < len))
     {
-        parent = dequeue(Q);
-        //printf("[Line 465] i: %d\n", i);        
+        parent = dequeue(Q);      
         BTree leftchild = makenode(array[i*2]);
         BTree rightchild = makenode(array[i*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
-            //printf("[Line 471] leftchild->data: %c | i: %d\n", leftchild->data, i);
             enqueue(Q, leftchild);
-            //printf("[Line 473] leftchild->data: %c | i: %d\n", leftchild->data, i);
         }
         if (rightchild)
         {
             parent->right = rightchild;
-            //printf("[Line 478] rightchild->data: %c | i: %d\n", rightchild->data, i);
             enqueue(Q, rightchild);
-            //printf("[Line 480] rightchild->data: %c | i: %d\n", rightchild->data, i);
         }
         ++i;
     }
+
+return root;
+}
 
 BTree makenode(ElementType data)
 {

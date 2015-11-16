@@ -1,6 +1,10 @@
 /* Convert a binary tree to a threaded binary */
 /* There are : preorder, inorder and postorder threaded binary trees. */
 /* based on common binary tree constructor (file 5_BTreeGenerator.c) */
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
 #define ElementType thrBTree
 #define dataType char // the type of data of thrtreeNode
 #define MAX_STACK_SIZE 100
@@ -14,7 +18,13 @@ struct thrtreeNode {
     bool left_thr;    // true if no left child: left is a thread
     bool right_thr;   // false if has right child: right links a child
 };
-static thrBTree create_sentinel(thrBTree root);
+/* declare for test */
+thrBTree create_sentinel(thrBTree root);
+thrBTree makethrnode(dataType data);
+thrBTree createthrBTree(dataType *array, int len);
+thrBTree linkthr_preorder(thrBTree root, int len);
+/* declare for test */
+
 
 thrBTree makethrnode(dataType data)
 {
@@ -44,16 +54,17 @@ thrBTree createthrBTree(dataType *array, int len)
         return NULL;
     thrBTree parent;
     Queue Q = CreateQueue(len);
+    Queue save = CreateQueue(len);
     int i = 1;
-    thrBTree root = makenode(array[i]);
+    thrBTree root = makethrnode(array[i]);
     enqueue(Q, root);
     enqueue(save, root);
 
     while (Q && (i*2+1 < len))
     {
         parent = dequeue(Q);      
-        thrBTree leftchild = makenode(array[i++*2]);
-        thrBTree rightchild = makenode(array[i++*2+1]);
+        thrBTree leftchild = makethrnode(array[i*2]);
+        thrBTree rightchild = makethrnode(array[i++*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
@@ -76,7 +87,7 @@ thrBTree linkthr_preorder(thrBTree root, int len)
     len is the number of tree nodes excluding sentinel node of arg 'array'
     of function 'thrBTree createthrBTree(dataType *array, int len)' */
     Queue save = CreateQueue(len);
-    S = CreateStack(MAXSIZE);          // create and initialize stack
+    Stack S = CreateStack(MAXSIZE);          // create and initialize stack
     thrBTree tree = root;
     thrBTree prev, curr;               // two pointer to be used to make thread
     thrBTree sentinel = create_sentinel(root); // create a sentinel node
@@ -84,7 +95,7 @@ thrBTree linkthr_preorder(thrBTree root, int len)
     {
         while (tree)
         {
-            printf("%4d", tree->data);
+            printf("%c ", tree->data);
             enqueue(save, tree);       // save preorder traversed node in queue
             push(S, tree);             // push visited node into stack
             tree = tree->left;         // move all the way to left
@@ -98,43 +109,31 @@ thrBTree linkthr_preorder(thrBTree root, int len)
     prev = dequeue(save);
     prev->left_thr = true;
     prev->left = sentinel;
-    while (!IsEmpty(save))
+    while (!QIsEmpty(save))
     {
-    	curr = dequeue(save);
-    	if (!curr->left)
-    	{
-    		curr->left_thr = true;
-    		curr->left = prev;
-    	}
-    	if (!prev->right)
-    	{
-    		prev->right_thr = true;
-    		prev->right = curr;
-    	}
-    	prev = curr;
+        curr = dequeue(save);
+        if (!curr->left)
+        {
+            curr->left_thr = true;
+            curr->left = prev;
+        }
+        if (!prev->right)
+        {
+            prev->right_thr = true;
+            prev->right = curr;
+        }
+        prev = curr;
     }
     prev->right_thr = true;
     prev->right = sentinel;
     return sentinel;
 }
 
-thrBTree linkthr_inorder(thrBTree root, int len)
+thrBTree create_sentinel(thrBTree root)
 {
-	// to be done
-	return root;
-}
-
-thrBTree linkthr_preorder(thrBTree root, int len)
-{
-	// to be done
-	return root;
-}
-
-static thrBTree create_sentinel(thrBTree root)
-{
-	thrBTree temp = (thrBTree)malloc(sizeof(struct thrtreeNode));
-	temp->left = root; temp->right = temp;
-	temp->left_thr = false; temp->right_thr = false;
-	return temp;
+    thrBTree temp = (thrBTree)malloc(sizeof(struct thrtreeNode));
+    temp->left = root; temp->right = temp;
+    temp->left_thr = false; temp->right_thr = false;
+    return temp;
 }
 

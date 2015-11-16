@@ -12,7 +12,7 @@ tree2: {'0','A','B','#','#','D'} or "0AB##D";
 First '0' is the sentinel node for subfix conciseness
 The function takes in an array or a tring and returns the root of the tree
 */
-
+#define ElementType char
 typedef struct treeNode *BTree;
 struct treeNode {
     char data;

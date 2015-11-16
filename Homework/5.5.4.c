@@ -18,7 +18,7 @@ void tpostorder(thrBTree tree)
     thrBTree temp = tree;
     for (;;)
     {
-        temp = presucc(temp);
+        temp = postsucc(temp);
         if (temp == tree) break;
         printf("%c ", temp->data);
     }

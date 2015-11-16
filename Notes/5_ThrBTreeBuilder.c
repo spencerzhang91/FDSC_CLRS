@@ -1,24 +1,27 @@
 /* Convert a binary tree to a threaded binary */
 /* There are : preorder, inorder and postorder threaded binary trees. */
 /* based on common binary tree constructor (file 5_BTreeGenerator.c) */
-#define ElementType char
+#define ElementType thrBTree
+#define dataType char // the type of data of thrtreeNode
+#define MAX_STACK_SIZE 100
+
 /* struct definition for threaded binary tree */
-typedef struct treeNode *thrBTree;
-struct treeNode {
-    char data;
+typedef struct thrtreeNode *thrBTree;
+struct thrtreeNode {
+    dataType data;
     thrBTree left;
     thrBTree right;
-    bool left_thr;    // true if no left child then left is a thread
-    bool right_thr;   // false if has right child then right links a child
+    bool left_thr;    // true if no left child: left is a thread
+    bool right_thr;   // false if has right child: right links a child
 };
 
-BTree makethrnode(ElementType data)
+thrBTree makethrnode(dataType data)
 {
     /* create a threaded tree node and return its pointer if data
      is not '#' */
     if (data != '#')
     {
-        BTree node = (BTree)malloc(sizeof(struct treeNode));
+        thrBTree node = (thrBTree)malloc(sizeof(struct thrtreeNode));
         if (!node)
         {
             fprintf(stderr, "Memory full.\n");
@@ -33,23 +36,23 @@ BTree makethrnode(ElementType data)
         return NULL;
 }
 
-BTree createthrBTree(char *array, int len)
+thrBTree createthrBTree(dataType *array, int len)
 {
     /* generate a binary tree */
     if (len < 2)
     	return NULL;
-    BTree parent;
+    thrBTree parent;
     Queue Q = CreateQueue(len);
     int i = 1;
-    BTree root = makenode(array[i]);
+    thrBTree root = makenode(array[i]);
     enqueue(Q, root);
     enqueue(save, root);
 
     while (Q && (i*2+1 < len))
     {
         parent = dequeue(Q);      
-        BTree leftchild = makenode(array[i*2]);
-        BTree rightchild = makenode(array[i*2+1]);
+        thrBTree leftchild = makenode(array[i*2]);
+        thrBTree rightchild = makenode(array[i*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
@@ -68,20 +71,38 @@ BTree createthrBTree(char *array, int len)
 return root;
 }
 
-void linkthr_preorder(BTree root, int len)
+void linkthr_preorder(thrBTree root, int len)
 {
 	/* input: root is the root node of sent in binary tree
 	len is the number of tree nodes excluding sentinel node of arg 'array'
-	of function 'BTree createthrBTree(char *array, int len)' */
-	Queue save = CreateQueue()
+	of function 'thrBTree createthrBTree(dataType *array, int len)' */
+	Queue save = CreateQueue(len);
+	S = CreateStack(MAXSIZE);          // create and initialize stack
+    thrBTree tree = root;
+    while (tree || !isEmpty(S))        // using 'while' is more readable than 'for'
+    {
+        while (tree)
+        {
+            printf("%4d", tree->data);
+            enqueue(save, tree);       // save preorder traversed node in queue
+            push(S, tree);             // push visited node into stack
+            tree = tree->left;         // move all the way to left
+        }
+        if (!isEmpty(S))
+        {
+            tree = pop(S);             // when there's no more left subtree,
+            tree = tree->right;        // to the right
+        }
+    }
 }
 
-void linkthr_inorder(BTree root)
+void linkthr_inorder(thrBTree root)
 {
 
 }
 
-void linkthr_preorder(BTree root)
+void linkthr_preorder(thrBTree root)
 {
 
 }
+

@@ -23,6 +23,8 @@ thrBTree create_sentinel(thrBTree root);
 thrBTree makethrnode(dataType data);
 thrBTree createthrBTree(dataType *array, int len);
 thrBTree linkthr_preorder(thrBTree root, int len);
+thrBTree linkthr_inorder(thrBTree root, int len); // to be done
+thrBTree linkthr_postorder(thrBTree root, int len); // to be done
 /* declare for test */
 
 
@@ -49,7 +51,8 @@ thrBTree makethrnode(dataType data)
 
 thrBTree createthrBTree(dataType *array, int len)
 {
-    /* generate a binary tree */
+    /* Level orderly generates a threaded binary tree whose threads are yet 
+    defined. Output of this function is to be used by linkthr_ functions */
     if (len < 2)
         return NULL;
     thrBTree parent;
@@ -130,8 +133,20 @@ thrBTree linkthr_preorder(thrBTree root, int len)
     return sentinel;
 }
 
+thrBTree linkthr_inorder(thrBTree root, int len) // to be done
+{
+    return root;
+}
+
+thrBTree linkthr_postorder(thrBTree root, int len)  // to be done
+{
+    return root;
+}
+
 thrBTree create_sentinel(thrBTree root)
 {
+    /* This function creates sentinel node for tree and applies all 
+    three linkthr_ functions */
     thrBTree temp = (thrBTree)malloc(sizeof(struct thrtreeNode));
     temp->left = root; temp->right = temp;
     temp->left_thr = false; temp->right_thr = false;

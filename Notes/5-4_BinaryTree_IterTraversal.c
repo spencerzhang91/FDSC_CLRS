@@ -69,8 +69,7 @@ void iter_postorder(BTree root)
         }
         else
         {
-            peeknode = pop(S);
-            push(S, peeknode); // not now to pop out so push back
+            peeknode = top(S); // 'top()' gets but not pop out the stack top
             if (peeknode->right && lastvisited != peeknode->right)
                 root = peeknode->right;
             else

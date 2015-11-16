@@ -16,8 +16,7 @@ void iter_postorder(BTree root)
         }
         else
         {
-            peeknode = pop(S);
-            push(S, peeknode); // not now to pop out so push back
+            peeknode = top(S) // not now to pop out so push back
             if (peeknode->right && lastvisited != peeknode->right)
                 root = peeknode->right;
             else
@@ -38,8 +37,7 @@ void iter_postorder2(BTree root)
     BTree curr = NULL;
     while (!IsEmpty(S))
     {
-        curr = pop(S);
-        push(S, curr);
+        curr = top(S);
         if (!prev || prev->left == curr || prev->right == curr)
         {
             // traversing down the tree

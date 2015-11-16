@@ -19,6 +19,7 @@ bool IsFull(Stack S);
 bool IsEmpty(Stack S);
 void push(Stack S, ElementType item);
 ElementType pop(Stack S);
+ElementType top(Stack S);
 void display(Stack S);
 
 int main(void) // test funtion
@@ -66,7 +67,7 @@ void push(Stack S, ElementType item)
         exit(EXIT_FAILURE);
     }
     else
-        S->array[++(S->top)] = item;
+        S->array[++(S->top)] = item; // add in and move top ptr up/right
 }
 
 ElementType pop(Stack S)
@@ -77,7 +78,12 @@ ElementType pop(Stack S)
         exit(EXIT_FAILURE);
     }
     else
-        return S->array[(S->top)--];
+        return S->array[(S->top)--]; // return and move top ptr down/left
+}
+
+ElementType top(Stack S)
+{
+    return S->array[(S->top)]; // just return top element, top unchanged
 }
 
 void display(Stack S)

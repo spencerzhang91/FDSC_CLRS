@@ -24,6 +24,7 @@ bool IsFull(Stack S);
 bool IsEmpty(Stack S);
 void push(Stack S, ElementType item);
 ElementType pop(Stack S);
+ElementType top(Stack S);
 void display(Stack S);
 
 int main(void) // test funtion
@@ -95,6 +96,11 @@ ElementType pop(Stack S)
         S->cursize--;
         return res;
     }
+}
+
+ElementType top(Stack S)
+{
+    return S->head->data;
 }
 
 void display(Stack S)

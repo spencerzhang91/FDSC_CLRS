@@ -13,10 +13,6 @@ struct treeNode {
     BTree right;
 };
 
-void iter_preorder(BTree root);
-void iter_inorder(BTree root);
-void iter_postorder(BTree root);
-
 void iter_preorder(BTree root)
 {
     S = CreateStack(MAXSIZE);          // create and initialize stack

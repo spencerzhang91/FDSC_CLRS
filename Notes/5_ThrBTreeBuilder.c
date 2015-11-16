@@ -52,8 +52,8 @@ thrBTree createthrBTree(dataType *array, int len)
     while (Q && (i*2+1 < len))
     {
         parent = dequeue(Q);      
-        thrBTree leftchild = makenode(array[i*2]);
-        thrBTree rightchild = makenode(array[i*2+1]);
+        thrBTree leftchild = makenode(array[i++*2]);
+        thrBTree rightchild = makenode(array[i++*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
@@ -66,9 +66,7 @@ thrBTree createthrBTree(dataType *array, int len)
             parent->right_thr = false;
             enqueue(Q, rightchild);
         }
-        ++i;
     }
-
 return root;
 }
 

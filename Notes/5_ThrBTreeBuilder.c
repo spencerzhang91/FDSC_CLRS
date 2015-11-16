@@ -85,7 +85,8 @@ thrBTree linkthr_preorder(thrBTree root, int len)
 {
     /* input: root is the root node of sent in binary tree
     len is the number of tree nodes excluding sentinel node of arg 'array'
-    of function 'thrBTree createthrBTree(dataType *array, int len)' */
+    of function 'thrBTree createthrBTree(dataType *array, int len)' 
+    The returned 'temp' is the wanted node of the threaded tree. */
     Queue save = CreateQueue(len);
     Stack S = CreateStack(MAXSIZE);          // create and initialize stack
     thrBTree tree = root;

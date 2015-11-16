@@ -9,7 +9,7 @@
 #define RIGHT 1
 #define IS_FULL(x) ((x)==NULL)?1: 0
 #define N 10
-#define ElementType thrBTree
+#define ElementType BTree
 #define dataType char // the type of data of thrtreeNode
 
 
@@ -42,16 +42,6 @@ typedef struct {
     int maxsize;
 } Qnode;
 typedef Qnode *Queue;
-
-/* struct definition for threaded binary tree */
-typedef struct thrtreeNode *thrBTree;
-struct thrtreeNode {
-    dataType data;
-    thrBTree left;
-    thrBTree right;
-    bool left_thr;    // true if no left child: left is a thread
-    bool right_thr;   // false if has right child: right links a child
-};
 
 /* stack ADT methods */
 Stack CreateStack(int size);
@@ -89,13 +79,6 @@ void swaptree(BTree root);
 BTree createBTree(char *array, int len);
 BTree makenode(char data);
 
-/* declare for test */
-thrBTree create_sentinel(thrBTree root);
-thrBTree makethrnode(dataType data);
-thrBTree createthrBTree(dataType *array, int len);
-thrBTree linkthr_preorder(thrBTree root, int len);
-/* declare for test */
-
 int main(void)
 {
 	/*BTree root = (BTree)malloc(sizeof(struct treeNode));
@@ -120,8 +103,8 @@ int main(void)
 	puts("\n");
 	iter_postorder2(root);*/
     char info2[N+1] = "0abcd##e#f";
-	thrBTree testree = createthrBTree(info2, N+1);
-	testree = linkthr_preorder(testree, N+1);
+	BTree testree = createBTree(info2, N+1);
+	iter_preorder(testree);
     
 	return 0;
 }
@@ -519,105 +502,3 @@ BTree makenode(char data)
         return NULL;
 }
 
-thrBTree makethrnode(dataType data)
-{
-    /* create a threaded tree node and return its pointer if data
-     is not '#' */
-    if (data != '#')
-    {
-        thrBTree node = (thrBTree)malloc(sizeof(struct thrtreeNode));
-        if (!node)
-        {
-            fprintf(stderr, "Memory full.\n");
-            exit(EXIT_FAILURE);
-        }
-        node->data = data; node->left = NULL; node->right = NULL;
-        // newly created node has no children yet so threaded set to true
-        node->left_thr = true; node->right_thr = true;
-        return node;
-    }
-    else
-        return NULL;
-}
-
-thrBTree createthrBTree(dataType *array, int len)
-{
-    /* generate a binary tree */
-    if (len < 2)
-        return NULL;
-    thrBTree parent;
-    Queue Q = CreateQueue(len);
-    Queue save = CreateQueue(len);
-    int i = 1;
-    thrBTree root = makenode(array[i]);
-    enqueue(Q, root);
-    enqueue(save, root);
-
-    while (Q && (i*2+1 < len))
-    {
-        parent = dequeue(Q);      
-        thrBTree leftchild = makenode(array[i*2]);
-        thrBTree rightchild = makenode(array[i++*2+1]);
-        if (leftchild)
-        {
-            parent->left = leftchild;
-            parent->left_thr = false;
-            enqueue(Q, leftchild);
-        }
-        if (rightchild)
-        {
-            parent->right = rightchild;
-            parent->right_thr = false;
-            enqueue(Q, rightchild);
-        }
-    }
-return root;
-}
-
-thrBTree linkthr_preorder(thrBTree root, int len)
-{
-    /* input: root is the root node of sent in binary tree
-    len is the number of tree nodes excluding sentinel node of arg 'array'
-    of function 'thrBTree createthrBTree(dataType *array, int len)' */
-    Queue save = CreateQueue(len);
-    S = CreateStack(MAXSIZE);          // create and initialize stack
-    thrBTree tree = root;
-    thrBTree prev, curr;               // two pointer to be used to make thread
-    thrBTree sentinel = create_sentinel(root); // create a sentinel node
-    while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
-    {
-        while (tree)
-        {
-            printf("%4d", tree->data);
-            enqueue(save, tree);       // save preorder traversed node in queue
-            push(S, tree);             // push visited node into stack
-            tree = tree->left;         // move all the way to left
-        }
-        if (!IsEmpty(S))
-        {
-            tree = pop(S);             // when there's no more left subtree,
-            tree = tree->right;        // to the right
-        }
-    }
-    prev = dequeue(save);
-    prev->left_thr = true;
-    prev->left = sentinel;
-    while (!QIsEmpty(save))
-    {
-        curr = dequeue(save);
-        if (!curr->left)
-        {
-            curr->left_thr = true;
-            curr->left = prev;
-        }
-        if (!prev->right)
-        {
-            prev->right_thr = true;
-            prev->right = curr;
-        }
-        prev = curr;
-    }
-    prev->right_thr = true;
-    prev->right = sentinel;
-    return sentinel;
-}

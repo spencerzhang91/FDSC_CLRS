@@ -21,7 +21,7 @@ void iter_preorder(BTree root)
 {
     S = CreateStack(MAXSIZE);          // create and initialize stack
     BTree tree = root;
-    while (tree || !isEmpty(S))        // using 'while' is more readable than 'for'
+    while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
     {
         while (tree)
         {
@@ -29,7 +29,7 @@ void iter_preorder(BTree root)
             push(S, tree);             // push visited node into stack
             tree = tree->left;         // move all the way to left
         }
-        if (!isEmpty(S))
+        if (!IsEmpty(S))
         {
             tree = pop(S);             // when there's no more left subtree,
             tree = tree->right;        // to the right
@@ -41,14 +41,14 @@ void iter_inorder(BTree root)
 {
     S = CreateStack(MAXSIZE);
     BTree tree = root;
-    while (tree || isEmpty(S))
+    while (tree || IsEmpty(S))
     {
         while (tree)
         {
             push(S, tree);                 // push tree node into stack when still have left child
             tree = tree->left;
         }
-        if (!isEmpty(S))
+        if (!IsEmpty(S))
         {
             tree = pop(S);                 // pop out tree node when no more left child
             printf("%4d", tree->data);     // which means move back upper level and print

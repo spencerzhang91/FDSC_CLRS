@@ -14,6 +14,7 @@ struct thrtreeNode {
     bool left_thr;    // true if no left child: left is a thread
     bool right_thr;   // false if has right child: right links a child
 };
+static thrBTree create_sentinel(thrBTree root);
 
 thrBTree makethrnode(dataType data)
 {
@@ -40,7 +41,7 @@ thrBTree createthrBTree(dataType *array, int len)
 {
     /* generate a binary tree */
     if (len < 2)
-    	return NULL;
+        return NULL;
     thrBTree parent;
     Queue Q = CreateQueue(len);
     int i = 1;
@@ -71,15 +72,17 @@ thrBTree createthrBTree(dataType *array, int len)
 return root;
 }
 
-void linkthr_preorder(thrBTree root, int len)
+thrBTree linkthr_preorder(thrBTree root, int len)
 {
-	/* input: root is the root node of sent in binary tree
-	len is the number of tree nodes excluding sentinel node of arg 'array'
-	of function 'thrBTree createthrBTree(dataType *array, int len)' */
-	Queue save = CreateQueue(len);
-	S = CreateStack(MAXSIZE);          // create and initialize stack
+    /* input: root is the root node of sent in binary tree
+    len is the number of tree nodes excluding sentinel node of arg 'array'
+    of function 'thrBTree createthrBTree(dataType *array, int len)' */
+    Queue save = CreateQueue(len);
+    S = CreateStack(MAXSIZE);          // create and initialize stack
     thrBTree tree = root;
-    while (tree || !isEmpty(S))        // using 'while' is more readable than 'for'
+    thrBTree prev, curr;               // two pointer to be used to make thread
+    thrBTree sentinel = create_sentinel(root); // create a sentinel node
+    while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
     {
         while (tree)
         {
@@ -88,21 +91,52 @@ void linkthr_preorder(thrBTree root, int len)
             push(S, tree);             // push visited node into stack
             tree = tree->left;         // move all the way to left
         }
-        if (!isEmpty(S))
+        if (!IsEmpty(S))
         {
             tree = pop(S);             // when there's no more left subtree,
             tree = tree->right;        // to the right
         }
     }
+    prev = dequeue(save);
+    prev->left_thr = true;
+    prev->left = sentinel;
+    while (!IsEmpty(save))
+    {
+    	curr = dequeue(save);
+    	if (!curr->left)
+    	{
+    		curr->left_thr = true;
+    		curr->left = prev;
+    	}
+    	if (!prev->right)
+    	{
+    		prev->right_thr = true;
+    		prev->right = curr;
+    	}
+    	prev = curr;
+    }
+    prev->right_thr = true;
+    prev->right = sentinel;
+    return sentinel;
 }
 
-void linkthr_inorder(thrBTree root)
+thrBTree linkthr_inorder(thrBTree root, int len)
 {
-
+	// to be done
+	return root;
 }
 
-void linkthr_preorder(thrBTree root)
+thrBTree linkthr_preorder(thrBTree root, int len)
 {
+	// to be done
+	return root;
+}
 
+static thrBTree create_sentinel(thrBTree root)
+{
+	thrBTree temp = (thrBTree)malloc(sizeof(struct thrtreeNode));
+	temp->left = root; temp->right = temp;
+	temp->left_thr = false; temp->right_thr = false;
+	return temp;
 }
 

@@ -16,7 +16,7 @@ class TreeNode:
 
 tree = ('100', ('1','3',('4','7',None)), ('2','5','6'))
 
-def CreateBTree(infoset):
+def CreateBiTree(infoset):
     '''
     Take a tuple contains binary tree structure information as
     argument, construct tree recursively and return the root.
@@ -106,7 +106,7 @@ def iter_refinedp2(root):
 
 if __name__ == '__main__':
     
-    test = CreateBTree(tree)
+    test = CreateBiTree(tree)
 
     iter_refinedp2(test)
 

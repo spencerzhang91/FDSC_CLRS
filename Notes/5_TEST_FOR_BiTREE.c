@@ -9,16 +9,16 @@
 #define RIGHT 1
 #define IS_FULL(x) ((x)==NULL)?1: 0
 #define N 10
-#define ElementType BTree
+#define ElementType BiTree
 #define dataType char // the type of data of thrtreeNode
 
 
 /* binary tree ADT struct definition */
-typedef struct treeNode *BTree;
+typedef struct treeNode *BiTree;
 struct treeNode {
     int data;
-    BTree left;
-    BTree right;
+    BiTree left;
+    BiTree right;
 };
 
 /* stack ADT struct definition */
@@ -60,37 +60,37 @@ ElementType dequeue(Queue Q);
 
 
 /* binary tree traversal */
-void iter_preorder(BTree root);
-void iter_inorder(BTree root);
-void iter_postorder(BTree root);
-void iter_postorder2(BTree root);
+void iter_preorder(BiTree root);
+void iter_inorder(BiTree root);
+void iter_postorder(BiTree root);
+void iter_postorder2(BiTree root);
 
-void inorder(BTree ptr);
-void preorder(BTree ptr);
-void postorder(BTree ptr);
+void inorder(BiTree ptr);
+void preorder(BiTree ptr);
+void postorder(BiTree ptr);
 
-BTree copy(BTree origin);
-bool isEqual(BTree t1, BTree t2);
-void countleaf(BTree root, int *count);
-int iter_countleaf(BTree root);
-void swaptree(BTree root);
+BiTree copy(BiTree origin);
+bool isEqual(BiTree t1, BiTree t2);
+void countleaf(BiTree root, int *count);
+int iter_countleaf(BiTree root);
+void swaptree(BiTree root);
 
 /* binary tree creation and helper function */
-BTree createBTree(char *array, int len);
-BTree makenode(char data);
+BiTree createBiTree(char *array, int len);
+BiTree makenode(char data);
 
 int main(void)
 {
-	/*BTree root = (BTree)malloc(sizeof(struct treeNode));
+	/*BiTree root = (BiTree)malloc(sizeof(struct treeNode));
 	root->data = 100;
 
-	BTree node1 = (BTree)malloc(sizeof(struct treeNode)); node1->data = 1;
-	BTree node2 = (BTree)malloc(sizeof(struct treeNode)); node2->data = 2;
-	BTree node3 = (BTree)malloc(sizeof(struct treeNode)); node3->data = 3;
-	BTree node4 = (BTree)malloc(sizeof(struct treeNode)); node4->data = 4;
-	BTree node5 = (BTree)malloc(sizeof(struct treeNode)); node5->data = 5;
-	BTree node6 = (BTree)malloc(sizeof(struct treeNode)); node6->data = 6;
-	BTree node7 = (BTree)malloc(sizeof(struct treeNode)); node7->data = 7;
+	BiTree node1 = (BiTree)malloc(sizeof(struct treeNode)); node1->data = 1;
+	BiTree node2 = (BiTree)malloc(sizeof(struct treeNode)); node2->data = 2;
+	BiTree node3 = (BiTree)malloc(sizeof(struct treeNode)); node3->data = 3;
+	BiTree node4 = (BiTree)malloc(sizeof(struct treeNode)); node4->data = 4;
+	BiTree node5 = (BiTree)malloc(sizeof(struct treeNode)); node5->data = 5;
+	BiTree node6 = (BiTree)malloc(sizeof(struct treeNode)); node6->data = 6;
+	BiTree node7 = (BiTree)malloc(sizeof(struct treeNode)); node7->data = 7;
 	root->left = node1; root->right = node2;
 	node1->left = node3; node1->right = node4;
 	node2->left = node5; node2->right = node6;
@@ -103,7 +103,7 @@ int main(void)
 	puts("\n");
 	iter_postorder2(root);*/
     char info2[N+1] = "0abcd##e#f";
-	BTree testree = createBTree(info2, N+1);
+	BiTree testree = createBiTree(info2, N+1);
 	iter_preorder(testree);
     
 	return 0;
@@ -227,10 +227,10 @@ ElementType dequeue(Queue Q)
 }
 
 /* binary tree traversal methods */
-void iter_preorder(BTree root)
+void iter_preorder(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);    // create and initialize stack
-    BTree tree = root;
+    BiTree tree = root;
     while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
     {
         while (tree)
@@ -241,16 +241,16 @@ void iter_preorder(BTree root)
         }
         if (!IsEmpty(S))
         {
-            tree = pop(S);             // when there's no more left subtree,
+            tree = pop(S);             // when there's no more left suBiTree,
             tree = tree->right;        // to the right
         }
     }
 }
 
-void iter_inorder(BTree root)
+void iter_inorder(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);
-    BTree tree = root;
+    BiTree tree = root;
     while (tree || !IsEmpty(S))
     {
         while (tree)
@@ -269,11 +269,11 @@ void iter_inorder(BTree root)
 
 #define LEFT 0
 #define RIGHT 1
-void iter_postorder(BTree root)
+void iter_postorder(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);
-    BTree lastvisited = NULL;
-    BTree peeknode = NULL;
+    BiTree lastvisited = NULL;
+    BiTree peeknode = NULL;
     while (!IsEmpty(S) || root)
     {
         if (root)
@@ -297,12 +297,12 @@ void iter_postorder(BTree root)
 }
 
 /* no visited flag solution */
-void iter_postorder2(BTree root)
+void iter_postorder2(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);
-    BTree prev = NULL; // previously traversed(not necessarily printed) node
+    BiTree prev = NULL; // previously traversed(not necessarily printed) node
     push(S, root);
-    BTree curr = NULL;
+    BiTree curr = NULL;
     while (!IsEmpty(S))
     {
         curr = pop(S);
@@ -341,7 +341,7 @@ void iter_postorder2(BTree root)
     }
 }
 
-void inorder(BTree ptr)
+void inorder(BiTree ptr)
 {
     if (ptr)
     {
@@ -351,7 +351,7 @@ void inorder(BTree ptr)
     }
 }
 
-void postorder(BTree ptr)
+void postorder(BiTree ptr)
 {
     if (ptr)
     {
@@ -361,7 +361,7 @@ void postorder(BTree ptr)
     }
 }
 
-void preorder(BTree ptr)
+void preorder(BiTree ptr)
 {
     if (ptr)
     {
@@ -371,11 +371,11 @@ void preorder(BTree ptr)
     }
 }
 
-BTree copy(BTree origin)
+BiTree copy(BiTree origin)
 {
     if (origin)
     {
-        BTree temp = (BTree)malloc(sizeof(struct treeNode));
+        BiTree temp = (BiTree)malloc(sizeof(struct treeNode));
         if (IS_FULL(temp))
         {
             fprintf(stderr, "The memory is full.\n");
@@ -389,13 +389,13 @@ BTree copy(BTree origin)
     return NULL;
 }
 
-bool isEqual(BTree t1, BTree t2)
+bool isEqual(BiTree t1, BiTree t2)
 {
     return (!t1 && !t2) || (t1 && t2 && (t1->data == t2->data) &&
     isEqual(t1->left, t2->left) && isEqual(t1->right, t2->right));
 }
 
-void countleaf(BTree root, int *count)
+void countleaf(BiTree root, int *count)
 {
     if (root)
     {
@@ -406,11 +406,11 @@ void countleaf(BTree root, int *count)
     }
 }
 
-int iter_countleaf(BTree root)
+int iter_countleaf(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);
-    BTree lastvisited = NULL;
-    BTree peeknode = NULL;
+    BiTree lastvisited = NULL;
+    BiTree peeknode = NULL;
     int leaves = 0;
     while (!IsEmpty(S) || root)
     {
@@ -437,11 +437,11 @@ int iter_countleaf(BTree root)
     return leaves;
 }
 
-void swaptree(BTree root)
+void swaptree(BiTree root)
 {
     if (!root)
         return;
-    BTree temp;
+    BiTree temp;
     temp = root->left;
     root->left = root->right;
     root->right = temp;
@@ -449,13 +449,13 @@ void swaptree(BTree root)
     swaptree(root->right);
 }
 
-BTree createBTree(char *array, int len)
+BiTree createBiTree(char *array, int len)
 {
     /* generate a binary tree */
-    BTree parent;
+    BiTree parent;
     Queue Q = CreateQueue(len);
     int i = 1;
-    BTree root = makenode(array[i]);
+    BiTree root = makenode(array[i]);
     //printf("[Line 456] root->data: %c\n", root->data);
     enqueue(Q, root);
     //printf("[Line 458] root->data: %c\n", root->data);
@@ -464,8 +464,8 @@ BTree createBTree(char *array, int len)
     {
         parent = dequeue(Q);
         //printf("[Line 465] i: %d\n", i);        
-        BTree leftchild = makenode(array[i*2]);
-        BTree rightchild = makenode(array[i++*2+1]);
+        BiTree leftchild = makenode(array[i*2]);
+        BiTree rightchild = makenode(array[i++*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
@@ -484,12 +484,12 @@ BTree createBTree(char *array, int len)
 return root;
 }
 
-BTree makenode(char data)
+BiTree makenode(char data)
 {
     /* create a tree node and return its pointer if data is not '#' */
     if (data != '#')
     {
-        BTree node = (BTree)malloc(sizeof(struct treeNode));
+        BiTree node = (BiTree)malloc(sizeof(struct treeNode));
         if (!node)
         {
             fprintf(stderr, "Memory full.\n");

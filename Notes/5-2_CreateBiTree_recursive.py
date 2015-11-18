@@ -16,7 +16,7 @@ class TreeNode:
 
 tree = ('a', ('b', ('c', 'e', ('f',None,('h','i',None))), ('d',None,'g')), None)
 
-def CreateBTree(infoset):
+def CreateBiTree(infoset):
     '''
     Take a tuple contains binary tree structure information as
     argument, construct tree recursively and return the root.
@@ -77,7 +77,7 @@ def levelOrderTraversal(root):
 
 if __name__ == '__main__':
     
-    test = CreateBTree(tree)
+    test = CreateBiTree(tree)
 
     preorder(test); print()
     inorder(test); print()

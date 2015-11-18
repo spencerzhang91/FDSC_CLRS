@@ -1,17 +1,17 @@
 /* copy binary tree using (recursive) postorder traversal */
 #define IS_FULL(x) ((x)==NULL)?1: 0
-typedef struct treeNode *BTree;
+typedef struct treeNode *BiTree;
 struct treeNode {
     int data;
-    BTree left;
-    BTree right;
+    BiTree left;
+    BiTree right;
 };
 
-BTree copy(BTree origin)
+BiTree copy(BiTree origin)
 {
     if (origin)
     {
-        BTree temp = (BTree)malloc(sizeof(struct treeNode));
+        BiTree temp = (BiTree)malloc(sizeof(struct treeNode));
         if (IS_FULL(temp))
         {
             fprintf(stderr, "The memory is full.\n");

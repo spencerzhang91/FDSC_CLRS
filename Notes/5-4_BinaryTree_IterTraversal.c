@@ -1,22 +1,22 @@
 /* Preorder, inorder and postorder traversal algorithm of binary tree */
 /* Using stack ADT to implement iteratively */
-/* This file need to be compared with file '5-4_iterBTreeTraversal.c'
+/* This file need to be compared with file '5-4_iterBiTreeTraversal.c'
 since this two is identical in nature and comparable in implementation
 I personaly reckon this version as better implemented */
 
 #define MAXSIZE 10                     // the maxsize of tree nodes
 
-typedef struct treeNode *BTree;
+typedef struct treeNode *BiTree;
 struct treeNode {
     int data;
-    BTree left;
-    BTree right;
+    BiTree left;
+    BiTree right;
 };
 
-void iter_preorder(BTree root)
+void iter_preorder(BiTree root)
 {
     S = CreateStack(MAXSIZE);          // create and initialize stack
-    BTree tree = root;
+    BiTree tree = root;
     while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
     {
         while (tree)
@@ -33,10 +33,10 @@ void iter_preorder(BTree root)
     }
 }
 
-void iter_inorder(BTree root)
+void iter_inorder(BiTree root)
 {
     S = CreateStack(MAXSIZE);
-    BTree tree = root;
+    BiTree tree = root;
     while (tree || IsEmpty(S))
     {
         while (tree)
@@ -53,13 +53,13 @@ void iter_inorder(BTree root)
     }
 }
 
-void iter_postorder(BTree root)
+void iter_postorder(BiTree root)
 {
     /* standard solution from wiki
     see more solution in file 5-4_iter_postorder.c */
     Stack S = CreateStack(MAXSIZE);
-    BTree lastvisited = NULL;
-    BTree peeknode = NULL;
+    BiTree lastvisited = NULL;
+    BiTree peeknode = NULL;
     while (!IsEmpty(S) || root)
     {
         if (root)

@@ -13,27 +13,27 @@ First '0' is the sentinel node for subfix conciseness
 The function takes in an array or a tring and returns the root of the tree
 */
 #define ElementType char
-typedef struct treeNode *BTree;
+typedef struct treeNode *BiTree;
 struct treeNode {
     char data;
-    BTree left;
-    BTree right;
+    BiTree left;
+    BiTree right;
 };
 
-BTree createBTree(char *array, int len)
+BiTree createBiTree(char *array, int len)
 {
     /* generate a binary tree */
-    BTree parent;
+    BiTree parent;
     Queue Q = CreateQueue(len);
     int i = 1;
-    BTree root = makenode(array[i]);
+    BiTree root = makenode(array[i]);
     enqueue(Q, root);
 
     while (Q && (i*2+1 < len))
     {
         parent = dequeue(Q);      
-        BTree leftchild = makenode(array[i*2]);
-        BTree rightchild = makenode(array[i*2+1]);
+        BiTree leftchild = makenode(array[i*2]);
+        BiTree rightchild = makenode(array[i*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
@@ -50,12 +50,12 @@ BTree createBTree(char *array, int len)
 return root;
 }
 
-BTree makenode(ElementType data)
+BiTree makenode(ElementType data)
 {
     /* create a tree node and return its pointer if data is not '#' */
     if (data != '#')
     {
-        BTree node = (BTree)malloc(sizeof(struct treeNode));
+        BiTree node = (BiTree)malloc(sizeof(struct treeNode));
         if (!node)
         {
             fprintf(stderr, "Memory full.\n");

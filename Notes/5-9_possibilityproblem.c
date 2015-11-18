@@ -1,14 +1,14 @@
 /* 5-9 the possibility problme on page 132 of FDSC */
 typedef enum {not, and, or, true, false} logical;
-typedef struct treeNode *BTree;
+typedef struct treeNode *BiTree;
 struct treeNode {
     int value;
     logical data;
-    BTree left;
-    BTree right;
+    BiTree left;
+    BiTree right;
 };
 
-void postorder_eval(BTree node)
+void postorder_eval(BiTree node)
 {
 	/* post order traversal to evaluate a propositional calculus tree. */
 	if (node)

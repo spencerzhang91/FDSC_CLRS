@@ -9,7 +9,7 @@
 #define RIGHT 1
 #define IS_FULL(x) ((x)==NULL)?1: 0
 #define N 10
-#define ElementType thrBTree
+#define ElementType thrBiTree
 #define dataType char // the type of data of thrtreeNode
 // NOV16: It's better to unify two kinds of binary tree definitions 
 /* binary tree ADT struct definition
@@ -22,11 +22,11 @@ struct treeNode {
 */
 
 /* threaded binary tree ADT struct definition */
-typedef struct thrtreeNode *thrBTree;
+typedef struct thrtreeNode *thrBiTree;
 struct thrtreeNode {
     dataType data;
-    thrBTree left;
-    thrBTree right;
+    thrBiTree left;
+    thrBiTree right;
     bool left_thr;    // true if no left child: left is a thread
     bool right_thr;   // false if has right child: right links a child
 };
@@ -89,10 +89,10 @@ binary tree creation and helper function
 BTree createBTree(char *array, int len);
 BTree makenode(char data);
 */
-thrBTree create_sentinel(thrBTree root);
-thrBTree makethrnode(dataType data);
-thrBTree createthrBTree(dataType *array, int len);
-thrBTree linkthr_preorder(thrBTree root, int len);
+thrBiTree create_sentinel(thrBiTree root);
+thrBiTree makethrnode(dataType data);
+thrBiTree createthrBiTree(dataType *array, int len);
+thrBiTree linkthr_preorder(thrBiTree root, int len);
 
 int main(void)
 {
@@ -118,7 +118,7 @@ int main(void)
 	puts("\n");
 	iter_postorder2(root);*/
     char info2[N+1] = "0abcd##e#f";
-	thrBTree testree = createthrBTree(info2, N+1);
+	thrBiTree testree = createthrBiTree(info2, N+1);
 	testree = linkthr_preorder(testree, N+1);
     
 	return 0;
@@ -518,13 +518,13 @@ BTree makenode(char data)
 }
 */
 
-thrBTree makethrnode(dataType data)
+thrBiTree makethrnode(dataType data)
 {
     /* create a threaded tree node and return its pointer if data
      is not '#' */
     if (data != '#')
     {
-        thrBTree node = (thrBTree)malloc(sizeof(struct thrtreeNode));
+        thrBiTree node = (thrBiTree)malloc(sizeof(struct thrtreeNode));
         if (!node)
         {
             fprintf(stderr, "Memory full.\n");
@@ -539,24 +539,24 @@ thrBTree makethrnode(dataType data)
         return NULL;
 }
 
-thrBTree createthrBTree(dataType *array, int len)
+thrBiTree createthrBiTree(dataType *array, int len)
 {
     /* generate a binary tree */
     if (len < 2)
         return NULL;
-    thrBTree parent;
+    thrBiTree parent;
     Queue Q = CreateQueue(len);
     Queue save = CreateQueue(len);
     int i = 1;
-    thrBTree root = makethrnode(array[i]);
+    thrBiTree root = makethrnode(array[i]);
     enqueue(Q, root);
     enqueue(save, root);
 
     while (Q && (i*2+1 < len))
     {
         parent = dequeue(Q);      
-        thrBTree leftchild = makethrnode(array[i*2]);
-        thrBTree rightchild = makethrnode(array[i++*2+1]);
+        thrBiTree leftchild = makethrnode(array[i*2]);
+        thrBiTree rightchild = makethrnode(array[i++*2+1]);
         if (leftchild)
         {
             parent->left = leftchild;
@@ -573,16 +573,16 @@ thrBTree createthrBTree(dataType *array, int len)
 return root;
 }
 
-thrBTree linkthr_preorder(thrBTree root, int len)
+thrBiTree linkthr_preorder(thrBiTree root, int len)
 {
     /* input: root is the root node of sent in binary tree
     len is the number of tree nodes excluding sentinel node of arg 'array'
-    of function 'thrBTree createthrBTree(dataType *array, int len)' */
+    of function 'thrBiTree createthrBiTree(dataType *array, int len)' */
     Queue save = CreateQueue(len);
     Stack S = CreateStack(MAXSIZE);          // create and initialize stack
-    thrBTree tree = root;
-    thrBTree prev, curr;               // two pointer to be used to make thread
-    thrBTree sentinel = create_sentinel(root); // create a sentinel node
+    thrBiTree tree = root;
+    thrBiTree prev, curr;               // two pointer to be used to make thread
+    thrBiTree sentinel = create_sentinel(root); // create a sentinel node
     while (tree || !IsEmpty(S))        // using 'while' is more readable than 'for'
     {
         while (tree)
@@ -621,9 +621,9 @@ thrBTree linkthr_preorder(thrBTree root, int len)
     return sentinel;
 }
 
-thrBTree create_sentinel(thrBTree root)
+thrBiTree create_sentinel(thrBiTree root)
 {
-    thrBTree temp = (thrBTree)malloc(sizeof(struct thrtreeNode));
+    thrBiTree temp = (thrBiTree)malloc(sizeof(struct thrtreeNode));
     temp->left = root; temp->right = temp;
     temp->left_thr = false; temp->right_thr = false;
     return temp;

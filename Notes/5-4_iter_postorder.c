@@ -2,11 +2,11 @@
 #define RIGHT 1
 
 /* standard solution from wiki */
-void iter_postorder(BTree root)
+void iter_postorder(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);
-    BTree lastvisited = NULL;
-    BTree peeknode = NULL;
+    BiTree lastvisited = NULL;
+    BiTree peeknode = NULL;
     while (!IsEmpty(S) || root)
     {
         if (root)
@@ -29,12 +29,12 @@ void iter_postorder(BTree root)
 }
 
 /* no visited flag solution */
-void iter_postorder2(BTree root)
+void iter_postorder2(BiTree root)
 {
     Stack S = CreateStack(MAXSIZE);
-    BTree prev = NULL; // previously traversed(not necessarily printed) node
+    BiTree prev = NULL; // previously traversed(not necessarily printed) node
     push(S, root);
-    BTree curr = NULL;
+    BiTree curr = NULL;
     while (!IsEmpty(S))
     {
         curr = top(S);

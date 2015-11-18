@@ -18,23 +18,46 @@ void change_priority(element origin, element newp, int *n)
        newp: new key to replace origin if origin in heap, otherwise add it in;
        n: the number of elements of the heap.
     */
-    if (!inheap(origin, *n))
+    int parent, child;
+    int index = inheap(origin, *n);
+    parent = index; child = parent * 2;
+    if (!index)
     {
         printf("Origin not in the heap, inserting...\n");
         insert_max_heap(origin, *n);
     }
     else
     {
-        
+        if (newp.key > heap[index/2].key)
+        {
+            while ((newp.key > heap[index/2].key) && index != 1)
+            {
+                heap[index] = heap[index/2];
+                index /= 2;
+            }
+            heap[index] = newp;
+        }
+        else
+        {
+            while (child <= *n)
+            {
+                if ((child < *n) && (heap[child].key < heap[child+1].key))
+                    child++;
+                if (newp.key >= heap[child].key)
+                    break;
+                heap[parent] = heap[child];
+                child *= 2;
+            }
+            heap[parent] = newp;
+        }
     }
-
 }
 
-bool inheap(element item, int *n)
+int inheap(element item, int *n)
 {
     for (int i = 1; i <= *n; i++)
         if (item == heap[i])
-            return true;
+            return i;
     return false;
 }
 

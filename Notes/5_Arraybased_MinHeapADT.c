@@ -21,3 +21,31 @@ MinHeap Create(int MAXSIZE)
 
     return H;
 }
+
+void Insert(MinHeap H, ElementType item)
+{
+    int i;
+    if (IsFull(H))
+    {
+        printf("The min heap is full.\n");
+        return;
+    }
+    i = ++H->size;
+    for (; H->elements[i/2] > item; i /= 2)
+    // when use a large enough sentiel, no need to add(i>1) in for loop
+        H->elements[i] = H->elements[i/2];
+    H->elements[i] = item;
+}
+
+ElementType Delete(MinHeap H)
+{
+    /* delete and return the max element from the heap, which is the root */
+    int parent, child;
+    ElementType MinItem, temp;
+    if (IsEmpty(H))
+    {
+        printf("The min heap is empty.\n");
+        return;
+    }
+    return MinItem;
+}

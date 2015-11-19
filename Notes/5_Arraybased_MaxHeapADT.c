@@ -13,39 +13,64 @@ struct HeapStruct {
 MaxHeap Create(int MAXSIZE)
 {
     /* create a emtpy max heap with capacity of MAXSIZE */
-    MaxHeap H = (MaxHeap)malloc( sizeof(struct HeapStruct));
-    H->elements = (ElementType)malloc((MAXSIZE+1) * sizeof(ElementType));
-    H->size = 0;
-    H->capacity = MAXSIZE;
-    H->elements[0] = MAXDATA;   // sentinel
+    MaxHeap heap = (MaxHeap)malloc( sizeof(struct HeapStruct));
+    heap->elements = (ElementType)malloc((MAXSIZE+1) * sizeof(ElementType));
+    heap->size = 0;
+    heap->capacity = MAXSIZE;
+    heap->elements[0] = MAXDATA;   // sentinel
 
-    return H;
+    return heap;
 }
 
-void Insert(MaxHeap H, ElementType item)
+void Insert(MaxHeap heap, ElementType item)
 {
     int i;
-    if (IsFull(H))
+    if (IsFull(heap))
     {
         printf("The max heap is full.\n");
         return;
     }
-    i = ++H->size;
-    for (; H->elements[i/2] < item; i /= 2)
-    // when use a large enough sentiel, no need to add(i>1) in for loop
-        H->elements[i] = H->elements[i/2];
-    H->elements[i] = item;
+    i = ++(heap->size);
+    while (heap->elements[i] > heap->elements[i/2]) // because sentinel exists
+    {
+        heap->elements[i] = heap->elements[i/2];
+        i /= 2;
+    }
+    heap->elements[i] = item;
 }
 
-ElementType Delete(MaxHeap H)
+ElementType Delete(MaxHeap heap)
 {
     /* delete and return the max element from the heap, which is the root */
     int parent, child;
     ElementType MaxItem, temp;
-    if (IsEmpty(H))
+    if (IsEmpty(heap))
     {
         printf("The heap is empty.\n");
         return;
     }
+    MaxItem = heap[1];
+    temp = heap->elements[(heap->size)--];
+    parent = 1; child = 2;
+    while (child <= heap->size)
+    {
+        if ((child < heap->size) && (heap->elements[child]))
+            child++;
+        if (temp >= heap->elements[child]) break;
+        heap->elements[parent] = heap->elements[child];
+        parent = child;
+        child *= 2;
+    }
+    heap->elements[parent] = temp;
     return MaxItem;
+}
+
+bool IsFull(MaxHeap heap)
+{
+    return (heap->size >= heap->capacity);
+}
+
+bool IsEmpty(MaxHeap heap)
+{
+    return (heap->size == 0);
 }

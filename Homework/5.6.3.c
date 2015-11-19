@@ -1,9 +1,11 @@
 /* excercise 5.6.3.c */
 #include <stdio.h>
-
+#include <stdbool.h>
+#include <stdlib.h>
 #define MAX_ELEMENTS 200
 #define HEAP_FULL(n) (n == MAX_ELEMENTS - 1)
 #define HEAP_EMPTY(n) (!n)
+
 typedef struct {
     int key;
     /* other fields */
@@ -11,6 +13,29 @@ typedef struct {
 
 element heap[MAX_ELEMENTS]; // here define it as global variable
 int n = 0;
+
+void change_priority(element origin, element newp, int *n);
+int inheap(element item, int n);
+void insert_max_heap(element item, int *n);
+void traverse();
+
+int main(void)
+{
+    // create a max heap first
+    for (int j = 1; j < 11; j++)
+    {
+        element temp;
+        temp.key = j;
+        insert_max_heap(temp, &n);
+    }
+    traverse();
+    element origin = {3};
+    element newp = {33};
+    change_priority(origin, newp, &n);
+    traverse();
+    
+    return 0;
+}
 
 void change_priority(element origin, element newp, int *n)
 {
@@ -24,13 +49,13 @@ void change_priority(element origin, element newp, int *n)
     if (!index)
     {
         printf("Origin not in the heap, inserting...\n");
-        insert_max_heap(origin, *n);
+        insert_max_heap(origin, n);
     }
     else
     {
         if (newp.key > heap[index/2].key)
         {
-            while ((newp.key > heap[index/2].key) && index != 1)
+            while ((newp.key > heap[index/2].key) && (index != 1))
             {
                 heap[index] = heap[index/2];
                 index /= 2;
@@ -53,10 +78,10 @@ void change_priority(element origin, element newp, int *n)
     }
 }
 
-int inheap(element item, int *n)
+int inheap(element item, int n)
 {
-    for (int i = 1; i <= *n; i++)
-        if (item == heap[i])
+    for (int i = 1; i <= n; i++)
+        if (item.key == heap[i].key)
             return i;
     return false;
 }
@@ -69,10 +94,17 @@ void insert_max_heap(element item, int *n)
         exit(EXIT_FAILURE);
     }
     int i = ++(*n); // this is equal to i = *n + 1; (*n) += 1;
-    while (item.key > heap[i/2])
+    while ((item.key > heap[i/2].key) && (i != 1))
     {
         heap[i] = heap[i/2];
         i /= 2;
     }
     heap[i] = item;
+}
+
+void traverse(void)
+{
+    for (int i = 1; i <= n; i++)
+        printf("%d ", heap[i]);
+    puts("\n");
 }

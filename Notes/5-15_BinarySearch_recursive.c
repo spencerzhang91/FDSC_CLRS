@@ -2,7 +2,6 @@
    The time complexity is O(h) and additional stack space consumption O(h) 
    h is the height of the tree.
 */
-
 typedef struct treeNode *BiTree;
 struct treeNode {
     int data;

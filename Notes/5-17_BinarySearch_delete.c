@@ -7,6 +7,23 @@ struct treeNode {
     BiTree right;
 };
 
+int main(void)
+{
+    BiTree tree = createSearchTree(3);
+    delete_iter(tree, 2);
+    delete_iter(tree, 3);
+    
+    return 0;
+}
+
+BiTree createSearchTree(int init)
+{
+    BiTree temp = (BiTree)malloc(sizeof(struct treeNode));
+    temp->left = temp->right = NULL;
+    temp->data = init;
+    return temp;
+}
+
 BiTree delete_recr(BiTree root, int number)
 {
     BiTree temp;
@@ -34,9 +51,9 @@ BiTree delete_recr(BiTree root, int number)
     }
 }
 
-void delete_iter(Bitree *root, int number)
+void delete_iter(BiTree *root, int number)
 {
-    Bitree temp;
+    BiTree temp;
     if (!root) printf("Empty tree!\n");
     while (root)
     {
@@ -64,7 +81,7 @@ void delete_iter(Bitree *root, int number)
     }
 }
 
-BiTree findmax(Bitree node)
+BiTree findmax(BiTree node)
 {
     while (node->right)
         node = node->right;

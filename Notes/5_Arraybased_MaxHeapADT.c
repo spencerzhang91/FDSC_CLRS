@@ -54,7 +54,8 @@ ElementType Delete(MaxHeap heap)
     parent = 1; child = 2;
     while (child <= heap->size)
     {
-        if ((child < heap->size) && (heap->elements[child]))
+        if ((child < heap->size) &&
+            (heap->elements[child] < heap->elements[child+1]))
             child++;
         if (temp >= heap->elements[child]) break;
         heap->elements[parent] = heap->elements[child];

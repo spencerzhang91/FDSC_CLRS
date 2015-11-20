@@ -66,5 +66,7 @@ void delete_iter(Bitree *root, int number)
 
 BiTree findmax(Bitree node)
 {
-    return node; // yet done
+    while (node->right)
+        node = node->right;
+    return node;
 }

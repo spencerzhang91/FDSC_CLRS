@@ -14,7 +14,7 @@ void insert_node(BiTree *pointer, int num)
     BiTree temp = modified_search(*pointer, num);
     if (temp || !*pointer) // means num is not in the tree
     {
-        ptr = (BiTree)malloc(sizeof(treeNode));
+        ptr = (BiTree)malloc(sizeof(struct treeNode));
         if (!ptr)
         {
             fprintf(stderr, "The memory is full.\n");

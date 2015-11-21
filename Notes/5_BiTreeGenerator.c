@@ -12,10 +12,10 @@ tree2: {'0','A','B','#','#','D'} or "0AB##D";
 First '0' is the sentinel node for subfix conciseness
 The function takes in an array or a tring and returns the root of the tree
 */
-#define ElementType char
+#define DataType char
 typedef struct treeNode *BiTree;
 struct treeNode {
-    char data;
+    DataType data;
     BiTree left;
     BiTree right;
 };
@@ -50,7 +50,7 @@ BiTree createBiTree(char *array, int len)
 return root;
 }
 
-BiTree makenode(ElementType data)
+BiTree makenode(DataType data)
 {
     /* create a tree node and return its pointer if data is not '#' */
     if (data != '#')
@@ -61,7 +61,9 @@ BiTree makenode(ElementType data)
             fprintf(stderr, "Memory full.\n");
             exit(EXIT_FAILURE);
         }
-        node->data = data; node->left = NULL; node->right = NULL;
+        node->data = data;  // the data type of data is default to char
+        node->left = NULL;
+        node->right = NULL;
         return node;
     }
     else

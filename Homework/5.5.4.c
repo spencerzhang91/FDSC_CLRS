@@ -13,7 +13,7 @@ struct thrtreeNode {
 
 void tpostorder(thrBTree tree)
 {
-    /* pre-order traversal of threaded binary tree, the input is the sentinel
+    /* post-order traversal of threaded binary tree, the input is the sentinel
     node of generated threaded binary tree. */
     thrBTree temp = tree;
     for (;;)
@@ -26,7 +26,7 @@ void tpostorder(thrBTree tree)
 
 thrBTree postsucc(thrBTree node)
 {
-    /* find the preorder sucessor of node in a threaded binary tree, the input
+    /* find the post-order sucessor of node in a threaded binary tree, the input
     is the sentinel    node of generated threaded binary tree. */
     thrBTree temp;
     temp = node->right;

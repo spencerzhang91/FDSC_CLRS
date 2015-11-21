@@ -21,7 +21,13 @@ BiTree modified_search(BiTree root, int key);
 int main(void)
 {
     BiTree tree = createSearchTree(3);
+    for (int i = 0; i < 10; i++)
+        insert_node(&tree, 10+i*2);
     preorder(tree);
+    puts("\n");
+    delete_iter(tree, 10);
+    preorder(tree);
+    
     
     return 0;
 }

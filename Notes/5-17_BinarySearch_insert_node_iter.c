@@ -10,7 +10,7 @@ struct treeNode {
     BiTree right;
 };
 
-void insert_node(BiTree *root, int num);
+void insert_node_iter(BiTree *root, int num);
 void preorder(BiTree tree);
 BiTree search_iter(BiTree root, int key);
 
@@ -18,12 +18,13 @@ int main(void)
 {
     BiTree root = (BiTree)malloc(sizeof(struct treeNode));
     root->data = 100; root->left = root->right = NULL;
-    insert_node(&root, 40);
-    insert_node(&root, 102);
+    insert_node_iter(&root, 40);
+    insert_node_iter(&root, 102);
+    preorder(root);
     return 0;
 }
 
-void insert_node(BiTree *root, int num)
+void insert_node_iter(BiTree *root, int num)
 {
     if (!search_iter(*root, num)) // means num is not found in the binary tree
     {

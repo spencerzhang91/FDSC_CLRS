@@ -26,6 +26,7 @@ int main(void)
 
 void insert_node_iter(BiTree *root, int num)
 {
+    /* iterative implementation of inserting a value in the binary search tree */
     if (!search_iter(*root, num)) // means num is not found in the binary tree
     {
         BiTree newptr = (BiTree)malloc(sizeof(struct treeNode));

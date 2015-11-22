@@ -23,6 +23,9 @@ int main(void)
     insert_node_iter(&root, 40);
     insert_node_iter(&root, 102);
     preorder(root);
+    puts("fuck");
+    delete_iter(root, 50);
+    puts("Fuck");
     return 0;
 }
 
@@ -36,7 +39,7 @@ void delete_iter(BiTree root, int number) // something wrong here!
             root = root->left;
         else if (number > root->data)
             root = root->right;
-        else
+        else if (number == root->data)
         {
             if (root->left && root->right)
             {
@@ -50,6 +53,7 @@ void delete_iter(BiTree root, int number) // something wrong here!
                 temp = root;
                 if (!root->right) root = root->left;
                 else if (!root->left) root = root->right;
+                else printf("The number in not in the binary search tree.\n");
             }
             free(temp);
             printf("Successfully deleted number %d from tree.\n", number);

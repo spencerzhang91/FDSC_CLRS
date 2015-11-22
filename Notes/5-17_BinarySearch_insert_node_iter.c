@@ -10,20 +10,44 @@ struct treeNode {
     BiTree right;
 };
 
-void insert_node(BiTree root, int num);
+void insert_node(BiTree *root, int num);
 void preorder(BiTree tree);
-BiTree search_iter(BiTree root, int key)
+BiTree search_iter(BiTree root, int key);
 
 int main(void)
 {
     BiTree root = (BiTree)malloc(sizeof(struct treeNode));
     root->data = 100; root->left = root->right = NULL;
+    insert_node(&root, 40);
+    insert_node(&root, 102);
     return 0;
 }
 
-void insert_node(BiTree root, int num)
+void insert_node(BiTree *root, int num)
 {
-    
+    if (!search_iter(*root, num)) // means num is not found in the binary tree
+    {
+        BiTree newptr = (BiTree)malloc(sizeof(struct treeNode));
+        newptr->data = num;
+        newptr->left = NULL; newptr->right = NULL;
+        if (!(*root))
+            *root = newptr;
+        else
+        {
+            BiTree temp = *root; BiTree parent;
+            while (temp)
+            {
+                parent = temp;
+                if (num < temp->data)
+                    temp = temp->left;
+                else
+                    temp = temp->right;
+            }
+            if (num < parent->data) parent->left = newptr;
+            else parent->right = newptr;
+        }
+    }
+    else printf("The number %d is already in the tree.\n", num);
 }
 
 void preorder(BiTree tree)

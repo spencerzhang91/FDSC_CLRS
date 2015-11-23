@@ -1,4 +1,5 @@
 /* code fragment 5-17: delete a new item from the binary search tree */
+/* test is included in this code segment */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -47,7 +48,7 @@ void delete_iter(BiTree root, int number) // something wrong here!
     /* Find the node in the tree if node->data == number, and find proper
     replacement node in node's sub tree, let node->data = replace->data, and
     then acutally delete the replacement node. */
-    BiTree delptr, temp;
+    BiTree delptr;
     BiTree parent, child;
     Pairs found;
     if ((delptr = search_iter(root, number)) != NULL && root)

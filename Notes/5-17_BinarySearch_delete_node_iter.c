@@ -19,46 +19,43 @@ void insert_node_iter(BiTree *root, int num);
 int main(void)
 {
     BiTree root = (BiTree)malloc(sizeof(struct treeNode));
-    root->data = 100; root->left = root->right = NULL;
-    insert_node_iter(&root, 40);
-    insert_node_iter(&root, 102);
-    preorder(root);
-    puts("fuck");
-    delete_iter(root, 50);
-    puts("Fuck");
+    BiTree left = (BiTree)malloc(sizeof(struct treeNode));
+    BiTree test;
+    root->data = 10; left->data = 3; root->left = left;
+    root->right = left->left = left->right = NULL;
+    test = data;
+    printf("%d\n", root->left->data);
+    printf("%d\n", test->left->data);
+
     return 0;
 }
 
 void delete_iter(BiTree root, int number) // something wrong here!
 {
-    BiTree temp;
-    if (!root) printf("Empty tree!\n");
-    while (root)
+    /* Find the node in the tree if node->data == number, and find proper
+    replacement node in node's sub tree, let node->data = replace->data, and
+    then acutally delete the replacement node. */
+    Bitree delptr, dummy;
+    if ((delptr = search_iter(root, number) != NULL) && root)
     {
-        if (number < root->data)
-            root = root->left;
-        else if (number > root->data)
-            root = root->right;
-        else if (number == root->data)
+        if (delptr->left && delptr->right)
         {
-            if (root->left && root->right)
-            {
-                temp = findmax(root->left);
-                if (temp->left)
-                    root->left->right = temp->left;
-                root->data = temp->data;
-            }
-            else
-            {
-                temp = root;
-                if (!root->right) root = root->left;
-                else if (!root->left) root = root->right;
-                else printf("The number in not in the binary search tree.\n");
-            }
-            free(temp);
-            printf("Successfully deleted number %d from tree.\n", number);
+            dummy = findmax(delptr->left);
+            delptr->left->right = dummy->left;
+            deptr->data = dummy->data;
+            free(dummy); // What if dummy is NULL?
+        }
+        
+        else
+        {
+            dummy = delptr;
+            if (!delptr->right) delptr = delptr->left;
+            else if (!delptr->left) deptr = delptr->right;
+            free(dummy);
         }
     }
+    else printf("The deletion operation failed because of empty tree
+        or number not found in the tree.\n");
 }
 
 BiTree findmax(BiTree node)

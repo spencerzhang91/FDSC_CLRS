@@ -11,7 +11,7 @@ struct treeNode {
 };
 
 void insert_node_iter(BiTree *root, int num);
-void delete_iter(BiTree *root, int number);
+void delete_iter(BiTree root, int number);
 void preorder(BiTree root);
 BiTree search_iter(BiTree root, int key);
 BiTree findmax(BiTree node);
@@ -30,26 +30,26 @@ int main(void)
     insert_node_iter(&root, 57);
 
     preorder(root); puts("\n");
-    delete_iter(&root, 10);
+    delete_iter(root, 60);
     preorder(root);
 
     return 0;
 }
 
-void delete_iter(BiTree *root, int number) // something wrong here!
+void delete_iter(BiTree root, int number) // something wrong here!
 {
     /* Find the node in the tree if node->data == number, and find proper
     replacement node in node's sub tree, let node->data = replace->data, and
     then acutally delete the replacement node. */
     BiTree delptr, dummy, temp;
-    if ((delptr = search_iter(*root, number)) != NULL && *root)
+    if ((delptr = search_iter(root, number)) != NULL && root)
     {
         if (delptr->left && delptr->right)
         {
             dummy = findmax(delptr->left);
             printf("dummy: %d\n", dummy->data);
-            delptr->left->right = dummy->left;
             delptr->data = dummy->data;
+            
         }
         else
         {

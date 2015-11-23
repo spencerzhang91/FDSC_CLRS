@@ -1,39 +1,56 @@
 /* excercise 5.7.5.c */
+typedef struct treeNode *BiTree;
+struct treeNode {
+    int data;
+    BiTree left;
+    BiTree right;
+};
+
+typedef struct pair *Pairs; // to contain result of modified findmax function
+struct pair {
+    BiTree parent;
+    BiTree child;
+};
+
 void delete_iter(BiTree root, int number) // something wrong here!
 {
-    BiTree temp;
-    if (!root) printf("Empty tree!\n");
-    while (root)
+    /* Find the node in the tree if node->data == number, and find proper
+    replacement node in node's sub tree, let node->data = replace->data, and
+    then acutally delete the replacement node. */
+    BiTree delptr, temp;
+    BiTree parent, child;
+    Pairs found;
+    if ((delptr = search_iter(root, number)) != NULL && root)
     {
-        if (number < root->data)
-            root = root->left;
-        else if (number > root->data)
-            root = root->right;
+        if (delptr->left && delptr->right)
+        {
+            found = findmax(delptr->left);
+            parent = found->parent; child = found->child;
+            delptr->data = child->data;
+            if (parent) parent->right = child->left;
+            free(child); child = NULL;            
+        }
         else
         {
-            if (root->left && root->right)
-            {
-                temp = findmax(root->left);
-                if (temp->left)
-                    root->left->right = temp->left;
-                root->data = temp->data;
-            }
-            else
-            {
-                temp = root;
-                if (!root->right) root = root->left;
-                else if (!root->left) root = root->right;
-            }
-            temp = NULL;
-            free(temp);
-            printf("Successfully deleted number %d from tree.\n", number);
+            child = delptr;
+            if (!delptr->right) delptr = delptr->left;
+            else if (!delptr->left) delptr = delptr->right;
+            free(child); child = NULL;
         }
     }
+    else printf("\nThe deletion operation failed because of empty tree"
+    "or number not found in the tree.\n");
 }
 
-BiTree findmax(BiTree node)
+Pairs findmax(BiTree node)
 {
-    while (node->right)
-        node = node->right;
-    return node;
+    /* find the right most tree node in sub tree of input 'node' */
+    Pairs P = (Pairs)malloc(sizeof(struct pair));
+    P->parent = NULL; P->child = node;
+    while (P->child->right)
+    {
+        P->parent = P->child;
+        P->child = P->child->right;
+    }
+    return P;
 }

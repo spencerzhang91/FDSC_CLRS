@@ -33,6 +33,7 @@ struct Gnode {
 };
 
 LGragh CreateGragh(int vn);
+void InsertEdge(LGragh gragh, Edge e);
 static void MakeEdge(ptr header, ptr newnode);
 static void traverselist(ptr header);
 
@@ -42,6 +43,11 @@ int main(void)
     printf("edge_num: %d\n", newgragh->edge_num);
     printf("vertex_num: %d\n", newgragh->vertex_num);
     printf("adjv: %d\n", newgragh->G[3]->adjv);
+    Edge edgeone = (Edge)malloc(sizeof(struct Enode));
+    edgeone->vc = 3; edgeone->vr = 8; edgeone->w = 1;
+    InsertEdge(newgragh, edgeone);
+    for (int i = 0; i < 10; i++)
+        traverselist(newgragh->G[i]);
     return 0;
 }
 
@@ -88,6 +94,10 @@ static void MakeEdge(ptr header, ptr newnode)
 static void traverselist(ptr header)
 {
     while (header)
+    {
         printf("%d ", header->adjv);
+        header = header->next;
+    }
+        
     printf("\n");
 }

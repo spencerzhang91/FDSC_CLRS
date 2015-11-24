@@ -28,7 +28,7 @@ MGragh CreateGragh(int vn)                  // vn for vertex number
     MGragh Gragh = (MGragh)malloc(sizeof(struct Gnode));
     Gragh->vertex_num = vn;
     Gragh->edge_num = 0;
-    /* the initial vertex subfix starts from 0 */
+    /* initialize the adjacency matrix */
     for (i = 0; i < vn; i++)
         for (j = 0; j < vn; j++)
             Gragh->G[i][j] = INFINITY;

@@ -34,3 +34,9 @@ MGragh CreateGragh(int vn)                  // vn for vertex number
             Gragh->G[i][j] = INFINITY;
     return Gragh;
 }
+
+void InsertEdge(MGragh g, Edge e)
+{
+    g->G[e->vr][e->vc] = e->w;
+    g->G[e->vc][e->vr] = e->w; // if gragh is undirected add this line
+}

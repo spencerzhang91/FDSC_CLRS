@@ -1,7 +1,6 @@
 /* Implementation of gragh using adjacency lists */
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MaxVertexNum 100
 typedef int Vertex;                         // subfix to represent vertex
 typedef int Weight;                         // use int to represent weight

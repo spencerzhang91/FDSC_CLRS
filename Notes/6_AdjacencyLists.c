@@ -1,4 +1,4 @@
-/* Implementation of gragh using adjacency lists */
+/* Implementation of graph using adjacency lists */
 #include <stdio.h>
 #include <stdlib.h>
 #define MaxVertexNum 100
@@ -23,30 +23,30 @@ struct adjnode {
     ptr next;
 };
 
-/* definition of linked lists based gragh */
-typedef struct Gnode *LGragh;
+/* definition of linked lists based graph */
+typedef struct Gnode *LGraph;
 struct Gnode {
     int vertex_num;
     int edge_num;
     ptr G[MaxVertexNum];                    // adjacency linked list
 };
 
-LGragh CreateGragh(int vn);
-void InsertEdge(LGragh gragh, Edge e);
+LGragh CreateGraph(int vn);
+void InsertEdge(LGraph gragh, Edge e);
 static void MakeEdge(ptr header, ptr newnode);
 static void traverselist(ptr header);
 
 int main(void)
 {
-    LGragh newgragh = CreateGragh(10);
-    printf("edge_num: %d\n", newgragh->edge_num);
-    printf("vertex_num: %d\n", newgragh->vertex_num);
-    printf("adjv: %d\n", newgragh->G[3]->adjv);
+    LGragh newgraph = CreateGraph(10);
+    printf("edge_num: %d\n", newgraph->edge_num);
+    printf("vertex_num: %d\n", newgraph->vertex_num);
+    printf("adjv: %d\n", newgraph->G[3]->adjv);
     Edge edgeone = (Edge)malloc(sizeof(struct Enode));
     edgeone->vc = 3; edgeone->vr = 8; edgeone->w = 1;
-    InsertEdge(newgragh, edgeone);
+    InsertEdge(newgraph, edgeone);
     for (int i = 0; i < 10; i++)
-        traverselist(newgragh->G[i]);
+        traverselist(newgraph->G[i]);
     return 0;
 }
 
@@ -54,28 +54,28 @@ LGragh CreateGragh(int vn)
 {
     /* initialize a gragh with vn vertexes but no edges */
     Vertex i;
-    LGragh Gragh = (LGragh)malloc(sizeof(struct Gnode));
-    Gragh->vertex_num = vn;
-    Gragh->edge_num = 0;
+    LGraph Graph = (LGraph)malloc(sizeof(struct Gnode));
+    Graph->vertex_num = vn;
+    Graph->edge_num = 0;
     for (i = 0; i < vn; i++)
     {
-        Gragh->G[i] = (ptr)malloc(sizeof(struct adjnode));
-        Gragh->G[i]->adjv = i;
-        Gragh->G[i]->next = NULL;
+        Graph->G[i] = (ptr)malloc(sizeof(struct adjnode));
+        Graph->G[i]->adjv = i;
+        Graph->G[i]->next = NULL;
     }
-    return Gragh;
+    return Graph;
 }
 
-void InsertEdge(LGragh gragh, Edge e)
+void InsertEdge(LGraph graph, Edge e)
 {
     /* for directed or undirected gragh to insert a new edge */
     ptr newnode = (ptr)malloc(sizeof(struct adjnode));
     newnode->adjv = e->vc;
     newnode->next = NULL;
     newnode->w = e->w;
-    MakeEdge(gragh->G[e->vr], newnode);
-    // if gragh is undirected:
-    //MakeEdge(gragh->G[e->vc], e->vr);
+    MakeEdge(graph->G[e->vr], newnode);
+    // if graph is undirected:
+    //MakeEdge(graph->G[e->vc], e->vr);
 }
 
 static void MakeEdge(ptr header, ptr newnode)
@@ -96,7 +96,6 @@ static void traverselist(ptr header)
     {
         printf("%d ", header->adjv);
         header = header->next;
-    }
-        
+    }      
     printf("\n");
 }

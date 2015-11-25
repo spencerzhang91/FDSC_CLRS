@@ -1,4 +1,4 @@
-/* implementation of gragh using adjacency matrix */
+/* implementation of graph using adjacency matrix */
 #define MaxVertexNum 100
 #define INFINITY 65535
 typedef int Vertex;                         // subfix to represent vertex
@@ -12,8 +12,8 @@ struct Enode {
     Vertex vc;                              // col subfix
     Weight w;                               // weight of the edge
 };
-/* definition of gragh */
-typedef struct Gnode *MGragh;
+/* definition of graph */
+typedef struct Gnode *MGraph;
 struct Gnode {
     int vertex_num;
     int edge_num;
@@ -21,22 +21,22 @@ struct Gnode {
     DataType Data[MaxVertexNum];            // data saved on vertexes
 };
 
-MGragh CreateGragh(int vn)                  // vn for vertex number
+MGragh CreateGraph(int vn)                  // vn for vertex number
 {
-    /* initialize a gragh with vn vertexes but no edges */
+    /* initialize a graph with vn vertexes but no edges */
     Vertex i, j;
-    MGragh Gragh = (MGragh)malloc(sizeof(struct Gnode));
-    Gragh->vertex_num = vn;
-    Gragh->edge_num = 0;
+    MGraph Graph = (MGraph)malloc(sizeof(struct Gnode));
+    Graph->vertex_num = vn;
+    Graph->edge_num = 0;
     /* initialize the adjacency matrix */
     for (i = 0; i < vn; i++)
         for (j = 0; j < vn; j++)
-            Gragh->G[i][j] = INFINITY;
-    return Gragh;
+            Graph->G[i][j] = INFINITY;
+    return Graph;
 }
 
-void InsertEdge(MGragh g, Edge e)
+void InsertEdge(MGraph g, Edge e)
 {
     g->G[e->vr][e->vc] = e->w;
-    g->G[e->vc][e->vr] = e->w; // if gragh is undirected add this line
+    g->G[e->vc][e->vr] = e->w; // if graph is undirected add this line
 }

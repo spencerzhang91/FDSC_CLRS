@@ -56,7 +56,6 @@ def display(head):
         print(head, end=' ')
         head = head.next
         
-
 if __name__ == '__main__':
 
     linked_list = CreateList(10)

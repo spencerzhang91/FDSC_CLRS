@@ -9,5 +9,7 @@ void dfs(int v)
     node_pointer w;
     visited[v] = true;
     printf("%d ", v);
-    for (w = graph)
+    for (w = graph[v]; w; w = w->link)
+        if (!visited[w->vertex])
+            dfs(w->vertex);
 }

@@ -22,7 +22,9 @@ int main(void)
     root->data = 100; root->left = root->right = NULL;
     insert_node_iter_du(&root, 40);
     insert_node_iter_du(&root, 102);
+    insert_node_iter_du(&root, 40);
     preorder(root);
+    printf("%d ", root->left->count);
     return 0;
 }
 
@@ -31,10 +33,10 @@ void insert_node_iter_du(BiTree_duplicate *root, int num)
     /* Dupliation allowed vertion of iterative implementation of inserting a value
      in the binary search tree */
     BiTree_duplicate pointer = search_iter(*root, num);
-    if (!search_iter(*root, num)) // means num is not found in the binary tree
+    if (!pointer) // means num is not found in the binary tree
     {
         BiTree_duplicate newptr = (BiTree_duplicate)malloc(sizeof(struct treeNode));
-        newptr->data = num;
+        newptr->data = num; newptr->count = 1;
         newptr->left = NULL; newptr->right = NULL;
         if (!(*root)) // if the search tree is empty tree
             *root = newptr;
@@ -56,9 +58,8 @@ void insert_node_iter_du(BiTree_duplicate *root, int num)
     }
     else
     {
-        BiTree_duplicate pointer = search_iter(*root, num);
-
-        printf("The number %d is already in the tree.\n", num);
+        pointer->count++;
+        printf("Number %d is already in the tree and now increased by 1.\n", num);
     }
 }
 

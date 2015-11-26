@@ -30,16 +30,18 @@ void insert_node_iter_du(BiTree_duplicate *root, int num)
 {
     /* Dupliation allowed vertion of iterative implementation of inserting a value
      in the binary search tree */
+    BiTree_duplicate pointer = search_iter(*root, num);
     if (!search_iter(*root, num)) // means num is not found in the binary tree
     {
         BiTree_duplicate newptr = (BiTree_duplicate)malloc(sizeof(struct treeNode));
         newptr->data = num;
         newptr->left = NULL; newptr->right = NULL;
-        if (!(*root))
+        if (!(*root)) // if the search tree is empty tree
             *root = newptr;
-        else
+        else          // the search tree is not empty tree otherwise
         {
-            BiTree_duplicate temp = *root; BiTree_duplicate parent;
+            BiTree_duplicate temp = *root;
+            BiTree_duplicate parent;
             while (temp)
             {
                 parent = temp;
@@ -52,7 +54,12 @@ void insert_node_iter_du(BiTree_duplicate *root, int num)
             else parent->right = newptr;
         }
     }
-    else printf("The number %d is already in the tree.\n", num);
+    else
+    {
+        BiTree_duplicate pointer = search_iter(*root, num);
+
+        printf("The number %d is already in the tree.\n", num);
+    }
 }
 
 void preorder(BiTree_duplicate tree)
@@ -68,7 +75,7 @@ void preorder(BiTree_duplicate tree)
 BiTree_duplicate search_iter(BiTree_duplicate root, int key)
 {
     /* return a pointer to the node that contains key. If there's no such key,
-    return NULL. */
+    return NULL, else return a pointer point to the found node */
     while (root)
     {
         if (root->data == key) return root;

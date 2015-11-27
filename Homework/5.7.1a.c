@@ -22,9 +22,7 @@ int main(void)
     root->data = 100; root->left = root->right = NULL;
     insert_node_iter_du(&root, 40);
     insert_node_iter_du(&root, 102);
-    insert_node_iter_du(&root, 40);
     preorder(root);
-    printf("%d ", root->left->count);
     return 0;
 }
 
@@ -32,18 +30,16 @@ void insert_node_iter_du(BiTree_duplicate *root, int num)
 {
     /* Dupliation allowed vertion of iterative implementation of inserting a value
      in the binary search tree */
-    BiTree_duplicate pointer = search_iter(*root, num);
-    if (!pointer) // means num is not found in the binary tree
+    if (!search_iter(*root, num)) // means num is not found in the binary tree
     {
         BiTree_duplicate newptr = (BiTree_duplicate)malloc(sizeof(struct treeNode));
-        newptr->data = num; newptr->count = 1;
+        newptr->data = num;
         newptr->left = NULL; newptr->right = NULL;
-        if (!(*root)) // if the search tree is empty tree
+        if (!(*root))
             *root = newptr;
-        else          // the search tree is not empty tree otherwise
+        else
         {
-            BiTree_duplicate temp = *root;
-            BiTree_duplicate parent;
+            BiTree_duplicate temp = *root; BiTree_duplicate parent;
             while (temp)
             {
                 parent = temp;
@@ -56,11 +52,7 @@ void insert_node_iter_du(BiTree_duplicate *root, int num)
             else parent->right = newptr;
         }
     }
-    else
-    {
-        pointer->count++;
-        printf("Number %d is already in the tree and now increased by 1.\n", num);
-    }
+    else printf("The number %d is already in the tree.\n", num);
 }
 
 void preorder(BiTree_duplicate tree)
@@ -76,7 +68,7 @@ void preorder(BiTree_duplicate tree)
 BiTree_duplicate search_iter(BiTree_duplicate root, int key)
 {
     /* return a pointer to the node that contains key. If there's no such key,
-    return NULL, else return a pointer point to the found node */
+    return NULL. */
     while (root)
     {
         if (root->data == key) return root;

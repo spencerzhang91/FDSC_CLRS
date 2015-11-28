@@ -18,8 +18,8 @@ struct pair {
     BiTree_duplicate child;
 };
 
-void insert_node_iter(BiTree_duplicate *root, int num);
-void delete_iter(BiTree_duplicate root, int number);
+void insert_node_iter_du(BiTree_duplicate *root, int num);
+void delete_iter_du(BiTree_duplicate root, int number);
 void preorder(BiTree_duplicate root);
 BiTree_duplicate search_iter(BiTree_duplicate root, int key);
 Pairs findmax(BiTree_duplicate node);
@@ -29,22 +29,22 @@ int main(void)
     BiTree_duplicate root = (BiTree_duplicate)malloc(sizeof(struct treeNode));
     root->data = 40; root->left = root->right = NULL;
     for (int i = 0; i < 10; i++)
-        insert_node_iter(&root, 10 * i);
-    insert_node_iter(&root, 55);
-    insert_node_iter(&root, 7);
-    insert_node_iter(&root, 3);
-    insert_node_iter(&root, 9);
-    insert_node_iter(&root, 59);
-    insert_node_iter(&root, 57);
+        insert_node_iter_du(&root, 10 * i);
+    insert_node_iter_du(&root, 55);
+    insert_node_iter_du(&root, 7);
+    insert_node_iter_du(&root, 3);
+    insert_node_iter_du(&root, 9);
+    insert_node_iter_du(&root, 59);
+    insert_node_iter_du(&root, 57);
 
     preorder(root); puts("\n");
-    delete_iter(root, 60);
+    delete_iter_du(root, 60);
     preorder(root);
 
     return 0;
 }
 
-void delete_iter(BiTree_duplicate root, int number) // something wrong here!
+void delete_iter_du(BiTree_duplicate root, int number) // something wrong here!
 {
     /* Find the node in the tree if node->data == number, and find proper
     replacement node in node's sub tree, let node->data = replace->data, and
@@ -54,20 +54,25 @@ void delete_iter(BiTree_duplicate root, int number) // something wrong here!
     Pairs found;
     if ((delptr = search_iter(root, number)) != NULL && root)
     {
-        if (delptr->left && delptr->right)
-        {
-            found = findmax(delptr->left);
-            parent = found->parent; child = found->child;
-            delptr->data = child->data;
-            if (parent) parent->right = child->left;
-            free(child); child = NULL;            
-        }
+        if (delptr->count > 1)
+            delptr->count--;
         else
         {
-            child = delptr;
-            if (!delptr->right) delptr = delptr->left;
-            else if (!delptr->left) delptr = delptr->right;
-            free(child); child = NULL;
+            if (delptr->left && delptr->right)
+            {
+                found = findmax(delptr->left);
+                parent = found->parent; child = found->child;
+                delptr->data = child->data;
+                if (parent) parent->right = child->left;
+                free(child); child = NULL;            
+            }
+            else
+            {
+                child = delptr;
+                if (!delptr->right) delptr = delptr->left;
+                else if (!delptr->left) delptr = delptr->right;
+                free(child); child = NULL;
+            }
         }
     }
     else printf("\nThe deletion operation failed because of empty tree"
@@ -97,8 +102,10 @@ void preorder(BiTree_duplicate root)
     }
 }
 
-void insert_node_iter(BiTree_duplicate *root, int num)
+void insert_node_iter_du(BiTree_duplicate *root, int num)
 {
+    /* Dupliation allowed vertion of iterative implementation of inserting a value
+     in the binary search tree */
     if (!search_iter(*root, num)) // means num is not found in the binary tree
     {
         BiTree_duplicate newptr = (BiTree_duplicate)malloc(sizeof(struct treeNode));

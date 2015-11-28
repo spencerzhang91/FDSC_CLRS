@@ -4,28 +4,29 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct treeNode *BiTree;
+typedef struct treeNode *BiTree_duplicate;
 struct treeNode {
     int data;
-    BiTree left;
-    BiTree right;
+    int count;    // count duplicate values
+    BiTree_duplicate left;
+    BiTree_duplicate right;
 };
 
 typedef struct pair *Pairs; // to contain result of modified findmax function
 struct pair {
-    BiTree parent;
-    BiTree child;
+    BiTree_duplicate parent;
+    BiTree_duplicate child;
 };
 
-void insert_node_iter(BiTree *root, int num);
-void delete_iter(BiTree root, int number);
-void preorder(BiTree root);
-BiTree search_iter(BiTree root, int key);
-Pairs findmax(BiTree node);
+void insert_node_iter(BiTree_duplicate *root, int num);
+void delete_iter(BiTree_duplicate root, int number);
+void preorder(BiTree_duplicate root);
+BiTree_duplicate search_iter(BiTree_duplicate root, int key);
+Pairs findmax(BiTree_duplicate node);
 
 int main(void)
 {
-    BiTree root = (BiTree)malloc(sizeof(struct treeNode));
+    BiTree_duplicate root = (BiTree_duplicate)malloc(sizeof(struct treeNode));
     root->data = 40; root->left = root->right = NULL;
     for (int i = 0; i < 10; i++)
         insert_node_iter(&root, 10 * i);
@@ -43,13 +44,13 @@ int main(void)
     return 0;
 }
 
-void delete_iter(BiTree root, int number) // something wrong here!
+void delete_iter(BiTree_duplicate root, int number) // something wrong here!
 {
     /* Find the node in the tree if node->data == number, and find proper
     replacement node in node's sub tree, let node->data = replace->data, and
     then acutally delete the replacement node. */
-    BiTree delptr;
-    BiTree parent, child;
+    BiTree_duplicate delptr;
+    BiTree_duplicate parent, child;
     Pairs found;
     if ((delptr = search_iter(root, number)) != NULL && root)
     {
@@ -73,7 +74,7 @@ void delete_iter(BiTree root, int number) // something wrong here!
     "or number not found in the tree.\n");
 }
 
-Pairs findmax(BiTree node)
+Pairs findmax(BiTree_duplicate node)
 {
     /* find the right most tree node in sub tree of input 'node' */
     Pairs P = (Pairs)malloc(sizeof(struct pair));
@@ -86,7 +87,7 @@ Pairs findmax(BiTree node)
     return P;
 }
 
-void preorder(BiTree root)
+void preorder(BiTree_duplicate root)
 {
     if (root)
     {
@@ -96,18 +97,18 @@ void preorder(BiTree root)
     }
 }
 
-void insert_node_iter(BiTree *root, int num)
+void insert_node_iter(BiTree_duplicate *root, int num)
 {
     if (!search_iter(*root, num)) // means num is not found in the binary tree
     {
-        BiTree newptr = (BiTree)malloc(sizeof(struct treeNode));
+        BiTree_duplicate newptr = (BiTree_duplicate)malloc(sizeof(struct treeNode));
         newptr->data = num;
         newptr->left = NULL; newptr->right = NULL;
         if (!(*root))
             *root = newptr;
         else
         {
-            BiTree temp = *root; BiTree parent;
+            BiTree_duplicate temp = *root; BiTree_duplicate parent;
             while (temp)
             {
                 parent = temp;
@@ -123,7 +124,7 @@ void insert_node_iter(BiTree *root, int num)
     else printf("The number %d is already in the tree.\n", num);
 }
 
-BiTree search_iter(BiTree root, int key)
+BiTree_duplicate search_iter(BiTree_duplicate root, int key)
 {
     /* return a pointer to the node that contains key. If there's no such key,
     return NULL. */

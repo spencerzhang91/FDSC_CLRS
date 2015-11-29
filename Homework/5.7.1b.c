@@ -36,7 +36,6 @@ int main(void)
     insert_node_iter_du(&root, 9);
     insert_node_iter_du(&root, 59);
     insert_node_iter_du(&root, 57);
-
     preorder(root); puts("\n");
     delete_iter_du(root, 60);
     preorder(root);

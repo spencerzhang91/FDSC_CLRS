@@ -10,7 +10,7 @@ typedef struct {
 element heap[MAX_ELEMENTS];
 int n = 0;
 
-void delete_min_heap(int *n)
+element delete_min_heap(int *n)
 {
     /* delete element with the highest key from heap */
     int parent, child; // variables of key

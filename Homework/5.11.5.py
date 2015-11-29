@@ -1,4 +1,5 @@
 '''
+Excercise 5.11.5.py
 An algorithm to generate an unique binary tree with its preorder
 and inorder sequence.
 Frequently used helper function when learning binary tree data
@@ -21,6 +22,8 @@ def CreateBiTree(preseq, inseq):
     preorder. This function constructs the unique tree that should generate
     the inputed sequences.
     '''
-    
+    root = preseq[0]
+    tree = treeNode(root)
+
 
 

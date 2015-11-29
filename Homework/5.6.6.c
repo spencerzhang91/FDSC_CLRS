@@ -1,23 +1,27 @@
 /* excercise 5.6.6.c */
-/* max heap implementation using banary tree data structure */
+/* max heap implementation using banary tree data structure, however
+I found it very unnecessary to do it. */
 #include <stdio.h>
 #include <stdbool.h>
-
-typedef ElementType int;
-typedef heapnode *Heap;
-struct heapnode {
-    ElementType value;
-    Heap lchild;
-    Heap rchild;
-    Heap parent;
+#define MAX_ELEMENTS 200
+#define HEAP_FULL(n) (n == MAX_ELEMENTS - 1)
+#define HEAP_EMPTY(n) (!n)
+struct node {
+    int key;
+    struct node left;
+    struct node right;
+    struct node parent;
 };
+
+struct node heap[MAX_ELEMENTS];
+int n = 0;
 
 int main(void)
 {
     return 0;
 }
 
-void insert(Heap heap, ElementType item)
+void insert_max_heap(struct node item, int *n)
 {
     /* insert item into a max heap of current size *n */
     int i;
@@ -27,7 +31,7 @@ void insert(Heap heap, ElementType item)
         exit(EXIT_FAILURE);
     }
     i = ++(*n);
-    while ((i != 1) && (item.key > heap[i/2].key))
+    while ((i != 1) && (item.key > heap.parent.key))
     {
         heap[i] = heap[i/2];
         i /= 2;
@@ -35,17 +39,17 @@ void insert(Heap heap, ElementType item)
     heap[i] = item;
 }
 
-ElementType delete(Heap heap)
+struct node delete(Heap heap)
 {
-    /* delete element with the highest key from heap */
+    /* delete struct node with the highest key from heap */
     int parent, child; // variables of key
-    element item, temp;
+    struct node item, temp;
     if (HEAP_EMPTY(*n))
     {
         fprintf(stderr, "The heap is empty.\n");
         exit(EXIT_FAILURE);
     }
-    /* save value of the element with the highest key */
+    /* save value of the struct node with the highest key */
     item = heap[1];
     temp = heap[(*n)--];
     parent = 1;

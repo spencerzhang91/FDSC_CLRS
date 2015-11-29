@@ -12,10 +12,6 @@ class treeNode:
         self.left = None
         self.right = None
 
-    def __repr__(self):
-        return str(self.val)
-
-
 def CreateBiTree(preseq, inseq):
     '''
     Input is two string or list of tree traversal sequences, inorder and
@@ -34,17 +30,24 @@ def CreateBiTree(preseq, inseq):
         root.right = CreateBiTree(pre_right_part, pre_right_part)
         return root
 
-def preorder(tree):
-    if tree != None:
-        print(tree, end=' ')
-        preorder(tree.left)
-        preorder(tree.right)
+def traversal(tree):
+    stack = []
+    curr = tree
+    while curr or stack:
+        while curr:
+            print(curr.val, end=" ")
+            stack.append(curr)
+            curr = curr.left
+        if not curr:
+            curr = stack.pop()
+            curr = curr.right
 
 
 if __name__ == "__main__":
     preorder = "ABCDEFGHI"
     inorder = "BCAEDGHFI"
     tree = CreateBiTree(preorder, inorder)
+    traversal(tree)
     
 
     

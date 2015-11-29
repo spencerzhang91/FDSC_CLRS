@@ -22,8 +22,32 @@ def CreateBiTree(preseq, inseq):
     preorder. This function constructs the unique tree that should generate
     the inputed sequences.
     '''
-    root = preseq[0]
-    tree = treeNode(root)
+    if not (preseq or inseq):
+        return None
+    else:
+        curr = preseq[0]
+        in_left_part, in_right_part = inseq.split(curr)
+        pre_left_part = preseq[1: len(in_left_part)+1]
+        pre_right_part = preseq[len(in_left_part)+1: ]
+        root = treeNode(curr)
+        root.left = CreateBiTree(pre_left_part, in_left_part)
+        root.right = CreateBiTree(pre_right_part, pre_right_part)
+        return root
+
+def preorder(tree):
+    if tree != None:
+        print(tree, end=' ')
+        preorder(tree.left)
+        preorder(tree.right)
 
 
+if __name__ == "__main__":
+    preorder = "ABCDEFGHI"
+    inorder = "BCAEDGHFI"
+    tree = CreateBiTree(preorder, inorder)
+    
+
+    
+
+    
 

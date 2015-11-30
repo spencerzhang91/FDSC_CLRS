@@ -6,8 +6,8 @@ typedef int Weight;                         // use int to represent weight
 typedef char DataType;                      // data type of vertex data
 
 /* definition of edge */
-typedef struct Enode *Edge;
-struct Enode {
+typedef struct edge *Edgeptr;
+struct edge {
     Vertex vr;                              // row subfix
     Vertex vc;                              // col subfix
     Weight w;                               // weight of the edge
@@ -20,6 +20,17 @@ struct graph {
     Weight G[MaxVertexNum][MaxVertexNum];   // the adjacency matix
     DataType Data[MaxVertexNum];            // data saved on vertexes
 };
+
+MGragh CreateGraph(int vn);
+void InsertEdge(MGraph g, Edgeptr e);
+void buildGraph(void);
+
+int main(void)
+{
+    MGraph map = CreateGraph(10);
+
+    return 0;
+}
 
 MGragh CreateGraph(int vn)                  // vn for vertex number
 {
@@ -35,8 +46,17 @@ MGragh CreateGraph(int vn)                  // vn for vertex number
     return Graph;
 }
 
-void InsertEdge(MGraph g, Edge e)
+void InsertEdge(MGraph g, Edgeptr e)
 {
     g->G[e->vr][e->vc] = e->w;
     g->G[e->vc][e->vr] = e->w; // if graph is undirected add this line
+}
+
+void buildGraph(MGraph newgra)
+{
+    /* This function builds a graph adjacency matrix by taking pairs of 
+    connections */
+    while ()
+    printf("Please input a pair of connected nodes:\n");
+
 }

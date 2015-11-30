@@ -81,7 +81,14 @@ void showmatrix(MGraph graph)
     int i, j;
     int max = graph->vertex_num;
     for (i = 0; i < max; i++)
+    {
         for (j = 0; j <max; j++)
-            printf("%d ", graph->G[i][j]);
-    printf("\n");
+        {
+            if (graph->G[i][j] != INFINITY)
+                printf("%d ", graph->G[i][j]);
+            else
+                printf("0 ");
+        }
+        puts("");
+    }
 }

@@ -1,4 +1,8 @@
 /* implementation of graph using adjacency matrix */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 #define MaxVertexNum 100
 #define INFINITY 65535
 typedef int Vertex;                         // subfix to represent vertex
@@ -21,18 +25,21 @@ struct graph {
     DataType Data[MaxVertexNum];            // data saved on vertexes
 };
 
-MGragh CreateGraph(int vn);
+MGraph CreateGraph(int vn);
 void InsertEdge(MGraph g, Edgeptr e);
-void buildGraph(void);
+void buildGraph(MGraph newgra);
+void showmatrix(MGraph graph);
 
 int main(void)
 {
     MGraph map = CreateGraph(10);
+    buildGraph(map);
+    showmatrix(map);
 
     return 0;
 }
 
-MGragh CreateGraph(int vn)                  // vn for vertex number
+MGraph CreateGraph(int vn)                  // vn for vertex number
 {
     /* initialize a graph with vn vertexes but no edges */
     Vertex i, j;
@@ -49,14 +56,32 @@ MGragh CreateGraph(int vn)                  // vn for vertex number
 void InsertEdge(MGraph g, Edgeptr e)
 {
     g->G[e->vr][e->vc] = e->w;
-    g->G[e->vc][e->vr] = e->w; // if graph is undirected add this line
+    //g->G[e->vc][e->vr] = e->w; // if graph is undirected add this line
+    g->edge_num++;
 }
 
 void buildGraph(MGraph newgra)
 {
-    /* This function builds a graph adjacency matrix by taking pairs of 
-    connections */
-    while ()
-    printf("Please input a pair of connected nodes:\n");
+    /* This function builds an directed graph adjacency matrix by taking
+     pairs of connections */
+    int row, col, weight;
+    printf("Please input a pair of connected nodes(vr-vc:w)"
+        " to the %d nodes graph:\n", newgra->vertex_num);
+    while (scanf("%d-%d:%d", &row, &col, &weight) == 3)
+    {
+        Edgeptr newedge = (Edgeptr)malloc(sizeof(struct edge));
+        newedge->vr = row; newedge->vc = col; newedge->w = weight;
+        InsertEdge(newgra, newedge);
+        printf("New edge inserted to the graph.\n");
+    }
+}
 
+void showmatrix(MGraph graph)
+{
+    int i, j;
+    int max = graph->vertex_num;
+    for (i = 0; i < max; i++)
+        for (j = 0; j <max; j++)
+            printf("%d ", graph->G[i][j]);
+    printf("\n");
 }

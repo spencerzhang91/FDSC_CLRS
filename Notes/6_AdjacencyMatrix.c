@@ -13,8 +13,8 @@ struct Enode {
     Weight w;                               // weight of the edge
 };
 /* definition of graph */
-typedef struct Gnode *MGraph;
-struct Gnode {
+typedef struct graph *MGraph;
+struct graph {
     int vertex_num;
     int edge_num;
     Weight G[MaxVertexNum][MaxVertexNum];   // the adjacency matix
@@ -25,13 +25,13 @@ MGragh CreateGraph(int vn)                  // vn for vertex number
 {
     /* initialize a graph with vn vertexes but no edges */
     Vertex i, j;
-    MGraph Graph = (MGraph)malloc(sizeof(struct Gnode));
+    MGraph Graph = (MGraph)malloc(sizeof(struct graph));
     Graph->vertex_num = vn;
     Graph->edge_num = 0;
     /* initialize the adjacency matrix */
     for (i = 0; i < vn; i++)
         for (j = 0; j < vn; j++)
-            Graph->G[i][j] = INFINITY;
+            Graph->G[i][j] = INFINITY; // initialization weight
     return Graph;
 }
 

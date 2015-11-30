@@ -1,4 +1,4 @@
-/* Implementation of graph using adjacency lists */
+/* This file is used to test graph related algorithm functions */
 #include <stdio.h>
 #include <stdlib.h>
 #define MaxVertexNum 100
@@ -37,14 +37,10 @@ void buildGraph(LGraph newgra);
 void showmatrix(LGraph graph);
 static void MakeEdge(ptr header, ptr newnode);
 static void traverselist(ptr header);
-static char *
 
 int main(void)
 {
-    int vnum;
-    printf("Please enter number of vertices:")
-    scanf("%d", &vnum);
-    LGraph newgraph = CreateGraph(vnum);
+    LGraph newgraph = CreateGraph(10);
     buildGraph(newgraph);
     showmatrix(newgraph);
 
@@ -62,7 +58,6 @@ LGraph CreateGraph(int vn)
     {
         Graph->G[i] = (ptr)malloc(sizeof(struct adjnode));
         Graph->G[i]->adjv = i;
-        printf("Please enter the value of %d")
         Graph->G[i]->next = NULL;
     }
     return Graph;

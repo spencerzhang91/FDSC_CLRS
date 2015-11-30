@@ -31,7 +31,7 @@ struct Gnode {
     ptr G[MaxVertexNum];                    // adjacency linked list
 };
 
-LGragh CreateGraph(int vn);
+LGraph CreateGraph(int vn);
 void InsertEdge(LGraph gragh, Edgeptr e);
 void buildGraph(LGraph newgra);
 void showmatrix(LGraph graph);
@@ -40,14 +40,14 @@ static void traverselist(ptr header);
 
 int main(void)
 {
-    LGragh newgraph = CreateGraph(10);
+    LGraph newgraph = CreateGraph(10);
     buildGraph(newgraph);
     showmatrix(newgraph);
 
     return 0;
 }
 
-LGragh CreateGragh(int vn)
+LGraph CreateGraph(int vn)
 {
     /* initialize a gragh with vn vertexes but no edges */
     Vertex i;

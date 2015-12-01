@@ -4,7 +4,6 @@
 since this two is identical in nature and comparable in implementation
 I personaly reckon this version as better implemented */
 #define MAXSIZE 10                     // the maxsize of tree nodes
-
 typedef struct treeNode *BiTree;
 struct treeNode {
     int data;

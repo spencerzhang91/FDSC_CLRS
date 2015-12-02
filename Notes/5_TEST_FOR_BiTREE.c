@@ -86,6 +86,7 @@ int main(void)
     BiTree testree = createBiTree(info2, N+1);
     iter_preorder(testree);
     iter_inorder(testree);
+    iter_postorder1(testree);
     iter_postorder(testree);
     
     return 0;
@@ -288,12 +289,12 @@ void iter_postorder1(BiTree root)
     BiTree peeknode = NULL;
     while (!IsEmpty(S) || root)
     {
-        if (root)
+        while (root)
         {
             push(S, root);
             root = root->left;
         }
-        else
+        if (!IsEmpty(S))
         {
             peeknode = pop(S);
             push(S, peeknode); // not now to pop out so push back

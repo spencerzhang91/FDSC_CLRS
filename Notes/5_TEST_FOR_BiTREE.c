@@ -1,4 +1,4 @@
-/* Test file for 5-4 */
+/* Test file for binary tree related functions */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -63,6 +63,7 @@ ElementType dequeue(Queue Q);
 void iter_preorder(BiTree root);
 void iter_inorder(BiTree root);
 void iter_postorder(BiTree root);
+void iter_postorder1(BiTree root);
 void iter_postorder2(BiTree root);
 
 void inorder(BiTree ptr);
@@ -81,34 +82,13 @@ BiTree makenode(char data);
 
 int main(void)
 {
-	/*BiTree root = (BiTree)malloc(sizeof(struct treeNode));
-	root->data = 100;
-
-	BiTree node1 = (BiTree)malloc(sizeof(struct treeNode)); node1->data = 1;
-	BiTree node2 = (BiTree)malloc(sizeof(struct treeNode)); node2->data = 2;
-	BiTree node3 = (BiTree)malloc(sizeof(struct treeNode)); node3->data = 3;
-	BiTree node4 = (BiTree)malloc(sizeof(struct treeNode)); node4->data = 4;
-	BiTree node5 = (BiTree)malloc(sizeof(struct treeNode)); node5->data = 5;
-	BiTree node6 = (BiTree)malloc(sizeof(struct treeNode)); node6->data = 6;
-	BiTree node7 = (BiTree)malloc(sizeof(struct treeNode)); node7->data = 7;
-	root->left = node1; root->right = node2;
-	node1->left = node3; node1->right = node4;
-	node2->left = node5; node2->right = node6;
-	node3->left = NULL; node3->right = NULL; node4->left = node7; node4->right = NULL;
-	node5->left = NULL; node5->right = NULL; node6->left = NULL; node6->right = NULL;
-	node7->left = NULL; node7->right = NULL;
-
-	iter_postorder2(root);
-	swaptree(root);
-	puts("\n");
-	iter_postorder2(root);*/
     char info2[N+1] = "0abcd##e#f";
-	BiTree testree = createBiTree(info2, N+1);
-	iter_preorder(testree);
+    BiTree testree = createBiTree(info2, N+1);
+    iter_preorder(testree);
     iter_inorder(testree);
     iter_postorder(testree);
     
-	return 0;
+    return 0;
 }
 
 /* stack ADT methods */
@@ -301,6 +281,34 @@ void iter_postorder(BiTree root)
     printf("\n");
 }
 
+void iter_postorder1(BiTree root)
+{
+    Stack S = CreateStack(MAXSIZE);
+    BiTree lastvisited = NULL;
+    BiTree peeknode = NULL;
+    while (!IsEmpty(S) || root)
+    {
+        if (root)
+        {
+            push(S, root);
+            root = root->left;
+        }
+        else
+        {
+            peeknode = pop(S);
+            push(S, peeknode); // not now to pop out so push back
+            if (peeknode->right && lastvisited != peeknode->right)
+                root = peeknode->right;
+            else
+            {
+                printf("%c ", peeknode->data);
+                lastvisited = pop(S);
+            }
+        }
+    }
+    printf("\n");
+}
+
 /* no visited flag solution */
 void iter_postorder2(BiTree root)
 {
@@ -435,7 +443,7 @@ int iter_countleaf(BiTree root)
             {
                 printf("%d ", peeknode->data);
                 if (!peeknode->left && !peeknode->right)
-                	leaves++;
+                    leaves++;
                 lastvisited = pop(S);
             }
         }

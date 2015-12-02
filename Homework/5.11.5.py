@@ -5,7 +5,6 @@ and inorder sequence.
 Frequently used helper function when learning binary tree data
 structure. And is simpler than file 5-2_CreateBiTree_recursive.py
 '''
-
 class treeNode:
     def __init__(self, val):
         self.val = val
@@ -31,6 +30,9 @@ def CreateBiTree(preseq, inseq):
         return root
 
 def traversal(tree):
+	'''
+	preorder traversal of a binary tree.
+	'''
     stack = []
     curr = tree
     while curr or stack:

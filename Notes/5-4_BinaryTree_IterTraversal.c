@@ -35,7 +35,7 @@ void iter_inorder(BiTree root)
 {
     S = CreateStack(MAXSIZE);
     BiTree tree = root;
-    while (tree || IsEmpty(S))
+    while (tree || !IsEmpty(S))
     {
         while (tree)
         {

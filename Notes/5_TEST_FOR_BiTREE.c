@@ -105,6 +105,8 @@ int main(void)
     char info2[N+1] = "0abcd##e#f";
 	BiTree testree = createBiTree(info2, N+1);
 	iter_preorder(testree);
+    iter_inorder(testree);
+    iter_postorder(testree);
     
 	return 0;
 }
@@ -245,6 +247,7 @@ void iter_preorder(BiTree root)
             tree = tree->right;        // to the right
         }
     }
+    printf("\n");
 }
 
 void iter_inorder(BiTree root)
@@ -261,10 +264,11 @@ void iter_inorder(BiTree root)
         if (!IsEmpty(S))
         {
             tree = pop(S);                 // pop out tree node when no more left child
-            printf("%d ", tree->data);     // which means move back upper level and print
+            printf("%c ", tree->data);     // which means move back upper level and print
             tree = tree->right;            // then, to the right sub tree and repeat
         }
     }
+    printf("\n");
 }
 
 #define LEFT 0
@@ -289,11 +293,12 @@ void iter_postorder(BiTree root)
                 root = peeknode->right;
             else
             {
-                printf("%d ", peeknode->data);
+                printf("%c ", peeknode->data);
                 lastvisited = pop(S);
             }
         }
     }
+    printf("\n");
 }
 
 /* no visited flag solution */
@@ -339,6 +344,7 @@ void iter_postorder2(BiTree root)
         }
         prev = curr;
     }
+    printf("\n");
 }
 
 void inorder(BiTree ptr)

@@ -10,6 +10,9 @@ class Graph:
         self.vnum = len(vertices)
 
     def connect(self, edges: list):
+        '''
+        add new edge to the graph.
+        '''
         pass
 
 

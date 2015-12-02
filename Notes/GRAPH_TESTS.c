@@ -31,23 +31,23 @@ struct Gnode {
     ptr G[MaxVertexNum];                    // adjacency linked list
 };
 
-LGraph CreateGraph(int vn);
+LGraph CreateLGraph(int vn);				// create a adjacency list graph
 void InsertEdge(LGraph gragh, Edgeptr e);
-void buildGraph(LGraph newgra);
+void buildLGraph(LGraph newgra);
 void showmatrix(LGraph graph);
 static void MakeEdge(ptr header, ptr newnode);
 static void traverselist(ptr header);
 
 int main(void)
 {
-    LGraph newgraph = CreateGraph(10);
-    buildGraph(newgraph);
+    LGraph newgraph = CreateLGraph(10);
+    buildLGraph(newgraph);
     showmatrix(newgraph);
 
     return 0;
 }
 
-LGraph CreateGraph(int vn)
+LGraph CreateLGraph(int vn)
 {
     /* initialize a gragh with vn vertexes but no edges */
     Vertex i;
@@ -72,11 +72,11 @@ void InsertEdge(LGraph graph, Edgeptr e)
     newnode->w = e->w;
     MakeEdge(graph->G[e->vr], newnode);
     // if graph is undirected:
-    //MakeEdge(graph->G[e->vc], e->vr);
+    // MakeEdge(graph->G[e->vc], e->vr);
     graph->vertex_num++;
 }
 
-void buildGraph(LGraph newgra)
+void buildLGraph(LGraph newgra)
 {
     /* This function builds an directed graph adjacency lists by taking
      pairs of connections */

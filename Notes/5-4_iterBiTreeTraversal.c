@@ -4,53 +4,39 @@ since this two is identical in nature and comparable in implementation */
 #include <stdio.h>
 #include <stdlib.h>
 #define MAXSIZE 100
-
-typedef struct Node *TreeNode;
-struct Node {
-    int data;
-    TreeNode left;
-    TreeNode right;
+#define DataType int
+typedef struct treeNode *BiTree;
+struct treeNode {
+    DataType data;
+    BiTree left;
+    BiTree right;
 };
 
-void iter_inorder(TreeNode node);
-void iter_preorder(TreeNode node);
-void iter_postorder(TreeNode node);
+void iter_inorder(treeNode node);
+void iter_preorder(treeNode node);
+void iter_postorder(treeNode node);
 
-void inorder(TreeNode node);
-void preorder(TreeNode node);
-void postorder(TreeNode node);
+void inorder(treeNode node);
+void preorder(treeNode node);
+void postorder(treeNode node);
 
-void push(int *top, TreeNode node);
-TreeNode pop(int *top);
+void push(int *top, treeNode node);
+treeNode pop(int *top);
+BiTree createBiTree(char *array, int len);
+BiTree makenode(DataType data);
 
 int top = -1; // initialize stack
-TreeNode stack[MAXSIZE];
+treeNode stack[MAXSIZE];
 
 int main(void)
 {
-    /* create a tree manually, function to be developed */
-    TreeNode n0 = (TreeNode)calloc(1, sizeof(struct Node));
-    TreeNode n1 = (TreeNode)calloc(1, sizeof(struct Node));
-    TreeNode n2 = (TreeNode)calloc(1, sizeof(struct Node));
-    TreeNode n3 = (TreeNode)calloc(1, sizeof(struct Node));
-    TreeNode n4 = (TreeNode)calloc(1, sizeof(struct Node));
-    n0->data = 0; n1->data =1; n2->data = 2; n3->data = 3; n4->data = 4;
-    n0->left = n1; n0->right = n2;
-    n1->left = n3; n1->right = n4;
-    n2->left = n2->right = NULL;
-    n3->left = n3->right = NULL;
-    n4->left = n4->right = NULL;
-    
-    // iter_inorder(n0);
-    // iter_preorder(n0);
-    iter_postorder(n0);
+    BiTree tree = createBiTree("0ABCDE#F", 8);
+    iter_postorder(tree);
     
     return 0;
 }
 
-
-
-void iter_inorder(TreeNode node)
+void iter_inorder(treeNode node)
 {
     for (;;)
     {
@@ -63,7 +49,7 @@ void iter_inorder(TreeNode node)
     }    
 }
 
-void iter_preorder(TreeNode node)
+void iter_preorder(treeNode node)
 {
     for (;;)
     {
@@ -79,7 +65,7 @@ void iter_preorder(TreeNode node)
 
 }
 
-void iter_postorder(TreeNode node)
+void iter_postorder(treeNode node)
 {
    for (;;)
     {
@@ -89,21 +75,21 @@ void iter_postorder(TreeNode node)
     }
 }
 
-void push(int *top, TreeNode node)
+void push(int *top, treeNode node)
 {
     if (*top >= MAXSIZE - 1)
         return;
     stack[++*top] = node;
 }
 
-TreeNode pop(int *top)
+treeNode pop(int *top)
 {
     if (*top == -1)
         return NULL;
     return stack[(*top)--];
 }
 
-void inorder(TreeNode ptr)
+void inorder(treeNode ptr)
 {
     if (ptr)
     {
@@ -113,7 +99,7 @@ void inorder(TreeNode ptr)
     }
 }
 
-void postorder(TreeNode ptr)
+void postorder(treeNode ptr)
 {
     if (ptr)
     {
@@ -123,7 +109,7 @@ void postorder(TreeNode ptr)
     }
 }
 
-void preorder(TreeNode ptr)
+void preorder(treeNode ptr)
 {
     if (ptr)
     {
@@ -131,4 +117,54 @@ void preorder(TreeNode ptr)
         preorder(ptr->left);
         preorder(ptr->right);
     }
+}
+
+BiTree createBiTree(char *array, int len)
+{
+    /* generate a binary tree */
+    BiTree parent;
+    Queue Q = CreateQueue(len);
+    int i = 1;
+    BiTree root = makenode(array[i]);
+    enqueue(Q, root);
+
+    while (Q && (i*2+1 < len))
+    {
+        parent = dequeue(Q);      
+        BiTree leftchild = makenode(array[i*2]);
+        BiTree rightchild = makenode(array[i*2+1]);
+        if (leftchild)
+        {
+            parent->left = leftchild;
+            enqueue(Q, leftchild);
+        }
+        if (rightchild)
+        {
+            parent->right = rightchild;
+            enqueue(Q, rightchild);
+        }
+        ++i;
+    }
+
+return root;
+}
+
+BiTree makenode(DataType data)
+{
+    /* create a tree node and return its pointer if data is not '#' */
+    if (data != '#')
+    {
+        BiTree node = (BiTree)malloc(sizeof(struct treeNode));
+        if (!node)
+        {
+            fprintf(stderr, "Memory full.\n");
+            exit(EXIT_FAILURE);
+        }
+        node->data = data;  // the data type of data is default to char
+        node->left = NULL;
+        node->right = NULL;
+        return node;
+    }
+    else
+        return NULL;
 }

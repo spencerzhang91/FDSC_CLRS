@@ -34,14 +34,15 @@ struct Gnode {
 LGraph CreateGraph(int vn);
 void InsertEdge(LGraph gragh, Edge e);
 void buildGraph(LGraph newgra);
+void buildGraph_test(LGraph newgra);
 void showmatrix(LGraph graph);
 static void MakeEdge(nodeptr header, nodeptr newnode);
 static void traverselist(nodeptr header);
 
 int main(void)
 {
-    LGraph newgraph = CreateGraph(10);
-    buildGraph(newgraph);
+    LGraph newgraph = CreateGraph(7);
+    buildGraph_test(newgraph);
     showmatrix(newgraph);
 
     return 0;
@@ -52,7 +53,7 @@ LGraph CreateGraph(int vn)
     /* initialize a gragh with vn vertexes but no edges */
     Vertex i;
     LGraph Graph = (LGraph)malloc(sizeof(struct Gnode));
-    Graph->vertex_num = vn;
+    Graph->vertex_num = 7;
     Graph->edge_num = 0;
     for (i = 0; i < vn; i++)
     {
@@ -74,11 +75,15 @@ void InsertEdge(LGraph graph, Edge e)
     }
     newnode->adjv = e->vc;
     newnode->next = NULL;
-    newnode->wt = e->w;
+    newnode->wt = e->wt;
     MakeEdge(graph->G[e->vr], newnode);
     // if graph is undirected:
-    //MakeEdge(graph->G[e->vc], e->vr);
-    graph->vertex_num++;
+    nodeptr mirror = (nodeptr)malloc(sizeof(struct node));
+    mirror->adjv = e->vr;
+    mirror->next = NULL;
+    mirror->wt = e->wt;
+    MakeEdge(graph->G[e->vc], mirror);
+    graph->edge_num++;
 }
 
 void buildGraph(LGraph newgra)
@@ -100,9 +105,9 @@ void buildGraph(LGraph newgra)
 void buildGraph_test(LGraph newgra)
 {
     /* test version of buildGraph, the original graph is on page180 */
-    int row[13] = {1,1,2,2,3,3,3,4,4,5,5,6,6};
-    int col[13] = {2,6,3,1,2,4,6,3,5,4,0,1,3};
-    for (int i = 0; i < 13; i++)
+    int row[8] = {0,0,1,1,2,3,3,4};
+    int col[8] = {1,5,2,6,3,4,6,5};
+    for (int i = 0; i < 8; i++)
     {
         Edge newedge = (Edge)malloc(sizeof(struct edge));
         newedge->vr = row[i];
@@ -121,7 +126,7 @@ void showmatrix(LGraph graph)
         nodeptr curr = graph->G[i];
         while (curr)
         {
-            printf("%d ", curr->w);
+            printf("%d ", curr->adjv);
             curr = curr->next;
         }
         printf("\n");

@@ -7,7 +7,7 @@ typedef int Weight;                         // use int to represent weight
 typedef char DataType;                      // data type of vertex data
 
 /* definition of edge */
-typedef struct edge *Edgeptr;
+typedef struct edge *Edge;
 struct edge {
     Vertex vr;                              // row subfix
     Vertex vc;                              // col subfix
@@ -15,12 +15,12 @@ struct edge {
 };
 
 /* definition of adjacency node */
-typedef struct adjnode *ptr;
-struct adjnode {
+typedef struct node *nodeptr;
+struct node {
     Vertex adjv;
     Weight w;
     DataType data;
-    ptr next;
+    nodeptr next;
 };
 
 /* definition of linked lists based graph */
@@ -28,15 +28,15 @@ typedef struct Gnode *LGraph;
 struct Gnode {
     int vertex_num;
     int edge_num;
-    ptr G[MaxVertexNum];                    // adjacency linked list
+    nodeptr G[MaxVertexNum];                    // adjacency linked list
 };
 
 LGraph CreateGraph(int vn);
-void InsertEdge(LGraph gragh, Edgeptr e);
+void InsertEdge(LGraph gragh, Edge e);
 void buildGraph(LGraph newgra);
 void showmatrix(LGraph graph);
-static void MakeEdge(ptr header, ptr newnode);
-static void traverselist(ptr header);
+static void MakeEdge(nodeptr header, nodeptr newnode);
+static void traverselist(nodeptr header);
 
 int main(void)
 {
@@ -56,17 +56,17 @@ LGraph CreateGraph(int vn)
     Graph->edge_num = 0;
     for (i = 0; i < vn; i++)
     {
-        Graph->G[i] = (ptr)malloc(sizeof(struct adjnode));
+        Graph->G[i] = (nodeptr)malloc(sizeof(struct node));
         Graph->G[i]->adjv = i;
         Graph->G[i]->next = NULL;
     }
     return Graph;
 }
 
-void InsertEdge(LGraph graph, Edgeptr e)
+void InsertEdge(LGraph graph, Edge e)
 {
     /* for directed or undirected gragh to insert a new edge */
-    ptr newnode = (ptr)malloc(sizeof(struct adjnode));
+    nodeptr newnode = (nodeptr)malloc(sizeof(struct node));
     newnode->adjv = e->vc;
     newnode->next = NULL;
     newnode->w = e->w;
@@ -85,7 +85,7 @@ void buildGraph(LGraph newgra)
         " to the %d nodes graph:\n", newgra->vertex_num);
     while (scanf("%d-%d:%d", &row, &col, &weight) == 3)
     {
-        Edgeptr newedge = (Edgeptr)malloc(sizeof(struct edge));
+        Edge newedge = (Edge)malloc(sizeof(struct edge));
         newedge->vr = row; newedge->vc = col; newedge->w = weight;
         InsertEdge(newgra, newedge);
         printf("New edge inserted to the graph.\n");
@@ -97,7 +97,7 @@ void showmatrix(LGraph graph)
     int i;
     for (i = 0; i < graph->vertex_num; i++)
     {
-        ptr curr = graph->G[i];
+        nodeptr curr = graph->G[i];
         while (curr)
         {
             printf("%d ", curr->w);
@@ -107,7 +107,7 @@ void showmatrix(LGraph graph)
     }
 }
 
-static void MakeEdge(ptr header, ptr newnode)
+static void MakeEdge(nodeptr header, nodeptr newnode)
 {
     if (!header)
     {
@@ -119,7 +119,7 @@ static void MakeEdge(ptr header, ptr newnode)
     header->next = newnode;
 }
 
-static void traverselist(ptr header)
+static void traverselist(nodeptr header)
 {
     while (header)
     {

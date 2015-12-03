@@ -27,7 +27,7 @@ element delete_min_heap(int *n)
     child = 2;
     while (child <= *n)
     {
-        /* find the smaller child of the current paren */
+        /* find the smaller child of the current parent */
         if ((child < *n) && (heap[child].key > heap[child+1].key))
             child++;
         /* move to next lower level */

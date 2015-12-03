@@ -11,14 +11,14 @@ typedef struct edge *Edge;
 struct edge {
     Vertex vr;                              // row subfix
     Vertex vc;                              // col subfix
-    Weight w;                               // weight of the edge
+    Weight wt;                               // weight of the edge
 };
 
 /* definition of adjacency node */
 typedef struct node *nodeptr;
 struct node {
     Vertex adjv;
-    Weight w;
+    Weight wt;
     DataType data;
     nodeptr next;
 };
@@ -67,9 +67,14 @@ void InsertEdge(LGraph graph, Edge e)
 {
     /* for directed or undirected gragh to insert a new edge */
     nodeptr newnode = (nodeptr)malloc(sizeof(struct node));
+    if (!newnode)
+    {
+        fprintf(stderr, "Memory is full, insert edge failed.\n");
+        exit(EXIT_FAILURE);
+    }
     newnode->adjv = e->vc;
     newnode->next = NULL;
-    newnode->w = e->w;
+    newnode->wt = e->w;
     MakeEdge(graph->G[e->vr], newnode);
     // if graph is undirected:
     //MakeEdge(graph->G[e->vc], e->vr);
@@ -86,10 +91,26 @@ void buildGraph(LGraph newgra)
     while (scanf("%d-%d:%d", &row, &col, &weight) == 3)
     {
         Edge newedge = (Edge)malloc(sizeof(struct edge));
-        newedge->vr = row; newedge->vc = col; newedge->w = weight;
+        newedge->vr = row; newedge->vc = col; newedge->wt = weight;
         InsertEdge(newgra, newedge);
         printf("New edge inserted to the graph.\n");
     }
+}
+
+void buildGraph_test(LGraph newgra)
+{
+    /* test version of buildGraph, the original graph is on page180 */
+    int row[13] = {1,1,2,2,3,3,3,4,4,5,5,6,6};
+    int col[13] = {2,6,3,1,2,4,6,3,5,4,0,1,3};
+    for (int i = 0; i < 13; i++)
+    {
+        Edge newedge = (Edge)malloc(sizeof(struct edge));
+        newedge->vr = row[i];
+        newedge->vc = col[i];
+        newedge->wt = 1;
+        InsertEdge(newgra, newedge);
+    }
+    printf("Test graph created.\n");
 }
 
 void showmatrix(LGraph graph)

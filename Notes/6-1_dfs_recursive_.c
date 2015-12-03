@@ -33,13 +33,13 @@ struct Gnode {
     nodeptr G[MaxVertexNum];                    // adjacency linked list
 };
 
-void dfs_recursive(int v)
+void dfs_recursive(LGraph graph, Vertex v)
 {
     /* depth first search of a graph beginning with vth vertex */
-    node_pointer w;
+    nodeptr w;
     visited[v] = true;
     printf("%d ", v);
-    for (w = graph[v]; w; w = w->link)
-        if (!visited[w->vertex])
-            dfs(w->vertex);
+    for (w = graph->G[v]; w; w = w->link)
+        if (!visited[w->adjv])
+            dfs(graph, w->adjv);
 }

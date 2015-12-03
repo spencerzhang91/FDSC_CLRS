@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #define MaxVertexNum 100
+#define MaxStackSize 50
 typedef int Vertex;                         // subfix to represent vertex
 typedef int Weight;                         // use int to represent weight
 typedef char DataType;                      // data type of vertex data
@@ -35,6 +36,9 @@ struct Gnode {
 
 void dfs_iterative(LGraph graph, Vertex start)
 {
+    nodeptr stack = CreateStack(MaxStackSize);
     nodeptr curr = graph->G[start];
     bool visited[graph->vertex_num];
+    while (curr)
+
 }

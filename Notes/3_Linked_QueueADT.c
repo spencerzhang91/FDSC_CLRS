@@ -6,19 +6,19 @@
 #define ElementType int
 #define MAXSIZE 10
 
-struct Node{
+typedef struct node *Node;
+struct node {
     ElementType data;
-    struct Node *next;
+    Node next;
 };
 
-typedef struct {
-    struct Node *front;
-    struct Node *rear;
+typedef struct Qnode *Queue;
+struct Qnode {
+    Node front;
+    Node rear;
     int cursize;
     int maxsize;
-} Qnode;
-
-typedef Qnode *Queue;
+};
 
 Queue CreateQueue(int maxsize);
 bool QIsFull(Queue Q);
@@ -26,7 +26,7 @@ bool QIsEmpty(Queue Q);
 void enqueue(Queue Q, ElementType item);
 ElementType dequeue(Queue Q);
 
-int main(void)                                     // test fucntion
+int main(void)
 {
     Queue NewQ = CreateQueue(MAXSIZE);
     if (QIsFull(NewQ))
@@ -38,7 +38,7 @@ int main(void)                                     // test fucntion
 
 Queue CreateQueue(int maxsize)
 {
-    Queue temp = (Queue)malloc(sizeof(Qnode));
+    Queue temp = (Queue)malloc(sizeof(struct Qnode));
     temp->front = temp->rear = NULL;
     temp->maxsize = maxsize;
     return temp;
@@ -56,7 +56,7 @@ bool QIsEmpty(Queue Q)
 
 void enqueue(Queue Q, ElementType item)
 {
-    struct Node *rearcell;
+    Node rearcell;
     ElementType rearelem = item;
     if (QIsFull(Q))
     {
@@ -65,7 +65,7 @@ void enqueue(Queue Q, ElementType item)
     }   
     else
     {
-        rearcell = (struct Node *)malloc(sizeof(struct Node));
+        rearcell = (Node)malloc(sizeof(struct node));
         rearcell->data = rearelem;
         if (Q->cursize == 0)
             Q->front = Q->rear = rearcell;
@@ -80,7 +80,7 @@ void enqueue(Queue Q, ElementType item)
 
 ElementType dequeue(Queue Q)
 {
-    struct Node *frontcell;
+    Node frontcell;
     ElementType frontelem;
     if (QIsEmpty(Q))
     {

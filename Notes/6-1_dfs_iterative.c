@@ -14,7 +14,7 @@ typedef struct edge *Edge;
 struct edge {
     Vertex vr;                              // row subfix
     Vertex vc;                              // col subfix
-    Weight wt;                               // weight of the edge
+    Weight wt;                              // weight of the edge
 };
 
 /* definition of adjacency node */
@@ -31,7 +31,7 @@ typedef struct Gnode *LGraph;
 struct Gnode {
     int vertex_num;
     int edge_num;
-    nodeptr G[MaxVertexNum];                    // adjacency linked list
+    nodeptr G[MaxVertexNum];                // adjacency linked list
 };
 
 void dfs_iterative(LGraph graph, Vertex start)

@@ -1,6 +1,5 @@
 /* The iterative implementation of depth first search of graph */
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include "StackADT.h"
 
@@ -35,6 +34,9 @@ struct Gnode {
     nodeptr G[MaxVertexNum];                // adjacency linked list
 };
 
+/* Modified definition of dfs: support function pointer as an argument */
+void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p));
+
 int main(void)
 {
     int vertices = 10;
@@ -44,12 +46,29 @@ int main(void)
     return 0;
 }
 
-void dfs_iterative(LGraph graph, Vertex start)
+void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 {
+    int visited[graph->vertex_num] = {0}; // rest elements init automaticly
     nodeptr stack = CreateStack(MaxStackSize);
     nodeptr curr, startnode;
     curr = startnode = graph->G[start];
-    bool visited[graph->vertex_num];
-    while (curr)
+    
+    push(stack, curr);
+    visited[curr->adjv] = 1;
+    while (curr->adjv != start || stack)
+    {
+        curr = nextunvisited(curr);
+        if (curr)
+        {
+            (*func)(curr);
+            visited[curr->adjv] = 1;
+            push(stack, curr);
+        }
+        else curr = pop(stack);
+    }
+}
 
+nodeptr nextunvisited(nodeptr curr)
+{
+    return curr; // yet done
 }

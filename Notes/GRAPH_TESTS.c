@@ -34,14 +34,15 @@ struct Gnode {
 LGraph CreateLGraph(int vn);				// create a adjacency list graph
 void InsertEdge(LGraph gragh, Edgeptr e);
 void buildLGraph(LGraph newgra);
+void buildGraph_test(LGraph newgra);
 void showmatrix(LGraph graph);
 static void MakeEdge(ptr header, ptr newnode);
 static void traverselist(ptr header);
 
 int main(void)
 {
-    LGraph newgraph = CreateLGraph(10);
-    buildLGraph(newgraph);
+    LGraph newgraph = CreateGraph(7);
+    buildGraph_test(newgraph);
     showmatrix(newgraph);
 
     return 0;
@@ -90,6 +91,22 @@ void buildLGraph(LGraph newgra)
         InsertEdge(newgra, newedge);
         printf("New edge inserted to the graph.\n");
     }
+}
+
+void buildGraph_test(LGraph newgra)
+{
+    /* test version of buildGraph, the original graph is on page180 */
+    int row[8] = {0,0,1,1,2,3,3,4};
+    int col[8] = {1,5,2,6,3,4,6,5};
+    for (int i = 0; i < 8; i++)
+    {
+        Edge newedge = (Edge)malloc(sizeof(struct edge));
+        newedge->vr = row[i];
+        newedge->vc = col[i];
+        newedge->wt = 1;
+        InsertEdge(newgra, newedge);
+    }
+    printf("Test graph created.\n");
 }
 
 void showmatrix(LGraph graph)

@@ -1,0 +1,1 @@
+/* Kruskal algorithm to calculate the minimum cost spanning tree */

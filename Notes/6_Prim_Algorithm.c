@@ -1,0 +1,1 @@
+/* Prim algorithm to calculate the minimum cost spanning tree */

@@ -1,3 +1,6 @@
+/* C implementation of Linked List based graph ADT */
+/* A more modern and reusable implementation */
+
 #ifndef _LINKEDGRAPH_H
 #define _LINKEDGRAPH_H
 #define MaxVertexNum 100

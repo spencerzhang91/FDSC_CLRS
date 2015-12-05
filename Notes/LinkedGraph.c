@@ -5,6 +5,9 @@
 #include <stdbool.h>
 #include "LinkedGraph.h"
 
+static void MakeEdge(nodeptr header, nodeptr newnode);
+static void traverselist(nodeptr header);
+
 LGraph CreateGraph(int vn)
 {
     /* initialize a gragh with vn vertexes but no edges */

@@ -36,12 +36,14 @@ struct Gnode {
 
 /* Modified definition of dfs: support function pointer as an argument */
 void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p));
+nodeptr nextunvisited(nodeptr curr, int visited[]);
+void visit(nodeptr p);
 
 int main(void)
 {
     int vertices = 10;
     LGraph tg = CreateGraph(vertices);
-    dfs_iterative(tg, 0);
+    dfs_iterative(tg, 0, visit);
 
     return 0;
 }
@@ -57,7 +59,7 @@ void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
     visited[curr->adjv] = 1;
     while (curr->adjv != start || stack)
     {
-        curr = nextunvisited(curr);
+        curr = nextunvisited(curr, visited);
         if (curr)
         {
             (*func)(curr);
@@ -68,7 +70,19 @@ void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
     }
 }
 
-nodeptr nextunvisited(nodeptr curr)
+nodeptr nextunvisited(nodeptr curr, int visited[])
 {
-    return curr; // yet done
+    curr = curr->next;
+    while (curr)
+    {
+        if (visited[curr->adjv])
+            curr = curr->next;
+        else break;
+    }
+    return curr;
+}
+
+void visit(nodeptr p)
+{
+    printf("visiting vertext %d\n", p->adjv);
 }

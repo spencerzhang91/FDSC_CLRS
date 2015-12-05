@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MaxVertexNum 100
-bool visited[MAX_VERTICES];
 
 typedef int Vertex;                         // subfix to represent vertex
 typedef int Weight;                         // use int to represent weight
@@ -33,7 +32,10 @@ struct Gnode {
     nodeptr G[MaxVertexNum];                    // adjacency linked list
 };
 
-void dfs_recursive(LGraph graph, Vertex v)
+bool visited[MaxVertexNum];
+LGraph graph = CreateGraph(MaxVertexNum);
+
+void dfs_recursive(Vertex v)
 {
     /* depth first search of a graph beginning with vth vertex */
     nodeptr w;
@@ -41,5 +43,5 @@ void dfs_recursive(LGraph graph, Vertex v)
     printf("%d ", v);
     for (w = graph->G[v]; w; w = w->link)
         if (!visited[w->adjv])
-            dfs(graph, w->adjv);
+            dfs(w->adjv);
 }

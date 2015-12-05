@@ -1,7 +1,7 @@
 /* The iterative implementation of depth first search of graph */
 #include <stdio.h>
 #include <stdlib.h>
-#include "StackADT.h"
+#include "LinkedStack.h"
 
 #define MaxVertexNum 100
 #define MaxStackSize 100

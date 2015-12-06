@@ -24,10 +24,22 @@ void bfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 {
     int visited[graph->vertex_num];
     Queue queue = CreateQueue(graph->vertex_num);
-    nodeptr curr, startnode;
-    curr = startnode = graph->G[start];
-
-
+    nodeptr curr;
+    curr = graph->G[start];
+    enqueue(queue, curr);
+    while (!QIsEmpty(queue))
+    {
+        curr = dequeue(queue);
+        (*func)(curr);
+        visited[curr->adjv] = 1;
+        while (curr)
+        {
+            if (visited[curr->adjv] != 1)
+                enqueue(queue, curr);
+            else
+                curr = curr->next;
+        }
+    }
 }
 
 void visit(nodeptr p)

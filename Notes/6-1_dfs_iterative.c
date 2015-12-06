@@ -22,7 +22,7 @@ int main(void)
 
 void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 {
-    int visited[graph->vertex_num]; // rest elements init automaticly
+    int visited[graph->vertex_num];
     Stack stack = CreateStack(MAX_STACK_SIZE);
     nodeptr curr, startnode;
     curr = startnode = graph->G[start];

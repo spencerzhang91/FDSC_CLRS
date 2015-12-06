@@ -2,37 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedStack.h"
-
-#define MaxVertexNum 100
-#define MaxStackSize 100
-typedef int Vertex;                         // subfix to represent vertex
-typedef int Weight;                         // use int to represent weight
-typedef char DataType;                      // data type of vertex data
-
-/* definition of edge */
-typedef struct edge *Edge;
-struct edge {
-    Vertex vr;                              // row subfix
-    Vertex vc;                              // col subfix
-    Weight wt;                              // weight of the edge
-};
-
-/* definition of adjacency node */
-typedef struct node *nodeptr;
-struct node {
-    Vertex adjv;
-    Weight wt;
-    DataType data;
-    nodeptr next;
-};
-
-/* definition of linked lists based graph */
-typedef struct Gnode *LGraph;
-struct Gnode {
-    int vertex_num;
-    int edge_num;
-    nodeptr G[MaxVertexNum];                // adjacency linked list
-};
+#include "LinkedGraph.h"
 
 /* Modified definition of dfs: support function pointer as an argument */
 void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p));
@@ -43,6 +13,8 @@ int main(void)
 {
     int vertices = 10;
     LGraph tg = CreateGraph(vertices);
+    buildGraph_test(tg);
+    showmatrix(tg);
     dfs_iterative(tg, 0, visit);
 
     return 0;
@@ -50,16 +22,21 @@ int main(void)
 
 void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 {
-    int visited[graph->vertex_num] = {0}; // rest elements init automaticly
-    nodeptr stack = CreateStack(MaxStackSize);
+    int visited[graph->vertex_num]; // rest elements init automaticly
+    Stack stack = CreateStack(MAX_STACK_SIZE);
     nodeptr curr, startnode;
     curr = startnode = graph->G[start];
     
+    (*func)(curr);
     push(stack, curr);
     visited[curr->adjv] = 1;
+    
     while (curr->adjv != start || stack)
     {
-        curr = nextunvisited(curr, visited);
+        nodeptr temp = nextunvisited(curr, visited);
+        if (temp)
+            curr = graph->G[temp->adjv];
+        else curr = NULL;
         if (curr)
         {
             (*func)(curr);
@@ -72,14 +49,15 @@ void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 
 nodeptr nextunvisited(nodeptr curr, int visited[])
 {
+    // printf("curr is: \n", curr->adjv);
     curr = curr->next;
     while (curr)
     {
-        if (visited[curr->adjv])
+        if (visited[curr->adjv] == 1)
             curr = curr->next;
-        else break;
+        else return curr;
     }
-    return curr;
+    return NULL;
 }
 
 void visit(nodeptr p)

@@ -2,8 +2,8 @@
 /* header files */
 #ifndef _LINKEDQUEUE_H
 #define _LINKEDQUEUE_H
-
-#define ElementType int // can be changed according to particular purpose
+#include "LinkedGraph.h"
+#define ElementType nodeptr // can be changed according to particular purpose
 #define MAXSIZE 100
 
 typedef struct node *Node;

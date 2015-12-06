@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "LinkedGraph.h"
 #define _LINKEDSTACK_H
-#define ElementType nodeptr
+#define ElementType nodeptr  // can be changed according to particular purpose
 #define MAX_STACK_SIZE 100
 
 struct Node {

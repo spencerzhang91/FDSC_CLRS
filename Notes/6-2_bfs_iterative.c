@@ -22,7 +22,12 @@ int main(void)
 
 void bfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 {
-    Queue queue = CreateQueue(graph->vertext_num);
+    int visited[graph->vertex_num];
+    Queue queue = CreateQueue(graph->vertex_num);
+    nodeptr curr, startnode;
+    curr = startnode = graph->G[start];
+
+
 }
 
 void visit(nodeptr p)

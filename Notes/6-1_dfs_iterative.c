@@ -34,8 +34,8 @@ void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
     while (curr->adjv != start || stack)
     {
         nodeptr temp = nextunvisited(curr, visited);
-        if (temp)
-            curr = graph->G[temp->adjv];
+        if (temp) // if curr has next unvisited connection
+            curr = graph->G[temp->adjv]; // cursor jump to that node in G
         else curr = NULL;
         if (curr)
         {

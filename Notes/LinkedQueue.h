@@ -4,7 +4,7 @@
 #define _LINKEDQUEUE_H
 
 #define ElementType int // can be changed according to particular purpose
-#define MAXSIZE 10
+#define MAXSIZE 100
 
 typedef struct node *Node;
 struct node {

@@ -1,39 +1,18 @@
 /* The recursive implementation of depth first search of graph */
 #include <stdio.h>
 #include <stdlib.h>
-#define MaxVertexNum 100
-
-typedef int Vertex;                         // subfix to represent vertex
-typedef int Weight;                         // use int to represent weight
-typedef char DataType;                      // data type of vertex data
-
-/* definition of edge */
-typedef struct edge *Edge;
-struct edge {
-    Vertex vr;                              // row subfix
-    Vertex vc;                              // col subfix
-    Weight wt;                               // weight of the edge
-};
-
-/* definition of adjacency node */
-typedef struct node *nodeptr;
-struct node {
-    Vertex adjv;
-    Weight wt;
-    DataType data;
-    nodeptr next;
-};
-
-/* definition of linked lists based graph */
-typedef struct Gnode *LGraph;
-struct Gnode {
-    int vertex_num;
-    int edge_num;
-    nodeptr G[MaxVertexNum];                    // adjacency linked list
-};
+#include <stdbool.h>
+#include "LinkedGraph.h"  // organized graph ADT
 
 bool visited[MaxVertexNum];
-LGraph graph = CreateGraph(MaxVertexNum);
+void dfs_recursive(Vertex v);
+int main(void)
+{
+    LGraph graph = CreateGraph(MaxVertexNum);
+    dfs_recursive(0);
+
+    return 0;
+}
 
 void dfs_recursive(Vertex v)
 {
@@ -42,6 +21,6 @@ void dfs_recursive(Vertex v)
     visited[v] = true;
     printf("%d ", v);
     for (w = graph->G[v]; w; w = w->link)
-        if (!visited[w->adjv])
+        if (!visited[wt->adjv])
             dfs(w->adjv);
 }

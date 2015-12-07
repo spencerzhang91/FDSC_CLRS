@@ -10,11 +10,11 @@ typedef int Weight;                         // use int to represent weight
 typedef char DataType;                      // data type of vertex data
 
 /* definition of edge */
-typedef struct edge *Edgeptr;
+typedef struct edge *Edge;
 struct edge {
     Vertex vr;                              // row subfix
     Vertex vc;                              // col subfix
-    Weight w;                               // weight of the edge
+    Weight wt;                               // weight of the edge
 };
 /* definition of graph */
 typedef struct graph *MGraph;
@@ -26,7 +26,7 @@ struct graph {
 };
 
 MGraph CreateGraph(int vn);
-void InsertEdge(MGraph g, Edgeptr e);
+void InsertEdge(MGraph g, Edge e);
 void buildGraph(MGraph newgra);
 void showmatrix(MGraph graph);
 
@@ -53,10 +53,11 @@ MGraph CreateGraph(int vn)                  // vn for vertex number
     return Graph;
 }
 
-void InsertEdge(MGraph g, Edgeptr e)
+void InsertEdge(MGraph g, Edge e)
 {
-    g->G[e->vr][e->vc] = e->w;
-    //g->G[e->vc][e->vr] = e->w; // if graph is undirected add this line
+    g->G[e->vr][e->vc] = e->wt;
+    // if graph is undirected add the following one line:
+    g->G[e->vc][e->vr] = e->wt; 
     g->edge_num++;
 }
 
@@ -69,8 +70,8 @@ void buildGraph(MGraph newgra)
         " to the %d nodes graph:\n", newgra->vertex_num);
     while (scanf("%d-%d:%d", &row, &col, &weight) == 3)
     {
-        Edgeptr newedge = (Edgeptr)malloc(sizeof(struct edge));
-        newedge->vr = row; newedge->vc = col; newedge->w = weight;
+        Edge newedge = (Edge)malloc(sizeof(struct edge));
+        newedge->vr = row; newedge->vc = col; newedge->wt = weight;
         InsertEdge(newgra, newedge);
         printf("New edge inserted to the graph.\n");
     }

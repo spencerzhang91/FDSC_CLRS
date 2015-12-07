@@ -17,7 +17,7 @@ LGraph CreateGraph(int vn)
     Graph->edge_num = 0;
     for (i = 0; i < vn; i++)
     {
-        Graph->G[i] = (nodeptr)malloc(sizeof(struct node));
+        Graph->G[i] = (nodeptr)malloc(sizeof(struct gnode));
         Graph->G[i]->adjv = i;
         Graph->G[i]->next = NULL;
     }
@@ -27,7 +27,7 @@ LGraph CreateGraph(int vn)
 void InsertEdge(LGraph graph, Edge e)
 {
     /* for directed or undirected gragh to insert a new edge */
-    nodeptr newnode = (nodeptr)malloc(sizeof(struct node));
+    nodeptr newnode = (nodeptr)malloc(sizeof(struct gnode));
     if (!newnode)
     {
         fprintf(stderr, "Memory is full, insert edge failed.\n");
@@ -38,7 +38,7 @@ void InsertEdge(LGraph graph, Edge e)
     newnode->wt = e->wt;
     MakeEdge(graph->G[e->vr], newnode);
     // if graph is undirected:
-    nodeptr mirror = (nodeptr)malloc(sizeof(struct node));
+    nodeptr mirror = (nodeptr)malloc(sizeof(struct gnode));
     mirror->adjv = e->vr;
     mirror->next = NULL;
     mirror->wt = e->wt;

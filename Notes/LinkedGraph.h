@@ -16,8 +16,8 @@ struct edge {
 };
 
 /* definition of adjacency node */
-typedef struct node *nodeptr;
-struct node {
+typedef struct gnode *nodeptr;
+struct gnode {
     Vertex adjv;
     Weight wt;
     DataType data;

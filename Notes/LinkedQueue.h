@@ -6,8 +6,8 @@
 #define ElementType nodeptr // can be changed according to particular purpose
 #define MAXSIZE 100
 
-typedef struct node *Node;
-struct node {
+typedef struct qnode *Node;
+struct qnode {
     ElementType data;
     Node next;
 };

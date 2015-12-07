@@ -16,7 +16,7 @@ int main(void)
     buildGraph_test(tg);
     showmatrix(tg);
     bfs_iterative(tg, 0, visit);
-
+    
     return 0;
 }
 
@@ -26,19 +26,25 @@ void bfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
     Queue queue = CreateQueue(graph->vertex_num);
     nodeptr curr;
     curr = graph->G[start];
+    visited[curr->adjv] = 1;
     enqueue(queue, curr);
+    
     while (!QIsEmpty(queue))
-    {
-        curr = dequeue(queue);
-        (*func)(curr);
-        visited[curr->adjv] = 1;
+    {        
         while (curr)
         {
             if (visited[curr->adjv] != 1)
+            {
                 enqueue(queue, curr);
+                visited[curr->adjv] = 1;
+            }
+                
             else
                 curr = curr->next;
         }
+        nodeptr temp = dequeue(queue);
+        curr = graph->G[temp->adjv];
+        (*func)(curr);
     }
 }
 

@@ -16,7 +16,7 @@ int main(void)
     buildGraph_test(tg);
     showmatrix(tg);
     dfs_iterative(tg, 0, visit);
-
+    getchar();
     return 0;
 }
 

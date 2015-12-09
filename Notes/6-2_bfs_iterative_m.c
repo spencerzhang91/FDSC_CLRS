@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "LinkedGraph.h"  // organized graph ADT
-#include "LinkedQueue.h"  // organized queue ADT
+#include "MatrixGraph.h"  // organized graph ADT
+#include "LinkedQueue_m.h"  // organized queue ADT
 
 /* Modified definition of bfs: support function pointer as an argument */
-void bfs_iterative(LGraph graph, Vertex start, void (*func)(int p));
+void bfs_iterative(MGraph graph, Vertex start, void (*func)(int p));
 void visit(int p);
 
 int main(void)
 {
     int vertices = 7;
-    LGraph tg = CreateGraph(vertices);
+    MGraph tg = CreateGraph(vertices);
     buildGraph_test(tg);
     showmatrix(tg);
     bfs_iterative(tg, 0, visit);
@@ -20,7 +20,7 @@ int main(void)
     return 0;
 }
 
-void bfs_iterative(LGraph graph, Vertex start, void (*func)(int p))
+void bfs_iterative(MGraph graph, Vertex start, void (*func)(int p))
 {
     int visited[graph->vertex_num];
     Queue queue = CreateQueue(graph->vertex_num);

@@ -2,7 +2,7 @@
 /* header files */
 #ifndef _LINKEDQUEUE_H
 #define _LINKEDQUEUE_H
-#include "LinkedGraph.h"
+#include "MatrixGraph.h"
 #define ElementType int // can be changed according to particular purpose
 #define MAXSIZE 100
 

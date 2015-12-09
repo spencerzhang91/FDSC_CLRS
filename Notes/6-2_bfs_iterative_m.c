@@ -6,12 +6,12 @@
 #include "LinkedQueue.h"  // organized queue ADT
 
 /* Modified definition of bfs: support function pointer as an argument */
-void bfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p));
-void visit(nodeptr p);
+void bfs_iterative(LGraph graph, Vertex start, void (*func)(int p));
+void visit(int p);
 
 int main(void)
 {
-    int vertices = 10;
+    int vertices = 7;
     LGraph tg = CreateGraph(vertices);
     buildGraph_test(tg);
     showmatrix(tg);
@@ -20,34 +20,29 @@ int main(void)
     return 0;
 }
 
-void bfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
+void bfs_iterative(LGraph graph, Vertex start, void (*func)(int p))
 {
     int visited[graph->vertex_num];
     Queue queue = CreateQueue(graph->vertex_num);
-    nodeptr curr;
-    curr = graph->G[start];
-    visited[curr->adjv] = 1;
+    int curr;
+    curr = start; // 
+    visited[curr] = 1;
     enqueue(queue, curr);
     
     while (!QIsEmpty(queue))
     {        
-        while (curr)
-        {
-            if (visited[curr->adjv] != 1)
+        for (int i = 0; i < graph->vertex_num; i++)
+            if ((graph->G[curr][i] == 1) && (visited[i] != 1))
             {
-                enqueue(queue, curr);
-                visited[curr->adjv] = 1;
+                enqueue(queue, i);
+                visited[i];
             }
-            else
-                curr = curr->next;
-        }
-        nodeptr temp = dequeue(queue);
-        curr = graph->G[temp->adjv];
+        curr = dequeue(queue);
         (*func)(curr);
     }
 }
 
-void visit(nodeptr p)
+void visit(int p)
 {
-    printf("visiting vertext %d\n", p->adjv);
+    printf("visiting vertext %d\n", p);
 }

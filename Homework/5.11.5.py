@@ -30,10 +30,10 @@ def CreateBiTree(preseq, inseq):
         return root
 
 def traversal(tree):
-	'''
-	preorder traversal of a binary tree.
-	'''
-    stack = []
+    '''
+    preorder traversal of a binary tree.
+    '''
+    stack = []  
     curr = tree
     while curr or stack:
         while curr:

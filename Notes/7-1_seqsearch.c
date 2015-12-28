@@ -12,5 +12,9 @@ int seqsearch(int list[], int target, int n)
 {
     /* search an array, list, that has n numbers. Return i if list[i] = target
     Return -1 if target is not in the list. */
-
+    int i;
+    list[n] = target;
+    for (i = 0; list[i] != target; i++)
+        ;
+    return ((i < n)? i: -1);
 }

@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #define MAXSIZE 1000 // maximum item number plus one
-#define COMPARE(x, y) ((x) > (y))? -1: (((x) == (y))? 0: 1)
 typedef struct {
     int key;
     /* other fields */

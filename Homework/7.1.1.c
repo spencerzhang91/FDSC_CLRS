@@ -6,7 +6,7 @@ typedef struct {
     // any other possible fields
 } element;
 
-void swapsort(element list[], int len, int target);
+void swapsearch(element list[], int len, int target);
 
 int main(void)
 {
@@ -18,7 +18,7 @@ int main(void)
     return 0;
 }
 
-void swapsort(element list[], int len, int target)
+void swapsearch(element list[], int len, int target)
 {
     int temp;
     for (int i = 0; i < len; i++)
@@ -28,7 +28,8 @@ void swapsort(element list[], int len, int target)
             list[i].key = list[0].key;
             list[0].key = temp;
             printf("%d is found!\n", target);
-            return;
+            return i;
         }
     printf("%d is not found in the list.\n", target);
+    return -1;
 }

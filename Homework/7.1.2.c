@@ -6,7 +6,7 @@ typedef struct {
     // any other possible fields
 } element;
 
-void movesort(element list[], int len, int target);
+int movesearch(element list[], int len, int target);
 void showlist(element *list, int len);
 
 int main(void)
@@ -21,7 +21,7 @@ int main(void)
     return 0;
 }
 
-void movesort(element list[], int len, int target)
+int movesearch(element list[], int len, int target)
 {
     int temp;
     for (int i = 0; i < len; i++)
@@ -30,9 +30,10 @@ void movesort(element list[], int len, int target)
             for (int j = i; j > 0; j--)
                 list[j] = list[j-1];
             list[0].key = target;
-            return;
+            return i;
         }
     printf("%d is not in list.\n", target);
+    return -1;
 }
 
 void showlist(element *list, int len)

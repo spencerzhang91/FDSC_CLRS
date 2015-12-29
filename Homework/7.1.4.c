@@ -8,3 +8,9 @@ typedef struct {
     int key;
     // any other possible fields
 } element;
+
+int main(void)
+{
+
+    return 0;
+}

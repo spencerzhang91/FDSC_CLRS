@@ -30,7 +30,5 @@ void swapsort(element list[], int len, int target)
             printf("%d is found!\n", target);
             return;
         }
-        else
-            continue;
     printf("%d is not found in the list.\n", target);
 }

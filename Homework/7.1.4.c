@@ -13,15 +13,16 @@ typedef struct {
 
 int itpsearch(element list[], int target, int n);
 int binsearch(element list[], int target, int n);
-void runtime(int (*func)(element list[], int len, int target));
 
 int main(void)
 {
     element list[MAXSIZE] = {{1},{2},{3},{4},{5},{6},{7},{8}};
+    int rec1 = 0, rec2 = 0;
     int res1 = itpsearch(list, 5, 8);
     int res2 = binsearch(list, 5, 8);
     printf("res1: %d  res2: %d\n", res1, res2);
-
+    printf("rec1: %d steps, rec2: %d steps\n", rec1, rec2);
+    runtime(&rec1);
     return 0;
 }
 

@@ -1,4 +1,4 @@
-// excercise of chapter 7 on P206
+// excercise 7.1.2 on P206
 #include <stdio.h>
 #define SIZE 5
 typedef struct {

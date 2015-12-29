@@ -53,6 +53,6 @@ void verify2(element list1[], element list2[], int n, int m)
 
 void sort(element list[], int len)
 {
+    // Some sorting algorithm, ommited here.
     return;
 }
-

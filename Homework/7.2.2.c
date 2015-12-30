@@ -16,7 +16,18 @@ int binsearch(element list[], int target, int n);
 
 int main(void)
 {
+    element list[SIZE] = {{5},{3},{2},{6},{1}};
+    puts("befor sorting:");
+    showlist(list, SIZE);
 
+    puts("sort ascendingly:");
+    insertion_sort(list, SIZE, ascending);
+    showlist(list, SIZE);
+
+    puts("sort descendingly:");
+    insertion_sort(list, SIZE, descending);
+    showlist(list, SIZE);
+    return 0;
     return 0;
 }
 
@@ -46,7 +57,9 @@ void insertion_sort(element list[], int n, bool (*func)(int x, int y))
     for (i = 1; i < n; i++)
     {
         next = list[i];
-        for (j = i - 1; j >= 0 && (*func)(next.key, list[j].key); j--)
+        int place = binsearch(list, next.key, i);
+        printf("place = %d next = %d\n", place, next.key);
+        for (j = i - 1; j > place; j--)
             list[j+1] = list[j];
         list[j+1] = next;
     }
@@ -65,5 +78,5 @@ int binsearch(element list[], int target, int n)
             case 1: right = middle - 1;
         }
     }
-    return -1;
+    return left;
 }

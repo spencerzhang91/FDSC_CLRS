@@ -13,8 +13,9 @@ struct element{
 bool ascending(int x, int y);
 bool descending(int x, int y);
 void showLinkedList(link head);
+// The two function below need to change i
 int binsearch(element list[], int target, int n, bool (*func)(int x, int y));
-link insertion_sort(element list[], int n, bool (*func)(int x, int y));
+link insertion_sort(link list, int n, bool (*func)(int x, int y));
 
 int main(void)
 {
@@ -54,7 +55,7 @@ bool descending(int x, int y)
     return (x > y);
 }
 
-link insertion_sort(element list[], int n, bool (*func)(int x, int y))
+link insertion_sort(link list, int n, bool (*func)(int x, int y)) // to be done
 {
     // perform a insertion sort on the list, and return a head of linked list
     int i, j, k;

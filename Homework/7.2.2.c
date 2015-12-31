@@ -52,7 +52,6 @@ void insertion_sort(element list[], int n, bool (*func)(int x, int y))
     // perform a insertion sort on the list
     int i, j;
     element next;
-    // from this point to the end of this function need to be modified
     for (i = 1; i < n; i++)
     {
         next = list[i];

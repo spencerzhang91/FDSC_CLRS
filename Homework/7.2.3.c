@@ -1,5 +1,6 @@
 // excercise 7.2.3 on P208
 #include<stdio.h>
+#include<stdlib.h>
 #include<stdbool.h>
 #define SIZE 6
 typedef struct element element;
@@ -9,28 +10,31 @@ struct element{
     link next;
 };
 
-
-
 void showlist(element *list, int len);
 bool ascending(int x, int y);
 bool descending(int x, int y);
 link insertion_sort(element list[], int n, bool (*func)(int x, int y));
 int binsearch(element list[], int target, int n, bool (*func)(int x, int y));
+void showlinkedlist(link head);
 
 int main(void)
 {
+    link head;
     element list[SIZE] = {{5},{3},{2},{6},{1},{8}};
     puts("befor sorting:");
     showlist(list, SIZE);
+    showlinkedlist(list);
 
     puts("sort ascendingly:");
-    insertion_sort(list, SIZE, ascending);
+    head = insertion_sort(list, SIZE, ascending);
     showlist(list, SIZE);
+    showlinkedlist(list);
 
     puts("sort descendingly:");
-    insertion_sort(list, SIZE, descending);
+    head = insertion_sort(list, SIZE, descending);
     showlist(list, SIZE);
-    return 0;
+    showlinkedlist(list);
+
     return 0;
 }
 
@@ -54,17 +58,25 @@ bool descending(int x, int y)
 link insertion_sort(element list[], int n, bool (*func)(int x, int y))
 {
     // perform a insertion sort on the list, and return a head of linked list
-    int i, j;
+    int i, j, k;
     element next;
     for (i = 1; i < n; i++)
     {
         next = list[i];
         int place = binsearch(list, next.key, i, func);
-        // from this line to the end of this function need to be rewritten
         for (j = i - 1; j > place; j--)
             list[j+1] = list[j];
         list[j+1] = next;
     }
+    /* As the excercise requests: construct a linked list from the sorted array,
+    which although would be even slow for first time, but would be faster later.
+    */
+    for (k = 0; k < n - 1; k++)
+        list[k].next = &list[k+1];
+    list[k].next = NULL;
+    link head = (link)malloc(sizeof(element));
+    head->next = &list[0];
+    return head;
 }
 
 int binsearch(element list[], int target, int n, bool (*func)(int x, int y))
@@ -82,4 +94,11 @@ int binsearch(element list[], int target, int n, bool (*func)(int x, int y))
         }
     }
     return right;
+}
+
+void showlinkedlist(link head)
+{
+    for (; head; head = head->next)
+        printf("%d ", head->key);
+    puts("");
 }

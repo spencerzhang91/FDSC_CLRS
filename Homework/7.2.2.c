@@ -1,7 +1,6 @@
 // excercise 7.2.2 on P208
 #include<stdio.h>
 #include<stdbool.h>
-#define COMPARE(x, y) ((x) > (y))? -1: (((x) == (y))? 0: 1)
 #define SIZE 5
 typedef struct {
     int key;
@@ -12,7 +11,7 @@ void showlist(element *list, int len);
 bool ascending(int x, int y);
 bool descending(int x, int y);
 void insertion_sort(element list[], int n, bool (*func)(int x, int y));
-int binsearch(element list[], int target, int n);
+int binsearch(element list[], int target, int n, bool (*func)(int x, int y));
 
 int main(void)
 {
@@ -57,26 +56,26 @@ void insertion_sort(element list[], int n, bool (*func)(int x, int y))
     for (i = 1; i < n; i++)
     {
         next = list[i];
-        int place = binsearch(list, next.key, i);
-        printf("place = %d next = %d\n", place, next.key);
+        int place = binsearch(list, next.key, i, func);
         for (j = i - 1; j > place; j--)
             list[j+1] = list[j];
         list[j+1] = next;
     }
 }
 
-int binsearch(element list[], int target, int n)
+int binsearch(element list[], int target, int n, bool (*func)(int x, int y))
 {
+    /* this binary search function behave according to the input of ascending
+    or descending function pointer */
     int left = 0, right = n-1, middle;
     while (left <= right)
     {
         middle = (left + right) / 2;
-        switch (COMPARE(target, list[middle].key))
+        switch ((*func)(target, list[middle].key))
         {
-            case -1: left = middle + 1; break;
-            case 0: return middle;
-            case 1: right = middle - 1;
+            case false: left = middle + 1; break;
+            case true: right = middle - 1;
         }
     }
-    return left;
+    return right;
 }

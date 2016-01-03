@@ -49,12 +49,27 @@ Linked create(datatype value)
 
 Linked construct(datatype array[], int len)
 {
-
+    Linked head = create(array[0]);
+    Linked curr = head;
+    for (int i = 1; i < len; i++)
+    {
+        Linked temp = create(array[i]);
+        curr->next = temp;
+        curr = temp;
+    }
+    return head;
 }
 
 void destruct(Linked head, int len)
 {
-
+    Linked temp = head;
+    Linked curr = temp->next;
+    while (curr)
+    {
+        free(temp);
+        temp = curr;
+        curr = temp->next;
+    }
 }
 
 bool insert(Linked head, datatype item, int len, int pos)

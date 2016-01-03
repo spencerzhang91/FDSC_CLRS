@@ -31,10 +31,48 @@ int main(void)
     return 0;
 }
 
-Linked create(datatype value);
-Linked construct(datatype array[], int len);
-void destruct(Linked head, int len);
-bool insert(Linked head, datatype item, int len, int pos);
-bool delete(Linked head, datatype item);
-void display(Linked head);
-int length(Linked head);
+Linked create(datatype value)
+{
+    Linked head = (Linked)malloc(sizeof(struct node));
+    if (head)
+    {
+        head->next = NULL;
+        head->key = value;
+    }
+    else
+    {
+        fprintf(stderr, "%s\n", "Fail to create list, full memory.");
+        exit(EXIT_FAILURE);
+    }
+    return head;
+}
+
+Linked construct(datatype array[], int len)
+{
+
+}
+
+void destruct(Linked head, int len)
+{
+
+}
+
+bool insert(Linked head, datatype item, int len, int pos)
+{
+
+}
+
+bool delete(Linked head, datatype item)
+{
+
+}
+
+void display(Linked head)
+{
+
+}
+
+int length(Linked head)
+{
+
+}

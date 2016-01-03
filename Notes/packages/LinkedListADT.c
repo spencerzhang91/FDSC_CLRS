@@ -74,7 +74,8 @@ void destruct(Linked head, int len)
 
 bool insert(Linked head, datatype item, int len, int pos)
 {
-
+    // here pos is where new item will attach after
+    Linked newnode = create(item);
 }
 
 bool delete(Linked head, datatype item)

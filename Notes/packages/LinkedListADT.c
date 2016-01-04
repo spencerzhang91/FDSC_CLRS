@@ -75,7 +75,17 @@ void destruct(Linked head, int len)
 bool insert(Linked head, datatype item, int len, int pos)
 {
     // here pos is where new item will attach after
+    if (pos > len || pos < 0)
+    {
+        printf("Invalide insert position.\n");
+        return false;
+    }
+    Linked temp = head;
     Linked newnode = create(item);
+    int marker = 0; // keep track of the current cursor
+    for (; marker < pos; marker++)
+        temp = temp->next;
+
 }
 
 bool delete(Linked head, datatype item)
@@ -85,7 +95,12 @@ bool delete(Linked head, datatype item)
 
 void display(Linked head)
 {
-
+    Linked temp = head;
+    while (temp)
+    {
+        printf("%d ", temp->key); // only if datatype == int
+        temp = temp->next;
+    }
 }
 
 int length(Linked head)

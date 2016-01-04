@@ -90,5 +90,12 @@ void display(Linked head)
 
 int length(Linked head)
 {
-
+    int count = 0;
+    Linked temp = head;
+    while (temp)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
 }

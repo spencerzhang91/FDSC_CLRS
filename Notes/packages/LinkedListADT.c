@@ -16,7 +16,7 @@ void destruct(Linked head, int len);
 void insert(Linked head, datatype item, int len, int pos);
 void delitem(Linked head, datatype item);
 void display(Linked head);
-int length(Linked head);
+int len(Linked head);
 // testing main function
 int main(void)
 {
@@ -132,7 +132,7 @@ void display(Linked head)
     puts(""); 
 }
 
-int length(Linked head)
+int len(Linked head)
 {
     int count = 0;
     Linked temp = head;

@@ -14,7 +14,7 @@ Linked create(datatype value);
 Linked construct(datatype array[], int len);
 void destruct(Linked head, int len);
 void insert(Linked head, datatype item, int len, int pos);
-void delitem(Linked head, datatype item);
+void delitem(Linked *head, datatype item);
 void display(Linked head);
 int len(Linked head);
 // testing main function
@@ -98,27 +98,30 @@ void insert(Linked head, datatype item, int len, int pos)
     }
 }
 
-void delitem(Linked head, datatype item)
+void delitem(Linked *head, datatype item)
 {
-    // if the item is successfully deleted return true, else false
-    Linked temp = head;
-    if (head->key == item)
+    // delete the requested item(if any)
+    Linked temp = *head;
+    if (temp->key == item)
     {
-        head = head->next;
+        (*head) = (*head)->next;
         temp->next = NULL;
         free(temp);
     }
-    while (temp->next)
+    else
     {
-        if (temp->next->key == item)
-            break;
-        else
-            temp = temp->next;
+        while (temp->next)
+        {
+            if (temp->next->key == item)
+                break;
+            else
+                temp = temp->next;
+        }
+        Linked drop = temp->next;
+        temp->next = temp->next->next;
+        drop->next = NULL;
+        free(drop);
     }
-    Linked drop = temp->next;
-    temp->next = temp->next->next;
-    drop->next = NULL;
-    free(drop);
 }
 
 void display(Linked head)

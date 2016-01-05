@@ -19,7 +19,7 @@ Linked create(datatype value);
 Linked construct(datatype array[], int len);
 void destruct(Linked head, int len);
 void insert(Linked head, datatype item, int len, int pos);
-void delitem(Linked head, datatype item);
+void delitem(Linked *head, datatype item);
 void display(Linked head);
 int len(Linked head);
 
@@ -28,9 +28,9 @@ int main(void)
     Linked sortedhead;
     datatype list[SIZE] = {5, 3, 2, 6, 1, 8};
     Linked origin = construct(list, SIZE);
-    delitem(origin, 2);
+    delitem(&origin, 2);
     display(origin);
-    delitem(origin, 5);
+    delitem(&origin, 5);
     display(origin);
     /*
     puts("befor sorting:");
@@ -137,13 +137,13 @@ void insert(Linked head, datatype item, int len, int pos)
     }
 }
 
-void delitem(Linked head, datatype item)
+void delitem(Linked *head, datatype item)
 {
     // delete the requested item(if any)
-    Linked temp = head;
-    if (head->key == item)
+    Linked temp = *head;
+    if (temp->key == item)
     {
-        head = head->next;
+        (*head) = (*head)->next;
         temp->next = NULL;
         free(temp);
     }

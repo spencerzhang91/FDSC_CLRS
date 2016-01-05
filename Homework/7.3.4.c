@@ -21,7 +21,7 @@ void destruct(Linked head, int len);
 void insert(Linked head, datatype item, int len, int pos);
 void delitem(Linked head, datatype item);
 void display(Linked head);
-int length(Linked head);
+int len(Linked head);
 
 int main(void)
 {
@@ -41,13 +41,6 @@ int main(void)
     return 0;
 }
 
-void showlist(element *list, int len)
-{
-    for (int i = 0; i < len; i++)
-        printf("%d ", list[i].key);
-    puts("");
-}
-
 bool ascending(int x, int y)
 {
     return (x < y);
@@ -58,12 +51,33 @@ bool descending(int x, int y)
     return (x > y);
 }
 
-link insertion_sort(link list, int n, bool (*func)(int x, int y)) // to be done
+Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
 {
-
+    // perform a insertion sort on the linked list
+    int length = len(list);
+    if (length <= 1)
+        return list;
+    Linked newhead = list;
+    Linked curr = list->next;
+    while (curr)
+    {
+        int marker = 0;
+        Linked temp = newhead;
+        while (temp)
+        {
+            if ((*func)(temp->key, curr->key))
+                insert(temp, curr, length, marker);
+            else
+            {
+                temp = temp->next;
+                marker++;
+            }
+        }
+    }
+    return newhead;
 }
 
-void showLinkedList(link head)
+void showLinkedList(Linked head)
 {
     for (; head; head = head->next)
         printf("%d ", head->key);
@@ -171,7 +185,7 @@ void display(Linked head)
     puts(""); 
 }
 
-int length(Linked head)
+int len(Linked head)
 {
     int count = 0;
     Linked temp = head;

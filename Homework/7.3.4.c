@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #define SIZE 6
+#define datatype int
 typedef struct node *Linked;
 struct node {
     datatype key;
@@ -11,8 +12,7 @@ struct node {
 
 bool ascending(int x, int y);
 bool descending(int x, int y);
-void showLinkedList(Linked head);
-Linked insertion_sort(Linked list, int n, bool (*func)(int x, int y));
+Linked insertion_sort(Linked list, bool (*func)(int x, int y));
 
 // basic operations of a linked list ADT
 Linked create(datatype value);
@@ -26,17 +26,18 @@ int len(Linked head);
 int main(void)
 {
     Linked sortedhead;
-    element list[SIZE] = {{5},{3},{2},{6},{1},{8}};
+    datatype list[SIZE] = {5, 3, 2, 6, 1, 8};
+    Linked origin = construct(list, SIZE);
     puts("befor sorting:");
-    showLinkedList(list);
+    display(origin);
 
     puts("sort ascendingly:");
-    sortedhead = insertion_sort(list, SIZE, ascending);
-    showLinkedList(list);
+    sortedhead = insertion_sort(origin, ascending);
+    display(sortedhead);
 
     puts("sort descendingly:");
-    sortedhead = insertion_sort(list, SIZE, descending);
-    showLinkedList(list);
+    sortedhead = insertion_sort(origin, descending);
+    display(sortedhead);
 
     return 0;
 }
@@ -63,25 +64,22 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
     {
         int marker = 0;
         Linked temp = newhead;
-        while (temp)
+        while (temp != curr)
         {
             if ((*func)(temp->key, curr->key))
-                insert(temp, curr, length, marker);
+            {
+                insert(temp, curr->key, length, marker);
+                break;
+            }
             else
             {
                 temp = temp->next;
                 marker++;
             }
         }
+        curr = curr->next;
     }
     return newhead;
-}
-
-void showLinkedList(Linked head)
-{
-    for (; head; head = head->next)
-        printf("%d ", head->key);
-    puts("");
 }
 
 // definition of linked list functions
@@ -131,7 +129,7 @@ void insert(Linked head, datatype item, int len, int pos)
     // here pos is where new item will attach after
     if (pos > len || pos < -1)
     {
-        printf("Invalide insert position.\n");
+        printf("Invalide insert position: %d.\n", pos);
         exit(EXIT_FAILURE);
     }
     Linked temp = head;

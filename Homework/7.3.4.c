@@ -28,6 +28,11 @@ int main(void)
     Linked sortedhead;
     datatype list[SIZE] = {5, 3, 2, 6, 1, 8};
     Linked origin = construct(list, SIZE);
+    delitem(origin, 2);
+    display(origin);
+    delitem(origin, 5);
+    display(origin);
+    /*
     puts("befor sorting:");
     display(origin);
 
@@ -38,7 +43,7 @@ int main(void)
     puts("sort descendingly:");
     sortedhead = insertion_sort(origin, descending);
     display(sortedhead);
-
+    */
     return 0;
 }
 
@@ -54,13 +59,12 @@ bool descending(int x, int y)
 
 Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
 {
-    /* perform a insertion sort on the linked list
-    actually it's a little bit detoured here, in order to use ADT functions
-    */
+    /* perform a insertion sort on the linked list. Actually here's a little bit
+    detoured here, in order to use ADT functions only. */
     int length = len(list);
     if (length <= 1)
         return list;
-    Linked newhead = list;
+    Linked newhead = create(list->key);
     Linked curr = list->next;
     
     return newhead;
@@ -135,7 +139,7 @@ void insert(Linked head, datatype item, int len, int pos)
 
 void delitem(Linked head, datatype item)
 {
-    // if the item is successfully deleted return true, else false
+    // delete the requested item(if any)
     Linked temp = head;
     if (head->key == item)
     {
@@ -143,17 +147,20 @@ void delitem(Linked head, datatype item)
         temp->next = NULL;
         free(temp);
     }
-    while (temp->next)
+    else
     {
-        if (temp->next->key == item)
-            break;
-        else
-            temp = temp->next;
+        while (temp->next)
+        {
+            if (temp->next->key == item)
+                break;
+            else
+                temp = temp->next;
+        }
+        Linked drop = temp->next;
+        temp->next = temp->next->next;
+        drop->next = NULL;
+        free(drop);
     }
-    Linked drop = temp->next;
-    temp->next = temp->next->next;
-    drop->next = NULL;
-    free(drop);
 }
 
 void display(Linked head)

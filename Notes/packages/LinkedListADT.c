@@ -14,7 +14,7 @@ Linked create(datatype value);
 Linked construct(datatype array[], int len);
 void destruct(Linked head, int len);
 bool insert(Linked head, datatype item, int len, int pos);
-bool delete(Linked head, datatype item);
+bool delitem(Linked head, datatype item);
 void display(Linked head);
 int length(Linked head);
 // testing main function
@@ -23,10 +23,11 @@ int main(void)
     Linked list1 = create(0);
     datatype array[SIZE] = {1, 3, 4, 5, 9};
     Linked list2 = construct(array, SIZE);
-    insert(list1, 30, 1, 1);
-    destruct(list1, length(list1));
+    //insert(list1, 30, 1, 1);
+    //destruct(list1, length(list1));
     display(list2);
-    delete(list2, 5);
+    delitem(list2, 5);
+    //display(list2);
 
     return 0;
 }
@@ -75,22 +76,46 @@ void destruct(Linked head, int len)
 bool insert(Linked head, datatype item, int len, int pos)
 {
     // here pos is where new item will attach after
-    if (pos > len || pos < 0)
+    if (pos > len || pos < -1)
     {
         printf("Invalide insert position.\n");
         return false;
     }
     Linked temp = head;
     Linked newnode = create(item);
-    int marker = 0; // keep track of the current cursor
+    int marker = -1; // -1 is to add newnode as new head
     for (; marker < pos; marker++)
         temp = temp->next;
-
+    if (marker == -1)
+    {
+        newnode->next = temp;
+        head = newnode;
+    }
+    else
+    {
+        newnode->next = temp->next;
+        temp->next = newnode;
+    }   
+    return true;
 }
 
-bool delete(Linked head, datatype item)
+bool delitem(Linked head, datatype item)
 {
-
+    // if the item is successfully deleted return true, else false
+    Linked temp = head;
+    temp->next = head;
+    while (temp->next)
+    {
+        if (temp->next->key == item)
+            break;
+        else
+            temp = temp->next;
+    }
+    Linked drop = temp->next;
+    temp->next = temp->next->next;
+    drop->next = NULL;
+    free(drop);
+    return true;
 }
 
 void display(Linked head)

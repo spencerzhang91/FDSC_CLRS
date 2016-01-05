@@ -54,31 +54,15 @@ bool descending(int x, int y)
 
 Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
 {
-    // perform a insertion sort on the linked list
+    /* perform a insertion sort on the linked list
+    actually it's a little bit detoured here, in order to use ADT functions
+    */
     int length = len(list);
     if (length <= 1)
         return list;
     Linked newhead = list;
     Linked curr = list->next;
-    while (curr)
-    {
-        int marker = 0;
-        Linked temp = newhead;
-        while (temp != curr)
-        {
-            if ((*func)(temp->key, curr->key))
-            {
-                insert(temp, curr->key, length, marker);
-                break;
-            }
-            else
-            {
-                temp = temp->next;
-                marker++;
-            }
-        }
-        curr = curr->next;
-    }
+    
     return newhead;
 }
 

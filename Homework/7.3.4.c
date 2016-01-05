@@ -18,7 +18,7 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y));
 Linked create(datatype value);
 Linked construct(datatype array[], int len);
 void destruct(Linked head, int len);
-void insert(Linked head, datatype item, int len, int pos);
+void insert(Linked head, Linked node, bool (*func)(int x, int y));
 void delitem(Linked *head, datatype item);
 void display(Linked head);
 int len(Linked head);
@@ -60,19 +60,26 @@ bool descending(int x, int y)
 Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
 {
     /* perform a insertion sort on the linked list. Actually here's a little bit
-    detoured here, in order to use ADT functions only. */
+    detoured here, so rather slow. Will be rewritten later*/
     int length = len(list);
     if (length <= 1)
         return list;
     Linked newhead = create(list->key);
-    Linked curr = list->next;
+    delitem(list, list->key);
+    while (list)
+    {
+        Linked curr = create(list->key);
+        insert(newhead, curr, func);
+        delitem(list, list->key);
+    }
+    
     
     return newhead;
 }
 
-// definition of linked list functions
 Linked create(datatype value)
 {
+    // create a Linked list node
     Linked head = (Linked)malloc(sizeof(struct node));
     if (head)
     {
@@ -112,29 +119,15 @@ void destruct(Linked head, int len)
     }
 }
 
-void insert(Linked head, datatype item, int len, int pos)
+void insert(Linked head, Linked node, bool (*func)(int x, int y))
 {
-    // here pos is where new item will attach after
-    if (pos > len || pos < -1)
+    // Insert node into the Linked list
+    if (!head)
     {
         printf("Invalide insert position: %d.\n", pos);
         exit(EXIT_FAILURE);
     }
-    Linked temp = head;
-    Linked newnode = create(item);
-    int marker = -1; // -1 is to add newnode as new head
-    for (; marker < pos; marker++)
-        temp = temp->next;
-    if (marker == -1)
-    {
-        newnode->next = temp;
-        head = newnode;
-    }
-    else
-    {
-        newnode->next = temp->next;
-        temp->next = newnode;
-    }
+     
 }
 
 void delitem(Linked *head, datatype item)

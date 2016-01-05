@@ -13,8 +13,8 @@ struct node {
 Linked create(datatype value);
 Linked construct(datatype array[], int len);
 void destruct(Linked head, int len);
-bool insert(Linked head, datatype item, int len, int pos);
-bool delitem(Linked head, datatype item);
+void insert(Linked head, datatype item, int len, int pos);
+void delitem(Linked head, datatype item);
 void display(Linked head);
 int length(Linked head);
 // testing main function
@@ -27,7 +27,7 @@ int main(void)
     //destruct(list1, length(list1));
     display(list2);
     delitem(list2, 5);
-    //display(list2);
+    display(list2);
 
     return 0;
 }
@@ -73,13 +73,13 @@ void destruct(Linked head, int len)
     }
 }
 
-bool insert(Linked head, datatype item, int len, int pos)
+void insert(Linked head, datatype item, int len, int pos)
 {
     // here pos is where new item will attach after
     if (pos > len || pos < -1)
     {
         printf("Invalide insert position.\n");
-        return false;
+        exit(EXIT_FAILURE);
     }
     Linked temp = head;
     Linked newnode = create(item);
@@ -95,15 +95,19 @@ bool insert(Linked head, datatype item, int len, int pos)
     {
         newnode->next = temp->next;
         temp->next = newnode;
-    }   
-    return true;
+    }
 }
 
-bool delitem(Linked head, datatype item)
+void delitem(Linked head, datatype item)
 {
     // if the item is successfully deleted return true, else false
     Linked temp = head;
-    temp->next = head;
+    if (head->key == item)
+    {
+        head = head->next;
+        temp->next = NULL;
+        free(temp);
+    }
     while (temp->next)
     {
         if (temp->next->key == item)
@@ -115,7 +119,6 @@ bool delitem(Linked head, datatype item)
     temp->next = temp->next->next;
     drop->next = NULL;
     free(drop);
-    return true;
 }
 
 void display(Linked head)
@@ -126,6 +129,7 @@ void display(Linked head)
         printf("%d ", temp->key); // only if datatype == int
         temp = temp->next;
     }
+    puts(""); 
 }
 
 int length(Linked head)

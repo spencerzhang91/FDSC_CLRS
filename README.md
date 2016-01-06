@@ -5,4 +5,4 @@ There are two seperated folders, one for learning notes(including implementation
 + Homework
 + Notes
 
-The book Data Structure and Algorithm in Python is also referenced during this learning process
+The book ***Data Structure and Algorithm in Python*** is also referenced during this learning process

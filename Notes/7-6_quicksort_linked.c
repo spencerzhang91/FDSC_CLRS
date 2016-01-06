@@ -4,3 +4,12 @@ get more specific conduction.
 It's an implementation using linked list based queue, so that 
 */
 #include <stdio.h>
+#include "LinkedQueue.h"
+
+void quicksort(int *list, int left, int right);
+
+int main(void)
+{
+
+    return 0;
+}

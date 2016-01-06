@@ -1,4 +1,5 @@
 /* Linked list based Queue ADT implementation */
+/* A more modern and reusable implementation, for MatrixGraph use only */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

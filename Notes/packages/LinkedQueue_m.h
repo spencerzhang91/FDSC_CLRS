@@ -1,4 +1,5 @@
 /* Linked list based Queue ADT implementation */
+/* A more modern and reusable implementation, for MatrixGraph use only */
 /* header files */
 #ifndef _LINKEDQUEUE_H
 #define _LINKEDQUEUE_H

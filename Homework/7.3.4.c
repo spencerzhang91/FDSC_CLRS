@@ -62,7 +62,14 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
         Linked temp = newhead;
         while (temp)
         {
-            if (!(*func)(curr->key, temp->key))
+            if ((*func)(curr->key, newhead->key))
+            {
+                Linked movehead = create(curr->key);
+                movehead->next = temp;
+                newhead = movehead;
+                break;
+            }
+            else if ((*func)(curr->key, temp->key) || !temp->next)
             {
                 Linked movenode = create(curr->key);
                 movenode->next = temp->next;
@@ -73,6 +80,7 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
         }
         curr = curr->next;
     }
+    return newhead; 
 }
 
 Linked create(datatype value)

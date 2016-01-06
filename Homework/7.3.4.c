@@ -59,7 +59,19 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
     Linked newhead = create(list->key);
     while (curr)
     {
-        
+        Linked temp = newhead;
+        while (temp)
+        {
+            if (!(*func)(curr->key, temp->key))
+            {
+                Linked movenode = create(curr->key);
+                movenode->next = temp->next;
+                temp->next = movenode;
+                break;
+            }
+            else temp = temp->next;
+        }
+        curr = curr->next;
     }
 }
 

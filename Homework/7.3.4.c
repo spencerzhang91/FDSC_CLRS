@@ -18,7 +18,7 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y));
 Linked create(datatype value);
 Linked construct(datatype array[], int len);
 void destruct(Linked head, int len);
-void insert(Linked head, Linked node, bool (*func)(int x, int y));
+void insert(Linked *head, Linked node, bool (*func)(int x, int y));
 void delitem(Linked *head, datatype item);
 void display(Linked head);
 int len(Linked head);
@@ -65,15 +65,13 @@ Linked insertion_sort(Linked list, bool (*func)(int x, int y)) // to be done
     if (length <= 1)
         return list;
     Linked newhead = create(list->key);
-    delitem(list, list->key);
+    delitem(&list, list->key);
     while (list)
     {
         Linked curr = create(list->key);
-        insert(newhead, curr, func);
-        delitem(list, list->key);
+        insert(&newhead, curr, func);
+        delitem(&list, list->key);
     }
-    
-    
     return newhead;
 }
 
@@ -119,15 +117,32 @@ void destruct(Linked head, int len)
     }
 }
 
-void insert(Linked head, Linked node, bool (*func)(int x, int y))
+void insert(Linked *head, Linked node, bool (*func)(int x, int y))
 {
-    // Insert node into the Linked list
+    // Insert node into the Linked list whose head is lead by 'head'
     if (!head)
     {
         printf("Invalide insert position: %d.\n", pos);
         exit(EXIT_FAILURE);
     }
-     
+    Linked pre = *head;
+    pre->next = *head;
+    if ((*func)((*head)->key, node->key))
+    {
+        node->next = *head;
+        *head = node;
+        return;
+    }
+    while (pre)
+    {
+        if ((*fun)(pre->key, node->key))
+        {
+            node->next = pre->next;
+            pre->next = node;
+            return;
+        }
+        else pre = pre->next;
+    }
 }
 
 void delitem(Linked *head, datatype item)

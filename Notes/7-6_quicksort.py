@@ -1,7 +1,7 @@
 def quicksort(array: list):
     '''
-    This function sorts an array of numbers ascendingly by the quick sort
-    algorithm, implemented based on python list.
+    This function sorts an array of numbers ascendingly using
+    quick sort algorithm.
     '''
     n = len(array)
     if n < 2:
@@ -33,4 +33,3 @@ if __name__ == "__main__":
     print("before sorting: ", test)
     quicksort(test)
     print("after sorting: ", test)
-        

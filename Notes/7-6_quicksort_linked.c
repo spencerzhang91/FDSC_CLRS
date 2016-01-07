@@ -7,19 +7,23 @@ It's an implementation using linked list based queue, so that
 #include <stdlib.h>
 #include <stdbool.h>
 #include "LinkedQueue.h"
+#define SIZE 10
 
-void quicksort(int array[]);
-static int array_len(int array[]);
+void quicksort(Queue Q);
 
 int main(void)
 {
-
+    int array[SIZE] = {1, 10, 4, 8, 21, 15, 7, 32, 86, 41};
+    Queue numbers = ConstructQ(array, SIZE);
+    displayQ(numbers);
+    quicksort(numbers);
+    displayQ(numbers);
     return 0;
 }
 
 void quicksort(Queue Q)
 {
-    /* This implementation uses a queue ADT, very much alike 7-6_quicksort.py
+    /* This implementation uses queue ADT, just like 7-6_quicksort.py
     It's also a recursive approach. */
     if ((int length = Q->cursize) < 2)
         return;

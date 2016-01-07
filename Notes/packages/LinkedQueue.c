@@ -69,3 +69,8 @@ ElementType dequeue(Queue Q)
         return frontelem;
     }
 }
+
+int len(Queue Q)
+{
+    return Q->cursize;
+}

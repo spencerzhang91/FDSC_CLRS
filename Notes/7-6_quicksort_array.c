@@ -9,5 +9,6 @@ void quicksort(element list[], int left, int right)
     key field. list[left].key is arbitrarily chosen as the pivot key. It
     is assumed that list[left].key <= lsit[right+1].key
     */
+    int pivot, i, j;
     
 }

@@ -25,5 +25,6 @@ bool QIsFull(Queue Q);
 bool QIsEmpty(Queue Q);
 void enqueue(Queue Q, ElementType item);
 ElementType dequeue(Queue Q);
+int len(Queue Q);
 
 #endif

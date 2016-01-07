@@ -13,3 +13,8 @@ int main(void)
 
     return 0;
 }
+
+void quicksort(int *list, int left, int right)
+{
+    
+}

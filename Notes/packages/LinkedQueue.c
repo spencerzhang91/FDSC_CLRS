@@ -70,6 +70,25 @@ ElementType dequeue(Queue Q)
     }
 }
 
+ElementType first(Queue Q)
+{
+    /* Returns the first element in the queue(first to out), without
+     deleting it */
+    Node frontcell;
+    ElementType frontelem;
+    if (QIsEmpty(Q))
+    {
+        printf("The queue is empty.\n");
+        return NULL; 
+    }
+    else
+    {
+        frontcell = Q->front;
+        frontelem = frontcell->data;
+        return frontelem;
+    }
+}
+
 int len(Queue Q)
 {
     return Q->cursize;

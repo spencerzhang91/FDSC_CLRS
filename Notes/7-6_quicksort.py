@@ -1,3 +1,7 @@
+''' 
+7-6_quicksort.py
+This implementation ot the algorithm is from book DSAP.
+'''
 def quicksort(array: list):
     '''
     This function sorts an array of numbers ascendingly using

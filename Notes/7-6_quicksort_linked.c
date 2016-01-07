@@ -17,16 +17,33 @@ int main(void)
     return 0;
 }
 
-void quicksort(int array[])
+void quicksort(Queue Q)
 {
     /* This implementation uses a queue ADT, very much alike 7-6_quicksort.py
     It's also a recursive approach. */
-    if ((int length = array_len(array)) < 2)
+    if ((int length = Q->cursize) < 2)
         return;
     // devide
-    int pivot = array[0];
+    int pivot = first(Q);
     Queue L = CreateQueue(length / 2 + 1);
     Queue E = CreateQueue(length / 2 + 1);
     Queue G = CreateQueue(length / 2 + 1);
-    // yet done
+    /* // turns out that have to use queue as parameter too
+    for (int i = 0; i < length; i++)
+    {
+        if (array[i] < pivot)
+            enqueue(L, array[i]);
+        else if (array[i] > pivot)
+            enqueue(G, array[i]);
+        else
+            enqueue(E, array[i]);
+    }
+    */
+
+    // conquer
+    quicksort(L);
+    quicksort(G);
+    // concatenate results
+    while (!QisEmpty(L))
+
 }

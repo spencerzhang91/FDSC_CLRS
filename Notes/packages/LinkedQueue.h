@@ -3,7 +3,7 @@
 #ifndef _LINKEDQUEUE_H
 #define _LINKEDQUEUE_H
 #include "LinkedGraph.h"
-#define ElementType nodeptr // can be changed according to particular purpose
+#define ElementType int // can be changed according to particular purpose
 #define MAXSIZE 100
 
 typedef struct qnode *Node;
@@ -25,6 +25,7 @@ bool QIsFull(Queue Q);
 bool QIsEmpty(Queue Q);
 void enqueue(Queue Q, ElementType item);
 ElementType dequeue(Queue Q);
+ElementType first(Queue Q);
 int len(Queue Q);
 
 #endif

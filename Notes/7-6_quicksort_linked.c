@@ -39,11 +39,23 @@ void quicksort(Queue Q)
             enqueue(E, array[i]);
     }
     */
-
+    while (!QisEmpty(Q))
+    {
+        if (first(Q) < pivot)
+            enqueue(L, dequeue(Q));
+        else if (first(Q) > pivot)
+            enqueue(G, dequeue(Q));
+        else
+            enqueue(E, dequeue(Q));
+    }
     // conquer
     quicksort(L);
     quicksort(G);
     // concatenate results
     while (!QisEmpty(L))
-
+        enqueue(Q, dequeue(L));
+    while (!QisEmpty(E))
+        enqueue(Q, dequeue(E));
+    while (!QisEmpty(Q))
+        enqueue(Q, dequeue(G));
 }

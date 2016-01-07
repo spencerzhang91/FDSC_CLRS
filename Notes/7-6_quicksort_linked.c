@@ -28,17 +28,6 @@ void quicksort(Queue Q)
     Queue L = CreateQueue(length / 2 + 1);
     Queue E = CreateQueue(length / 2 + 1);
     Queue G = CreateQueue(length / 2 + 1);
-    /* // turns out that have to use queue as parameter too
-    for (int i = 0; i < length; i++)
-    {
-        if (array[i] < pivot)
-            enqueue(L, array[i]);
-        else if (array[i] > pivot)
-            enqueue(G, array[i]);
-        else
-            enqueue(E, array[i]);
-    }
-    */
     while (!QisEmpty(Q))
     {
         if (first(Q) < pivot)

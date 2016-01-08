@@ -34,47 +34,24 @@ void quicksort(Queue Q)
     Queue L = CreateQueue(length);
     Queue E = CreateQueue(length);
     Queue G = CreateQueue(length);
-    printf("A\n");
     while (!QIsEmpty(Q))
     {
         if (first(Q) < pivot)
-        {
             enqueue(L, dequeue(Q));
-            puts("B");
-        } 
         else if (first(Q) > pivot)
-        {
             enqueue(G, dequeue(Q));
-            puts("C");
-        }
         else
-        {
-            enqueue(E, dequeue(Q));
-            puts("D");
-        }    
+            enqueue(E, dequeue(Q)); 
     }
     // conquer
-    printf("E\n");
     quicksort(L);
-    printf("F\n");
     quicksort(G);
     // concatenate results
-    printf("G\n");
     while (!QIsEmpty(L))
-    {
         enqueue(Q, dequeue(L));
-        puts("H");
-    }
     while (!QIsEmpty(E))
-    {
         enqueue(Q, dequeue(E));
-        puts("I");
-    }
     while (!QIsEmpty(G))  // got you! the bug is: !QIsEmpty(Q)
-    {
-        puts("J1"); 
         enqueue(Q, dequeue(G));
-        puts("J");
-    }
     printf("k\n");
 }

@@ -18,6 +18,7 @@ int main(void)
     displayQ(numbers);
     quicksort(numbers);
     displayQ(numbers);
+
     return 0;
 }
 
@@ -25,14 +26,15 @@ void quicksort(Queue Q)
 {
     /* This implementation uses queue ADT, just like 7-6_quicksort.py
     It's also a recursive approach. */
-    if ((int length = Q->cursize) < 2)
+    int length = Q->cursize; 
+    if (length < 2)
         return;
     // devide
     int pivot = first(Q);
     Queue L = CreateQueue(length / 2 + 1);
     Queue E = CreateQueue(length / 2 + 1);
     Queue G = CreateQueue(length / 2 + 1);
-    while (!QisEmpty(Q))
+    while (!QIsEmpty(Q))
     {
         if (first(Q) < pivot)
             enqueue(L, dequeue(Q));
@@ -45,10 +47,10 @@ void quicksort(Queue Q)
     quicksort(L);
     quicksort(G);
     // concatenate results
-    while (!QisEmpty(L))
+    while (!QIsEmpty(L))
         enqueue(Q, dequeue(L));
-    while (!QisEmpty(E))
+    while (!QIsEmpty(E))
         enqueue(Q, dequeue(E));
-    while (!QisEmpty(Q))
+    while (!QIsEmpty(Q))
         enqueue(Q, dequeue(G));
 }

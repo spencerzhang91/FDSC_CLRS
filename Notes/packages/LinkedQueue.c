@@ -17,7 +17,7 @@ Queue CreateQueue(int maxsize)
 
 Queue ConstructQ(ElementType array[], int size)
 {
-    Queue temp = CreateQueue(size+1);
+    Queue temp = CreateQueue(size);
     for (int i = 0; i < size; i++)
         enqueue(temp, array[i]);
     return temp;
@@ -46,6 +46,7 @@ void enqueue(Queue Q, ElementType item)
     {
         rearcell = (Node)malloc(sizeof(struct qnode));
         rearcell->data = rearelem;
+        rearcell->next = NULL;
         if (Q->cursize == 0)
             Q->front = Q->rear = rearcell;
         else
@@ -63,7 +64,7 @@ ElementType dequeue(Queue Q)
     ElementType frontelem;
     if (QIsEmpty(Q))
     {
-        printf("The queue is empty.\n");
+        printf("During dequeue the queue is empty.\n");
         exit(EXIT_FAILURE);
     }
     else
@@ -88,7 +89,7 @@ ElementType first(Queue Q)
     ElementType frontelem;
     if (QIsEmpty(Q))
     {
-        printf("The queue is empty.\n");
+        printf("During peeking first element the queue is empty.\n");
         exit(EXIT_FAILURE); 
     }
     else
@@ -112,4 +113,5 @@ void displayQ(Queue Q)
         printf("%d ", temp->data);
         temp = temp->next;
     }
+    puts("");
 }

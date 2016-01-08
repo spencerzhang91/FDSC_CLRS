@@ -6,10 +6,20 @@
 
 Queue CreateQueue(int maxsize)
 {
+    /* This function initialize an empty queue by taking in the queue size
+    and the return a pointer pointing to a queue node. */
     Queue temp = (Queue)malloc(sizeof(struct Qnode));
     temp->front = temp->rear = NULL;
     temp->maxsize = maxsize;
     temp->cursize = 0;
+    return temp;
+}
+
+Queue ConstructQ(ElementType array[], int size)
+{
+    Queue temp = CreateQueue(size+1);
+    for (int i = 0; i < size; i++)
+        enqueue(temp, array[i]);
     return temp;
 }
 
@@ -54,7 +64,7 @@ ElementType dequeue(Queue Q)
     if (QIsEmpty(Q))
     {
         printf("The queue is empty.\n");
-        return NULL; 
+        exit(EXIT_FAILURE);
     }
     else
     {
@@ -79,7 +89,7 @@ ElementType first(Queue Q)
     if (QIsEmpty(Q))
     {
         printf("The queue is empty.\n");
-        return NULL; 
+        exit(EXIT_FAILURE); 
     }
     else
     {
@@ -92,4 +102,14 @@ ElementType first(Queue Q)
 int len(Queue Q)
 {
     return Q->cursize;
+}
+
+void displayQ(Queue Q)
+{
+    Node temp = Q->front;
+    while (temp)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
 }

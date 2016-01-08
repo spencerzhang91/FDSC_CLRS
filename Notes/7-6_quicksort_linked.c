@@ -13,7 +13,7 @@ void quicksort(Queue Q);
 
 int main(void)
 {
-    int array[SIZE] = {1, 10, 4, 8, 21, 15, 7, 32, 86, 41};
+    int array[SIZE] = {17, 10, 4, 8, 21, 15, 7, 32, 86, 41};
     Queue numbers = ConstructQ(array, SIZE);
     displayQ(numbers);
     quicksort(numbers);
@@ -31,26 +31,50 @@ void quicksort(Queue Q)
         return;
     // devide
     int pivot = first(Q);
-    Queue L = CreateQueue(length / 2 + 1);
-    Queue E = CreateQueue(length / 2 + 1);
-    Queue G = CreateQueue(length / 2 + 1);
+    Queue L = CreateQueue(length);
+    Queue E = CreateQueue(length);
+    Queue G = CreateQueue(length);
+    printf("A\n");
     while (!QIsEmpty(Q))
     {
         if (first(Q) < pivot)
+        {
             enqueue(L, dequeue(Q));
+            puts("B");
+        } 
         else if (first(Q) > pivot)
+        {
             enqueue(G, dequeue(Q));
+            puts("C");
+        }
         else
+        {
             enqueue(E, dequeue(Q));
+            puts("D");
+        }    
     }
     // conquer
+    printf("E\n");
     quicksort(L);
+    printf("F\n");
     quicksort(G);
     // concatenate results
+    printf("G\n");
     while (!QIsEmpty(L))
+    {
         enqueue(Q, dequeue(L));
+        puts("H");
+    }
     while (!QIsEmpty(E))
+    {
         enqueue(Q, dequeue(E));
-    while (!QIsEmpty(Q))
+        puts("I");
+    }
+    while (!QIsEmpty(G))  // got you! the bug is: !QIsEmpty(Q)
+    {
+        puts("J1"); 
         enqueue(Q, dequeue(G));
+        puts("J");
+    }
+    printf("k\n");
 }

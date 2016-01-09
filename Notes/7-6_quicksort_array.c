@@ -2,6 +2,20 @@
 Actually I have to look up meterial about this algorithm in book DSAP to 
 get more specific conduction. Array based implementation.
 */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#define SIZE 10
+void quicksort(element list[], int left, int right);
+
+int main(void)
+{
+    int array[SIZE] = {17, 10, 4, 8, 21, 15, 7, 32, 86, 41};
+    displayQ(numbers);
+    quicksort(numbers);
+    displayQ(numbers);
+    return 0;
+}
 
 void quicksort(element list[], int left, int right)
 {

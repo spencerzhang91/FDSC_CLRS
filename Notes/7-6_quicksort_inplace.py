@@ -23,4 +23,10 @@ def inplace_quick_sort(S: list, a: int, b: int) -> None:
     S[left], S[b] = S[b], S[left]
     # make recursive calls
     inplace_quick_sort(S, a, left - 1)
-    inplace_quick_sort(S, left + 1, b)        
+    inplace_quick_sort(S, left + 1, b)
+
+if __name__ == "__main__":
+    test_array = [85,24,63,45,17,31,96,50,45]
+    print(test_array)
+    inplace_quick_sort(test_array, 0, 8)
+    print(test_array)

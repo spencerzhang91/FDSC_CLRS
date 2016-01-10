@@ -11,9 +11,9 @@ void quicksort(element list[], int left, int right);
 int main(void)
 {
     int array[SIZE] = {17, 10, 4, 8, 21, 15, 7, 32, 86, 41};
-    displayQ(numbers);
-    quicksort(numbers);
-    displayQ(numbers);
+    display(array);
+    quicksort(array, 0, 9);
+    display(array);
     return 0;
 }
 

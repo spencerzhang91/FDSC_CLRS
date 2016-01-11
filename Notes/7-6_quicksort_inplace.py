@@ -11,10 +11,10 @@ def inplace_quick_sort(S: list, a: int, b: int) -> None:
     right = b - 1         # will scan leftward
     while left <= right:
         # scan until reaching value equal or larger than pivot (or right marker)
-        while left <= right and S[left] < pivot:
+        while S[left] < pivot:
             left += 1
         # scan until reaching value equal or smaller than pivot (or left marker)
-        while left <= right and S[right] > pivot:
+        while S[right] > pivot:
             right -= 1
         if left <= right: # scan did not strictly cross
             S[left], S[right] = S[right], S[left] # swap

@@ -6,14 +6,21 @@ get more specific conduction. Array based implementation.
 #include <stdlib.h>
 #include <stdbool.h>
 #define SIZE 10
+typedef struct {
+    int key;
+    // other fields
+} element;
+
 void quicksort(element list[], int left, int right);
+void display(element list[], int size);
 
 int main(void)
 {
-    int array[SIZE] = {17, 10, 4, 8, 21, 15, 7, 32, 86, 41};
-    display(array);
+    element array[SIZE] = {{17}, {10}, {4}, {8}, {21},
+                           {15}, {7}, {32}, {86}, {41}};
+    display(array, SIZE);
     quicksort(array, 0, 9);
-    display(array);
+    display(array, SIZE);
     return 0;
 }
 
@@ -42,4 +49,11 @@ void quicksort(element list[], int left, int right)
         quicksort(list, left, j-1);
         quicksort(list, j+1, right);
     }
+}
+
+void display(element list[], int size)
+{
+    for (int i = 0; i < size; i++)
+        printf("%d ", list[i]);
+    puts("");
 }

@@ -12,7 +12,7 @@ typedef struct {
     // other fields
 } element;
 
-void quicksort(element list[], int left, int right);
+void quicksort(element list[], int a, int b);
 void display(element list[], int size);
 
 int main(void)
@@ -25,30 +25,36 @@ int main(void)
     return 0;
 }
 
-void quicksort(element list[], int left, int right)
+void quicksort(element list[], int a, int b)
 {
-    /* sort list[left], ..., list[right] into nondecreasing order on the
-    key field. list[left].key is arbitrarily chosen as the pivot key. It
-    is assumed that list[left].key <= lsit[right+1].key
+    /* sort list[a], ..., list[b] into nondecreasing order on the
+    key field. list[a].key is arbitrarily chosen as the pivot key. It
+    is assumed that list[a].key <= lsit[b+1].key
     */
-    int pivot, i, j;
+    int pivot, left, right;
     element temp;
-    if (left < right)
+    if (a < b)
     {
-        i = left; j = right + 1;
-        pivot = list[left].key;
-        do {
-            /* search ofr keys from the left and right sublists, swapping
-            out-of-order elements until the left and right boundaries cross
+        left = a; right = b - 1;
+        pivot = list[b].key;
+        while (left <= right)
+        {
+            /* search ofr keys from the a and b sublists, swapping
+            out-of-order elements until the a and b boundaries cross
             or meet. */
-            do i++; while (list[i].key < pivot);
-            do j--; while (list[j].key > pivot);
-            if (i < j)
-                SWAP(list[i], list[j], temp);
-        } while (i < j);
-        SWAP(list[left], list[j], temp);
-        quicksort(list, left, j-1);
-        quicksort(list, j+1, right);
+            while (list[left].key < pivot)
+                left++; 
+            while (list[right].key > pivot)
+                right--;
+            if (left <= right)
+            {
+                SWAP(list[left], list[right], temp);
+                left++; right--;
+            }
+        }
+        SWAP(list[b], list[left], temp);
+        quicksort(list, a, left-1);
+        quicksort(list, left+1, b);
     }
 }
 

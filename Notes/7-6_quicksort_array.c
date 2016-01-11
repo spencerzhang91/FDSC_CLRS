@@ -5,6 +5,7 @@ get more specific conduction. Array based implementation.
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define SWAP(a, b, t) ((t)=(a));((a)=(b));((b)=(t))
 #define SIZE 10
 typedef struct {
     int key;
@@ -54,6 +55,6 @@ void quicksort(element list[], int left, int right)
 void display(element list[], int size)
 {
     for (int i = 0; i < size; i++)
-        printf("%d ", list[i]);
+        printf("%d ", list[i].key);
     puts("");
 }

@@ -28,7 +28,7 @@ int main(void)
 void quicksort(element list[], int a, int b)
 {
     /* sort list[a], ..., list[b] into nondecreasing order on the
-    key field. list[a].key is arbitrarily chosen as the pivot key. It
+    key field. list[b].key is arbitrarily chosen as the pivot key. It
     is assumed that list[a].key <= lsit[b+1].key
     */
     int pivot, left, right;

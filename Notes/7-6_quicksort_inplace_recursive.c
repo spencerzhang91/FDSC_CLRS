@@ -1,4 +1,4 @@
-/* 7-6_quicksort_array.c
+/* 7-6_quicksort_inplace_recursive.c
 Actually I have to look up meterial about this algorithm in book DSAP to 
 get more specific conduction. Array based implementation.
 */

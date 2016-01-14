@@ -17,8 +17,10 @@ def merge(list1, list2):
             j += 1
     while i < len1:
         sorted_list.append(list1[i])
+        i += 1
     while j < len2:
         sorted_list.append(list2[j])
+        j += 1
     return sorted_list
 
 if __name__ == "__main__":

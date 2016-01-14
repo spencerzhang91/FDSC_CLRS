@@ -1,7 +1,4 @@
-/* 7-9_merge_pass & 7-10_merge_sort
-Perform one pass of the merge sort. It merges adjacent pairs of subfiles from
-list into sorted.
-*/
+// 7-9_merge_pass & 7-10_merge_sort
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE 10
@@ -43,33 +40,42 @@ void merge(int list[], int sorted[], int i, int m, int n)
     // sorted[k],...,sorted[n] = list[i],...,list[m]
         for (t = i; t <= m; t++)
             sorted[k+j-1] = list[t];
+    puts("F");
 }
 
 void merge_pass(int list[], int sorted[], int n, int length)
 {
     // n is the length of the list and length the length of subfile.
     int i, j;
-    for (i = 0; i <= n - 2 * length; i += 2 * length)
+    for (i = 0; i <= (n - 2 * length); i += (2 * length))
         merge(list, sorted, i, i+length-1, i+2*length-1);
     if (i + length < n)
         merge(list, sorted, i, i+length-1, n-1);
     else
         for (j = i; j < n; j++)
             sorted[j] = list[j];
+    puts("G");
 }
 
 void merge_sort(int list[], int n)
 {
-    // perform a merge sort on the file
+    /* Perform one pass of the merge sort. It merges adjacent pairs
+	 of subfiles from list into sorted. n is the list length. 
+	*/ 
     int length = 1; // current length being merged
-    int extra[SIZE];
+    int extra[100];
+    puts("A");
     while (length < n)
     {
-        merge_pass(list, extra, n, length);
+        puts("B");
+		merge_pass(list, extra, n, length);
         length *= 2;
+        puts("c");
         merge_pass(extra, list, n, length);
         length *= 2;
+        puts("D");
     }
+    puts("E");
 }
 
 void print(int *list, int len)

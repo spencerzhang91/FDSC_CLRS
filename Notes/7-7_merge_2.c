@@ -1,4 +1,5 @@
-// 7-7_merge_2.c 
+// 7-7_merge_2.c
+// create new memory space to hold the merged result
 #include <stdio.h>
 #include <stdlib.h>
 #define S1 5

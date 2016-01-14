@@ -20,5 +20,12 @@ int main(void)
 void merge_pass(int list[], int sorted[], int n, int length)
 {
     // n is the length of the list and length the length of subfile.
-    
+    int i, j;
+    for (i = 0; i <= n - 2 * length; i += 2 * length)
+        merge(list, sorted, i, i + length - 1, i + 2 * length - 1);
+    if (i + length < n)
+        merge(list, sorted, i, i + length - 1, n - 1);
+    else
+        for (j = i; j < n; j++)
+            sorted[j] = list[j];
 }

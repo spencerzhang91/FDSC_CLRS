@@ -11,6 +11,7 @@ def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
     i = 0
     while i < n:
         merge(array, sortedl, i, i+length-1, i+length*2-1)
+        i += 2 * length
     if i + length < n:
         merge(array, sortedl, i, n-1)
     else:

@@ -1,4 +1,5 @@
 # merge sort algorithm python implementation
+# recursive
 def mergesort(array: list)->list:
     if len(array) <= 1:
         return array

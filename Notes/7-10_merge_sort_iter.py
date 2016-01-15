@@ -17,7 +17,6 @@ def merge_sort(array:list)->None:
         merge_pass(extra, array, L, length)
         length *= 2
         
-
 def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
     """
     array is the unsorted list, sortedl is the sorted result, n is
@@ -34,7 +33,6 @@ def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
         while j < n:
             sortedl[j] = array[j]
             j += 1
-
 
 def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
     """
@@ -63,7 +61,6 @@ def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
             sortedl[k+t-i] = array[t]
             t += 1
 
-    
 if __name__ == "__main__":
     array = [1,5,77,100,161,11,59,75,148,219]
     print(array)

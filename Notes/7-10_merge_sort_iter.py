@@ -12,7 +12,9 @@ def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
     while i < n:
         merge(array, sortedl, i, i+length-1, i+length*2-1)
     if i + length < n:
-        merge(array, sortedl, )
+        merge(array, sortedl, i, n-1)
+    else:
+        sortedl += array[i:]
 
 def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
     """
@@ -36,5 +38,5 @@ if __name__ == "__main__":
     array = [1,5,77,100,161,11,59,75,148,219]
     result = []
     print(array)
-    merge(array, result, 0, 4, 9)
+    merge_pass(array, result, 10, 5)
     print(result)

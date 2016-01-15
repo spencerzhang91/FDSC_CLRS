@@ -1,7 +1,21 @@
-# merge sort algorithm python implementation
-# iterative
+"""
+Merge sort algorithm python iterative implementation
+The core idea is that the elments are transfered between two lists (array &
+extra) over and over again until all are sorted.
+"""
 def merge_sort(array:list)->None:
-    pass
+    """
+    Input a unsorted list and will apply merge sort algorithm to
+    sort the list in place (O(1) space)
+    """
+    length = 1
+    extra = []
+    while length < len(array):
+        merge_pass(array, extra, len(array), length)
+        length *= 2
+        merge_pass(extra, array, len(array), length)
+        length *= 2
+        
 
 def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
     """

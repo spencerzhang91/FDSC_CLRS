@@ -9,11 +9,12 @@ def merge_sort(array:list)->None:
     sort the list in place (O(1) space)
     """
     length = 1
-    extra = []
-    while length < len(array):
-        merge_pass(array, extra, len(array), length)
+    L = len(array)
+    extra = [None] * L
+    while length < L:
+        merge_pass(array, extra, L, length)
         length *= 2
-        merge_pass(extra, array, len(array), length)
+        merge_pass(extra, array, L, length)
         length *= 2
         
 
@@ -23,13 +24,16 @@ def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
     the number of elements that in array, length is sub list size.
     """
     i = 0
-    while i < n:
+    while i <= n - 2*length:
         merge(array, sortedl, i, i+length-1, i+length*2-1)
         i += 2 * length
     if i + length < n:
-        merge(array, sortedl, i, n-1)
+        merge(array, sortedl, i, i+length-1, n-1)
     else:
-        sortedl += array[i:]
+        j = i
+        while j < n:
+            sortedl[j] = array[j]
+            j += 1
 
 def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
     """
@@ -38,20 +42,29 @@ def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
     is the end index of first sublist and n is the last 
     index of the array .
     """
+    k = i
     j = m + 1
     while i <= m and j <= n:
         if array[i] <= array[j]:
-            sortedl.append(array[i])
-            i += 1
+            sortedl[k] = array[i]
+            i += 1; k += 1
         else:
-            sortedl.append(array[j])
-            j += 1
-    sortedl += array[i:m+1]
-    sortedl += array[j:n+1]
+            sortedl[k] = array[j]
+            j += 1; k += 1
+    if i > m:
+        t = j
+        while t <= n:
+            sortedl[k+t-j] = array[t]
+            t += 1
+    else:
+        t = i
+        while t <= m:
+            sortedl[k+t-i] = array[t]
+            t += 1
+    
 
 if __name__ == "__main__":
     array = [1,5,77,100,161,11,59,75,148,219]
-    result = []
     print(array)
-    merge_pass(array, result, 10, 5)
-    print(result)
+    merge_sort(array)
+    print(array)

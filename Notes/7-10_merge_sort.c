@@ -11,6 +11,7 @@ void print(int *list, int len);
 int main(void)
 {
     int unsorted[SIZE] = {2, 31, 7, 10, 81, 45, 23, 73, 19, 4};
+    print(unsorted, SIZE);
     merge_sort(unsorted, SIZE);
     print(unsorted, SIZE);
 
@@ -22,25 +23,20 @@ void merge(int list[], int sorted[], int i, int m, int n)
     /* merge two sorted files: list[i],...,list[m], and list[m+1],...,list[n].
     These files are sorted to obtain a sorted list: sorted[i],...,sorted[n].
     */
-    int j, k, t;
-    j = m + 1; // index for the second sublist
-    k = i;     // index for the sorted list
-    while (i <=m && j <= n)
+    int t;
+    int j = m + 1;
+    int k = i;
+    while (i <= m && j <= n)
     {
         if (list[i] <= list[j])
             sorted[k++] = list[i++];
         else
             sorted[k++] = list[j++];
     }
-    if (i > m)
-    // sorted[k],...,sorted[n] = list[j],...,list[n]
-        for (t = j; t <= n; t++)
-            sorted[k+t-j] = list[t];
-    else
-    // sorted[k],...,sorted[n] = list[i],...,list[m]
-        for (t = i; t <= m; t++)
-            sorted[k+j-1] = list[t];
-    puts("F");
+    while (i <= m)
+    	sorted[k++] = list[i++];
+    while (j <= n)
+    	sorted[k++] = list[j++];
 }
 
 void merge_pass(int list[], int sorted[], int n, int length)
@@ -54,7 +50,6 @@ void merge_pass(int list[], int sorted[], int n, int length)
     else
         for (j = i; j < n; j++)
             sorted[j] = list[j];
-    puts("G");
 }
 
 void merge_sort(int list[], int n)
@@ -63,19 +58,14 @@ void merge_sort(int list[], int n)
 	 of subfiles from list into sorted. n is the list length. 
 	*/ 
     int length = 1; // current length being merged
-    int extra[100];
-    puts("A");
+    int extra[10000];
     while (length < n)
     {
-        puts("B");
 		merge_pass(list, extra, n, length);
         length *= 2;
-        puts("c");
         merge_pass(extra, list, n, length);
         length *= 2;
-        puts("D");
     }
-    puts("E");
 }
 
 void print(int *list, int len)

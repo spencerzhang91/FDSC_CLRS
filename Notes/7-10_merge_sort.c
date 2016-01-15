@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE 10
+#define MAXSIZE 1000
 
 void merge(int list[], int sorted[], int i, int m, int n);
 void merge_pass(int list[], int sorted[], int n, int length);
@@ -58,7 +59,7 @@ void merge_sort(int list[], int n)
 	 of subfiles from list into sorted. n is the list length. 
 	*/ 
     int length = 1; // current length being merged
-    int extra[10000];
+    int extra[MAXSIZE];
     while (length < n)
     {
 		merge_pass(list, extra, n, length);

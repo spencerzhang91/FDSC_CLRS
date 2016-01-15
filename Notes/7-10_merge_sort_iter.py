@@ -1,5 +1,11 @@
 # merge sort algorithm python implementation
 # iterative
+def merge_sort(array:list)->None:
+    pass
+
+def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
+    pass
+
 def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
     """
     This function merges two sorted subpart of a list into 

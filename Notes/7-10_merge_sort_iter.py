@@ -4,7 +4,15 @@ def merge_sort(array:list)->None:
     pass
 
 def merge_pass(array:list, sortedl:list, n:int, length:int)->None:
-    pass
+    """
+    array is the unsorted list, sortedl is the sorted result, n is
+    the number of elements that in array, length is sub list size.
+    """
+    i = 0
+    while i < n:
+        merge(array, sortedl, i, i+length-1, i+length*2-1)
+    if i + length < n:
+        merge(array, sortedl, )
 
 def merge(array:list, sortedl:list, i:int, m:int, n:int)->None:
     """

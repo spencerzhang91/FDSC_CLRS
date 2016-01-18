@@ -31,7 +31,7 @@ void Insert(MinHeap heap, ElementType item)
         return;
     }
     i = ++(heap->size);
-    while (heap->elements[i] < heap->elements[i/2]) // because sentinel exists
+    while (item < heap->elements[i/2]) // because sentinel exists
     {
         heap->elements[i] = heap->elements[i/2];
         i /= 2;

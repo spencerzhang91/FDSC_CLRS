@@ -63,7 +63,7 @@ ElementType Delete(MinHeap heap)
     if (IsEmpty(heap))
     {
         printf("The min heap is empty.\n");
-        return;
+        exit(EXIT_FAILURE);
     }
     MinItem = heap->elements[1];
     temp = heap->elements[(heap->size)--];

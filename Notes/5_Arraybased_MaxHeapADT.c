@@ -63,9 +63,9 @@ ElementType Delete(MaxHeap heap)
     if (IsEmpty(heap))
     {
         printf("The heap is empty.\n");
-        return;
+        exit(EXIT_FAILURE);
     }
-    MaxItem = heap[1];
+    MaxItem = heap->elements[1];
     temp = heap->elements[(heap->size)--];
     parent = 1; child = 2;
     while (child <= heap->size)

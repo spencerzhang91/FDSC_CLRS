@@ -16,3 +16,5 @@ void Insert(MaxHeap heap, ElementType item);
 ElementType Delete(MaxHeap heap);
 bool IsFull(MaxHeap heap);
 bool IsEmpty(MaxHeap heap);
+
+#endif

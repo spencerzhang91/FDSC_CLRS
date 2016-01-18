@@ -1,4 +1,4 @@
-/* Implementation of array based max heap ADT */
+/* Implementation of array based min heap ADT */
 #include <stdlib.h>
 #define MAXSIZE 100
 #define MINDATA -10000
@@ -12,7 +12,7 @@ struct HeapStruct {
 
 MinHeap Create(int MAXSIZE)
 {
-    /* create a emtpy max heap with capacity of MAXSIZE */
+    /* create a emtpy min heap with capacity of MAXSIZE */
     MaxHeap heap = (MaxHeap)malloc( sizeof(struct HeapStruct));
     heap->elements = (ElementType)malloc((MAXSIZE+1) * sizeof(ElementType));
     heap->size = 0;
@@ -66,12 +66,12 @@ ElementType Delete(MinHeap heap)
     return MinItem;
 }
 
-bool IsFull(MaxHeap heap)
+bool IsFull(MinHeap heap)
 {
     return (heap->size >= heap->capacity);
 }
 
-bool IsEmpty(MaxHeap heap)
+bool IsEmpty(MinHeap heap)
 {
     return (heap->size == 0);
 }

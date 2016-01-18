@@ -1,23 +1,39 @@
 /* Implementation of array based min heap ADT */
+#include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <stdbool.h>
 #define MAXSIZE 100
-#define MINDATA -10000
+#define ElementType int
 
 typedef struct HeapStruct *MinHeap;
 struct HeapStruct {
     ElementType *elements;      // array
     int size;                   // current size
     int capacity;               // max element number
+};
+
+MinHeap Create(int size);
+void Insert(MinHeap heap, ElementType item);
+ElementType Delete(MinHeap heap);
+bool IsFull(MinHeap heap);
+bool IsEmpty(MinHeap heap);
+
+int main(void)
+{
+    printf("%d", INT_MIN);
+
+    return 0;
 }
 
-MinHeap Create(int MAXSIZE)
+MinHeap Create(int size)
 {
-    /* create a emtpy min heap with capacity of MAXSIZE */
-    MaxHeap heap = (MaxHeap)malloc(sizeof(struct HeapStruct));
-    heap->elements = (ElementType)malloc((MAXSIZE+1) * sizeof(ElementType));
+    /* create a emtpy min heap with capacity of size */
+    MinHeap heap = (MinHeap)malloc(sizeof(struct HeapStruct));
+    heap->elements = (ElementType *)malloc((size+1) * sizeof(ElementType));
     heap->size = 0;
-    heap->capacity = MAXSIZE;
-    heap->elements[0] = MINDATA;   // sentinel
+    heap->capacity = size;
+    heap->elements[0] = INT_MIN;   // sentinel
 
     return heap;
 }

@@ -1,7 +1,9 @@
 /* Another implementation of array based max heap ADT */
+#include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <stdbool.h>
 #define MAXSIZE 100
-#define MAXDATA 10000
 #define ElementType int
 
 typedef struct HeapStruct *MaxHeap;
@@ -9,16 +11,29 @@ struct HeapStruct {
     ElementType *elements;      // array
     int size;                   // current size
     int capacity;               // max element number
+};
+
+MaxHeap Create(int size);
+void Insert(MaxHeap heap, ElementType item);
+ElementType Delete(MaxHeap heap);
+bool IsFull(MaxHeap heap);
+bool IsEmpty(MaxHeap heap);
+
+int main(void)
+{
+    printf("%d", INT_MIN);
+
+    return 0;
 }
 
-MaxHeap Create(int MAXSIZE)
+MaxHeap Create(int size)
 {
-    /* create a emtpy max heap with capacity of MAXSIZE */
+    /* create a emtpy max heap with capacity of size */
     MaxHeap heap = (MaxHeap)malloc(sizeof(struct HeapStruct));
-    heap->elements = (ElementType)malloc((MAXSIZE+1) * sizeof(ElementType));
+    heap->elements = (ElementType *)malloc((size+1) * sizeof(ElementType));
     heap->size = 0;
-    heap->capacity = MAXSIZE;
-    heap->elements[0] = MAXDATA;   // sentinel
+    heap->capacity = size;
+    heap->elements[0] = INT_MAX;   // sentinel
 
     return heap;
 }

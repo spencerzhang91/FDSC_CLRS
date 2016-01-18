@@ -13,7 +13,7 @@ struct HeapStruct {
 MinHeap Create(int MAXSIZE)
 {
     /* create a emtpy min heap with capacity of MAXSIZE */
-    MaxHeap heap = (MaxHeap)malloc( sizeof(struct HeapStruct));
+    MaxHeap heap = (MaxHeap)malloc(sizeof(struct HeapStruct));
     heap->elements = (ElementType)malloc((MAXSIZE+1) * sizeof(ElementType));
     heap->size = 0;
     heap->capacity = MAXSIZE;

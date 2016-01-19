@@ -14,7 +14,7 @@ int main(void)
     display(numbers, 10);
     heapsort(numbers, 10);
     display(numbers, 10);
-    getchar();
+
     return 0;
 }
 

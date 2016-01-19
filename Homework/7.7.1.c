@@ -5,27 +5,27 @@
 #include <stdbool.h>
 #include "MinHeap.h"
 
-void heapsort(int **array, int len);
+void heapsort(int *array, int len);
 void display(int *array, int len);
 
 int main(void)
 {
     int numbers[10] = {1,22,3,7,100,53,17,65,8,9};
     display(numbers, 10);
-    heapsort(&numbers, 10);
+    heapsort(numbers, 10);
     display(numbers, 10);
-
+    getchar();
     return 0;
 }
 
-void heapsort(int **array, int len)
+void heapsort(int *array, int len)
 {
     MinHeap heap = Create(len);
     for (int i = 0; i < len; i++)
-        Insert(heap, (*array)[i]);
+        Insert(heap, array[i]);
     int j = 0;
     while (!IsEmpty(heap) && j <= len)
-        (*array)[j++] = Delete(heap);
+        array[j++] = Delete(heap);
 }
 
 void display(int *array, int len)

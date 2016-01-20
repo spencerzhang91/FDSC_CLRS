@@ -2,6 +2,7 @@
 adjust an unsorted array to a max heap in place
 */
 #include <stdio.h>
+#include <limits.h>
 #define SWAP(X, Y, T) ((T)=(X));((X)=(Y));((Y)=(T))
 void adjust(int list[], int root, int n);
 void heapsort(int list[], int n);
@@ -9,10 +10,11 @@ void display(int *array, int len);
 
 int main(void)
 {
-    int list[10] = {1,10,2,39,4,82,111,38,8,2};
+    int list[10] = {1,10,2,39,4,82,111,38,8,24};
+    display(list, 10);
     heapsort(list, 10);
     display(list, 10);
-    
+
     return 0;
 }
 
@@ -31,7 +33,7 @@ void adjust(int list[], int root, int n)
         else
         {
             list[child/2] = list[child]; // move to parent
-            child *= 2
+            child *= 2;
         }
     }
     list[child/2] = temp;

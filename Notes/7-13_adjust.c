@@ -13,7 +13,7 @@ int main(void)
     int list[10] = {1,10,2,39,4,82,111,38,8,24};
     display(list, 10);
     heapsort(list, 10);
-    display(list, 10);
+    display(list, 11);
 
     return 0;
 }

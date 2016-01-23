@@ -11,7 +11,7 @@
 
 typedef struct list_node *list_pointer;
 struct list_node {
-    int key[MAX_DIGIT];
+    int key[MAX_DIGIT]; // to contain digits of a three-digit-number
     list_pointer link;
 };
 

@@ -1,6 +1,7 @@
 /* 7-15_LSDsort.c */
 /* The original implementation from FDSC book */
 // In order to simplify only works for number smaller than 1000 (exclusive)
+// Need to be generalized
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -25,18 +26,17 @@ int main(void)
     int array[LENGTH] = {179,208,306,93,859,984,55,9,271,33};
     display(array, LENGTH);
     list_pointer list = convert2list(array, LENGTH);
-    // list = radix_sort(list);
-    display_list(list);
-    //int *new_array = convert2array(list);
+    list = radix_sort(list);
+    //display_list(list);
+    int *new_array = convert2array(list);
     
-    //display(new_array, LENGTH);
+    display(new_array, LENGTH);
     return 0;
 }
 
 list_pointer radix_sort(list_pointer ptr)
 {
     // radix sort using a linked list
-    puts("B");
     list_pointer front[RADIX_SIZE], rear[RADIX_SIZE];
     int i, j, digit;
     for (i = MAX_DIGIT-1; i >= 0; i--)
@@ -55,7 +55,6 @@ list_pointer radix_sort(list_pointer ptr)
         }
         /* reestablish the linked list for the next pass */
         ptr = NULL;
-        puts("A");
         for (j = RADIX_SIZE-1; j >= 0; j--)
             if (front[j])
             {
@@ -94,20 +93,15 @@ list_pointer convert2list(int *array, int len)
 
 int *convert2array(list_pointer list)
 {
-    // yet done
-    int *temp = (int *)malloc(sizeof(int) * LENGTH);
+    // only works when MAX_DIGIT == 3
+    static int temp[LENGTH];
     int i = 0;
     while (list && i < LENGTH)
     {
-        int num = 0;
-        for (int j = 0; j < MAX_DIGIT; j++)
-        { 
-            printf("list->key[%d] -> %d\n", j, list->key[j]);
-            //num += (list->key[j] * (int)pow(10, MAX_DIGIT-j-1));
-            printf("num -> %d\n", num);
-        } 
+        int num = list->key[0] * 100 + list->key[1] * 10 + list->key[2];
         temp[i] = num;
         list = list->link;
+        i++;
     }
     return temp;
 }

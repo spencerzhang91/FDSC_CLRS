@@ -1,6 +1,6 @@
 /* 7-15_LSDsort.c */
 /* The original implementation from FDSC book */
-// In order to simplify only works for number smaller than 1000 (exclusive)
+// In order to simplify only works for number smaller than 1000
 // Need to be generalized
 #include <stdio.h>
 #include <stdlib.h>
@@ -70,7 +70,8 @@ list_pointer convert2list(int *array, int len)
         return NULL;
     list_pointer curr;
     list_pointer head = (list_pointer)malloc(sizeof(struct list_node));
-    // The following three line is not reusable, only vaible when MAX_DIGIT == 3
+    // The following three line is not reusable, 
+    // only vaible when MAX_DIGIT == 3
     head->key[0] = array[0] / 100;
     head->key[1] = (array[0] - head->key[0]*100) / 10;
     head->key[2] = (array[0] - head->key[0]*100 - head->key[1]*10);        

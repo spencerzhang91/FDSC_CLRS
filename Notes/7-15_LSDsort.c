@@ -24,14 +24,15 @@ int main(void)
     list_pointer list = convert2list(array, LENGTH);
     list = radix_sort(list);
     int *new_array = convert2array(list);
+    display(array, LENGTH);
     display(new_array, LENGTH);
-
     return 0;
 }
 
 list_pointer radix_sort(list_pointer ptr)
 {
     // radix sort using a linked list
+    puts("B");
     list_pointer front[RADIX_SIZE], rear[RADIX_SIZE];
     int i, j, digit;
     for (i = MAX_DIGIT-1; i >= 0; i--)
@@ -50,6 +51,7 @@ list_pointer radix_sort(list_pointer ptr)
         }
         /* reestablish the linked list for the next pass */
         ptr = NULL;
+        puts("A");
         for (j = RADIX_SIZE-1; j >= 0; j--)
             if (front[j])
             {
@@ -74,7 +76,7 @@ list_pointer convert2list(int *array, int len)
     {
         list_pointer temp = (list_pointer)malloc(sizeof(struct list_node));
         for (int j = 0; j < MAX_DIGIT; j++)
-            head->key[j] = array[0] / pow(RADIX_SIZE, MAX_DIGIT-j-1);
+            head->key[j] = array[i] / pow(RADIX_SIZE, MAX_DIGIT-j-1);
         temp->link = NULL;
         curr->link = temp;
         curr = temp;
@@ -85,11 +87,14 @@ list_pointer convert2list(int *array, int len)
 int *convert2array(list_pointer list)
 {
     // yet done
-    int temp[LENGTH];
+    int *temp = (int *)malloc(sizeof(int) * LENGTH);
     int i = 0;
     while (list && i < LENGTH)
     {
-        temp[i] = list->key;
+        int num = 0;
+        for (int j = 0; j < MAX_DIGIT; j++)
+            num += list->key[j] * (int)pow(10, MAX_DIGIT-j-1);
+        temp[i] = num;
         list = list->link;
     }
     return temp;

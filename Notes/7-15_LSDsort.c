@@ -27,10 +27,9 @@ int main(void)
     display(array, LENGTH);
     list_pointer list = convert2list(array, LENGTH);
     list = radix_sort(list);
-    //display_list(list);
-    int *new_array = convert2array(list);
-    
+    int *new_array = convert2array(list)；
     display(new_array, LENGTH);
+    
     return 0;
 }
 

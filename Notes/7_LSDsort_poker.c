@@ -17,6 +17,8 @@ struct card_node {
 };
 
 Card radix_sort(Card ptr);
+Card convert(char (*poker)[2], int len);
+char (*reconvert(Card ptr))[2];
 void display_list(Card ptr);
 void display_card(char (*poker)[2], int len);
 

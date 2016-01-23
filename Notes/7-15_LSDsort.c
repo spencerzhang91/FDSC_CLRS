@@ -1,5 +1,6 @@
 /* 7-15_LSDsort.c */
 /* The original implementation from FDSC book */
+// In order to simplify only works for number smaller than 1000 (exclusive)
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -17,15 +18,18 @@ list_pointer radix_sort(list_pointer ptr);
 list_pointer convert2list(int *array, int len);
 int *convert2array(list_pointer list);
 void display(int *array, int len);
+void display_list(list_pointer list);
 
 int main(void)
 {
     int array[LENGTH] = {179,208,306,93,859,984,55,9,271,33};
-    list_pointer list = convert2list(array, LENGTH);
-    list = radix_sort(list);
-    int *new_array = convert2array(list);
     display(array, LENGTH);
-    display(new_array, LENGTH);
+    list_pointer list = convert2list(array, LENGTH);
+    // list = radix_sort(list);
+    display_list(list);
+    //int *new_array = convert2array(list);
+    
+    //display(new_array, LENGTH);
     return 0;
 }
 
@@ -68,15 +72,19 @@ list_pointer convert2list(int *array, int len)
         return NULL;
     list_pointer curr;
     list_pointer head = (list_pointer)malloc(sizeof(struct list_node));
-    for (int i = 0; i < MAX_DIGIT; i++)
-        head->key[i] = array[0] / pow(RADIX_SIZE, MAX_DIGIT-i-1);
+    // The following three line is not reusable, only vaible when MAX_DIGIT == 3
+    head->key[0] = array[0] / 100;
+    head->key[1] = (array[0] - head->key[0]*100) / 10;
+    head->key[2] = (array[0] - head->key[0]*100 - head->key[1]*10);        
     head->link = NULL;
     curr = head;
     for (int i = 1; i < len; i++)
     {
         list_pointer temp = (list_pointer)malloc(sizeof(struct list_node));
-        for (int j = 0; j < MAX_DIGIT; j++)
-            head->key[j] = array[i] / pow(RADIX_SIZE, MAX_DIGIT-j-1);
+        temp->key[0] = array[i] / 100;
+        temp->key[1] = (array[i] - temp->key[0]*100) / 10;
+        temp->key[2] = (array[i] - temp->key[0]*100 - temp->key[1]*10);  
+        // only works for number smaller than 1000
         temp->link = NULL;
         curr->link = temp;
         curr = temp;
@@ -93,7 +101,11 @@ int *convert2array(list_pointer list)
     {
         int num = 0;
         for (int j = 0; j < MAX_DIGIT; j++)
-            num += list->key[j] * (int)pow(10, MAX_DIGIT-j-1);
+        { 
+            printf("list->key[%d] -> %d\n", j, list->key[j]);
+            //num += (list->key[j] * (int)pow(10, MAX_DIGIT-j-1));
+            printf("num -> %d\n", num);
+        } 
         temp[i] = num;
         list = list->link;
     }
@@ -105,4 +117,13 @@ void display(int *array, int len)
     for (int i = 0; i < len; i++)
         printf("%d ", array[i]);
     puts("");
+}
+
+void display_list(list_pointer list)
+{
+    while (list)
+    {
+        display(list->key, MAX_DIGIT);
+        list = list->link;
+    }
 }

@@ -1,11 +1,13 @@
 /* 7-15_LSDsort.c */
 /* The original implementation from FDSC book */
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #define MAX_DIGIT 3 // number between 0 to 999
 #define RADIX_SIZE 10
 #define LENGTH 10
 
-typedef struct list_node *list_pointer
+typedef struct list_node *list_pointer;
 struct list_node {
     int key[MAX_DIGIT];
     list_pointer link;
@@ -19,10 +21,10 @@ void display(int *array, int len);
 int main(void)
 {
     int array[LENGTH] = {179,208,306,93,859,984,55,9,271,33};
-    list_pointer list = convert(array, LENGTH);
+    list_pointer list = convert2list(array, LENGTH);
     list = radix_sort(list);
-    array = convert2array(list);
-    display(array, LENGHT);
+    int *new_array = convert2array(list);
+    display(new_array, LENGTH);
 
     return 0;
 }
@@ -48,7 +50,7 @@ list_pointer radix_sort(list_pointer ptr)
         }
         /* reestablish the linked list for the next pass */
         ptr = NULL;
-        for (j = RADIX_SIZE-1; j >= 0 j--)
+        for (j = RADIX_SIZE-1; j >= 0; j--)
             if (front[j])
             {
                 rear[j]->link = ptr;
@@ -61,17 +63,19 @@ list_pointer radix_sort(list_pointer ptr)
 list_pointer convert2list(int *array, int len)
 {
     if (len <= 0)
-        return NULL
+        return NULL;
     list_pointer curr;
     list_pointer head = (list_pointer)malloc(sizeof(struct list_node));
-    head->key = array[0];
+    for (int i = 0; i < MAX_DIGIT; i++)
+        head->key[i] = array[0] / pow(RADIX_SIZE, MAX_DIGIT-i-1);
     head->link = NULL;
     curr = head;
     for (int i = 1; i < len; i++)
     {
         list_pointer temp = (list_pointer)malloc(sizeof(struct list_node));
-        temp->key = array[i];
-        temp->next = NULL;
+        for (int j = 0; j < MAX_DIGIT; j++)
+            head->key[j] = array[0] / pow(RADIX_SIZE, MAX_DIGIT-j-1);
+        temp->link = NULL;
         curr->link = temp;
         curr = temp;
     }
@@ -80,6 +84,7 @@ list_pointer convert2list(int *array, int len)
 
 int *convert2array(list_pointer list)
 {
+    // yet done
     int temp[LENGTH];
     int i = 0;
     while (list && i < LENGTH)

@@ -29,7 +29,7 @@ int main(void)
     char poker[SIZE][2] = {"SX","D9","C2","C1","HK","S4","D8","H3"};
     display_card(poker, SIZE);
     Card pokerface = convert(poker, SIZE);
-    //display_list(pokerface);
+    display_list(pokerface);
 
     return 0;
 }
@@ -55,8 +55,8 @@ Card convert(char (*poker)[2], int len)
             head->face = j;
             break;
         }
-    printf("%c %c\n", head_s, head_f);
-    printf("%d %d\n", head->suit, head->face);
+    //printf("%c %c\n", head_s, head_f);
+    //printf("%d %d\n", head->suit, head->face);
     Card curr = head;
     for (int k = 1; k < len; k++)
     {
@@ -75,8 +75,8 @@ Card convert(char (*poker)[2], int len)
                 temp->face = kj;
                 break;
             }
-        printf("%c %c\n", temp_s, temp_f);
-        printf("%d %d\n", temp->suit, temp->face);
+        //printf("%c %c\n", temp_s, temp_f);
+        //printf("%d %d\n", temp->suit, temp->face);
         temp->next = NULL;
         curr->next = temp;
         curr = temp;

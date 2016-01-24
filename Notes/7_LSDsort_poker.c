@@ -17,21 +17,21 @@ struct card_node {
 };
 
 Card radix_sort(Card ptr);
-Card convert(char (*poker)[2], int len);
-char (*reconvert(Card ptr))[2];
+Card convert(char **poker, int len);
+char **reconvert(Card ptr);
 void display_list(Card ptr);
-void display_card(char (*poker)[2], int len);
+void display_card(char **poker, int len);
 
 int main(void)
 {
-    char poker[SIZE][3] = {"SX","D9","C2","C1","HK","S4","D8","H3"};
+    char *poker[SIZE] = {"SX","D9","C2","C1","HK","S4","D8","H3"};
     printf("%s", poker[2]);
     display_card(poker, SIZE);
 
     return 0;
 }
 
-void display_card(char poker[][3], int len)
+void display_card(char **poker, int len)
 {
     for (int i = 0; i < len; i++)
     {

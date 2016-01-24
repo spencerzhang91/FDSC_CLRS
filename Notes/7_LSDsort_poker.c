@@ -9,6 +9,7 @@
 #define SIZE 8        // card number in hand
 
 enum suit {S, H, C, D, X=10, J=11, Q=12, K=13};
+char suits[14] = "_SHCD_____XJQK";
 typedef struct card_node *Card;
 struct card_node {
     int suit;
@@ -40,8 +41,25 @@ Card convert(char **poker, int len)
     head->suit = atoi(poker[0][0]);
     head->face = atoi(poker[0][1]);
     head->next = NULL;
-    
+    Card curr = head;
+    for (int i = 1; i < len; i++)
+    {
+        Card temp = (Card)malloc(sizeof(struct card_node));
+        temp->suit = atoi(poker[i][0]);
+        temp->face = atoi(poker[i][1]);
+        temp->next = NULL;
+        curr->next = temp;
+        curr = temp;
+    }
+    return head;
+}
 
+void display_list(Card ptr)
+{
+    while (ptr)
+    {
+        printf("%c%c ",)
+    }
 }
 
 void display_card(char **poker, int len)

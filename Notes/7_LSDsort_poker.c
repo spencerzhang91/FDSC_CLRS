@@ -36,7 +36,11 @@ Card radix_sort(Card ptr)
 
 Card convert(char **poker, int len)
 {
-    Card hand = (Card)malloc(sizeof(struct card_node));
+    Card head = (Card)malloc(sizeof(struct card_node));
+    head->suit = atoi(poker[0][0]);
+    head->face = atoi(poker[0][1]);
+    head->next = NULL;
+    
 
 }
 

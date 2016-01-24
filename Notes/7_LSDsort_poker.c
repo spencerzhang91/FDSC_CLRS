@@ -11,8 +11,8 @@
 enum suit {S, H, C, D, X=10, J=11, Q=12, K=13};
 typedef struct card_node *Card;
 struct card_node {
-    int suit[SUIT];
-    int face[FACE];
+    int suit;
+    int face;
     Card next;
 };
 
@@ -25,10 +25,19 @@ void display_card(char **poker, int len);
 int main(void)
 {
     char *poker[SIZE] = {"SX","D9","C2","C1","HK","S4","D8","H3"};
-    printf("%s", poker[2]);
     display_card(poker, SIZE);
 
     return 0;
+}
+Card radix_sort(Card ptr)
+{
+    // to be done
+}
+
+Card convert(char **poker, int len)
+{
+    Card hand = (Card)malloc(sizeof(struct card_node));
+
 }
 
 void display_card(char **poker, int len)

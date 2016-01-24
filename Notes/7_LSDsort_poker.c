@@ -9,7 +9,7 @@
 #define SIZE 8        // card number in hand
 
 enum suit {S, H, C, D, X=10, J=11, Q=12, K=13};
-char suits[14] = "_SHCD_____XJQK";
+char DISPLAY[14] = "SHCD000000XJQK";
 typedef struct card_node *Card;
 struct card_node {
     int suit;
@@ -18,14 +18,14 @@ struct card_node {
 };
 
 Card radix_sort(Card ptr);
-Card convert(char **poker, int len);
+Card convert(char (*poker)[2], int len);
 char **reconvert(Card ptr);
 void display_list(Card ptr);
-void display_card(char **poker, int len);
+void display_card(char (*poker)[2], int len);
 
 int main(void)
 {
-    char *poker[SIZE] = {"SX","D9","C2","C1","HK","S4","D8","H3"};
+    char poker[SIZE][2] = {"SX","D9","C2","C1","HK","S4","D8","H3"};
     display_card(poker, SIZE);
 
     return 0;
@@ -35,22 +35,10 @@ Card radix_sort(Card ptr)
     // to be done
 }
 
-Card convert(char **poker, int len)
+Card convert(char (*poker)[2], int len)
 {
     Card head = (Card)malloc(sizeof(struct card_node));
-    head->suit = atoi(poker[0][0]);
-    head->face = atoi(poker[0][1]);
-    head->next = NULL;
-    Card curr = head;
-    for (int i = 1; i < len; i++)
-    {
-        Card temp = (Card)malloc(sizeof(struct card_node));
-        temp->suit = atoi(poker[i][0]);
-        temp->face = atoi(poker[i][1]);
-        temp->next = NULL;
-        curr->next = temp;
-        curr = temp;
-    }
+    
     return head;
 }
 
@@ -58,11 +46,13 @@ void display_list(Card ptr)
 {
     while (ptr)
     {
-        printf("%c%c ",)
+        printf("%c%c ",DISPLAY[ptr->suit], DISPLAY[ptr->face]);
+        ptr = ptr->next;
     }
+    puts("");
 }
 
-void display_card(char **poker, int len)
+void display_card(char (*poker)[2], int len)
 {
     for (int i = 0; i < len; i++)
     {

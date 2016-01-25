@@ -88,7 +88,7 @@ Card convert(char (*poker)[2], int len)
 }
 char **reconvert(Card ptr, int len)
 {
-    
+    // to be done
 }
 
 

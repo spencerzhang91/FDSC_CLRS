@@ -1,7 +1,10 @@
 /* LSDsort_poker.c */
-/* Use LSDsort to sort cards */
+/* Use LSDsort to sort cards. This algorithm is actually aimed at
+sorting the sturct with multiple fields
+*/
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define CMP(x,y) ((x)==(y))
 #define SYMBOL_PART 2  // a card has graphic and numeric fields
 #define SUIT 4         // four suits
@@ -20,7 +23,7 @@ struct card_node {
 
 Card radix_sort(Card ptr);
 Card convert(char (*poker)[2], int len);
-char **reconvert(Card ptr);
+char **reconvert(Card ptr, int len);
 void display_list(Card ptr);
 void display_card(char (*poker)[2], int len);
 
@@ -83,6 +86,11 @@ Card convert(char (*poker)[2], int len)
     }
     return head;
 }
+char **reconvert(Card ptr, int len)
+{
+    
+}
+
 
 void display_list(Card ptr)
 {

@@ -1,7 +1,7 @@
 # simple matrix multiplication algorithm (none sparse matrix)
 # as a supplementary code for 2-9_MatrixMultiplication.c
 
-from matrix_transpose_basic import transpose                # import transpose module
+from 2-8_matrix_transpose_basic import transpose                # import transpose module
 
 def mul_matrix(m1:list, m2:list)->list:
     '''
@@ -32,8 +32,12 @@ def mul_matrix(m1:list, m2:list)->list:
 
 if __name__ == '__main__':
 
-    M1 = [[0,0,0],[0,1,0]]
-    M2 = [[0,0,0,1],[0,1,0,0],[0,0,0,0]]
+    M1 = [[1,2,0,1],
+          [4,3,1,4],
+          [0,1,1,4],
+          [0,0,1,1],
+          [1,2,1,3]]
+    M2 = transpose(M1)
     res = mul_matrix(M1, M2)
     print(res)
     

@@ -27,7 +27,6 @@ void shell_sort(int list[], int n)
                 list[j+step] = list[j];
             list[j+step] = next;
         }
-
 }
 
 void display(int list[], int n)

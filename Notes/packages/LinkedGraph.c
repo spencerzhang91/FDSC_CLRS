@@ -49,7 +49,7 @@ void InsertEdge(LGraph graph, Edge e)
 void buildGraph(LGraph newgra)
 {
     /* This function builds an directed graph adjacency lists by taking
-     pairs of connections */
+     pairs of connections, in an shell interactive way. */
     int row, col, weight;
     printf("Please input a pair of connected nodes(vr-vc:w)"
         " to the %d nodes graph:\n", newgra->vertex_num);
@@ -97,7 +97,7 @@ static void MakeEdge(nodeptr header, nodeptr newnode)
 {
     if (!header)
     {
-        fprintf(stderr, "arg1 of MakeEdge() if NULL.\n");
+        fprintf(stderr, "arg1 of MakeEdge() is NULL.\n");
         exit(EXIT_FAILURE);
     }
     while (header->next)

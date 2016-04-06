@@ -33,5 +33,11 @@ Tree CreateBiTree(char *preseq, char *inseq)
 
 void PostOrderTraversal(Tree root)
 {
-    
+    if (root)
+    {
+        PostOrderTraversal(root->left);
+        PostOrderTraversal(root->right);
+        printf("%d ", root->value);
+    }
 }
+

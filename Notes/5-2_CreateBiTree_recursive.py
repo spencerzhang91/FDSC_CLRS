@@ -74,7 +74,6 @@ def levelOrderTraversal(root):
         queue.pop(0)
 
       
-
 if __name__ == '__main__':
     
     test = CreateBiTree(tree)
@@ -83,6 +82,3 @@ if __name__ == '__main__':
     inorder(test); print()
     postorder(test);print()
     levelOrderTraversal(test)
-
-
-

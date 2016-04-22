@@ -60,12 +60,17 @@ h5 = genLinkedList([v5, v2, v7])
 h6 = genLinkedList([v6, v2, v7])
 h7 = genLinkedList([v7, v3, v4, v5, v6])
 
+# global variables below:
 graph = [h0, h1, h2, h3, h4, h5, h6, h7]
 visited = [False] * 8
 
 
-def dfs(graph):
+def dfs(v):
     """
     This function does depth first search for undirected unweighted graph.
+    Parameter v: the entry node number of the graph.
     """
-    raise NotImplementedError
+    visited[v] = True
+    curr = graph[v]
+    while curr:
+        pass

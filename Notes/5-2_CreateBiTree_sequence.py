@@ -22,7 +22,7 @@ def CreateBiTree(preseq, inseq):
         return None
     else:
         curr = preseq[0]
-        in_left_part, in_right_part = inseq.split(curr) # need to be generalized
+        in_left_part, in_right_part = inseq.split(curr)
         pre_left_part = preseq[1: len(in_left_part)+1]
         pre_right_part = preseq[len(in_left_part)+1: ]
         root = treeNode(curr)

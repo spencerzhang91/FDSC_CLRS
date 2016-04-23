@@ -80,3 +80,4 @@ def dfs(v):
 if __name__ == "__main__":
 
     disLinkedList(h0)
+    disLinkedList(h7)

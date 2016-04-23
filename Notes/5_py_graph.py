@@ -14,11 +14,11 @@ def genLinkedList(nodes):
     """
     if not nodes:
         return None
-    head = nodes[0]
+    head = LinkedListNode(nodes[0])
     head.next = None
     curr = head
     for i in range(1, len(nodes)):
-        temp = nodes[i]
+        temp = LinkedListNode(nodes[i])
         curr.next = temp
         curr = temp
     return head
@@ -49,28 +49,34 @@ The graph structure: (adjacency matrix discription)
 
 """
 # Temporarily set a graph below
-v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = LinkedListNode()
 
-h0 = genLinkedList([v0, v1, v2])
-h1 = genLinkedList([v1, v0, v3, v4])
-h2 = genLinkedList([v2, v0, v5, v6])
-h3 = genLinkedList([v3, v1, v7])
-h4 = genLinkedList([v4, v1, v7])
-h5 = genLinkedList([v5, v2, v7])
-h6 = genLinkedList([v6, v2, v7])
-h7 = genLinkedList([v7, v3, v4, v5, v6])
+h0 = genLinkedList([0, 1, 2])
+h1 = genLinkedList([1, 0, 3, 4])
+h2 = genLinkedList([2, 0, 5, 6])
+h3 = genLinkedList([3, 1, 7])
+h4 = genLinkedList([4, 1, 7])
+h5 = genLinkedList([5, 2, 7])
+h6 = genLinkedList([6, 2, 7])
+h7 = genLinkedList([7, 3, 4, 5, 6])
 
 # global variables below:
 graph = [h0, h1, h2, h3, h4, h5, h6, h7]
 visited = [False] * 8
 
-
+'''
 def dfs(v):
     """
     This function does depth first search for undirected unweighted graph.
     Parameter v: the entry node number of the graph.
     """
     visited[v] = True
+    stack = []
     curr = graph[v]
     while curr:
-        pass
+        stack.append(curr)
+
+'''
+
+if __name__ == "__main__":
+
+    disLinkedList(h0)

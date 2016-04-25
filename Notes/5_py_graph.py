@@ -63,21 +63,32 @@ h7 = genLinkedList([7, 3, 4, 5, 6])
 graph = [h0, h1, h2, h3, h4, h5, h6, h7]
 visited = [False] * 8
 
-'''
+
 def dfs(v):
     """
     This function does depth first search for undirected unweighted graph.
     Parameter v: the entry node number of the graph.
     """
+    print(v, end=" ")
     visited[v] = True
-    stack = []
-    curr = graph[v]
-    while curr:
-        stack.append(curr)
+    stack = [v]
+    curr = graph[v].next
+    while stack:
+        while curr:
+            if not visited[curr.val]:
+                print(curr.val, end=" ")
+                visited[curr.val] = True
+                stack.append(curr.val)
+                curr = graph[curr.val] # this step switch curr to other adj list
+            else:
+                curr = curr.next
+        curr = graph[stack.pop()]
+    print()
+    print(visited)
 
-'''
 
 if __name__ == "__main__":
-
-    disLinkedList(h0)
-    disLinkedList(h7)
+    print(visited)
+    # disLinkedList(h0)
+    # disLinkedList(h7)
+    dfs(0)

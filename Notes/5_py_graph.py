@@ -79,7 +79,7 @@ def dfs(v):
                 print(curr.val, end=" ")
                 visited[curr.val] = True
                 stack.append(curr.val)
-                curr = graph[curr.val] # this step switch curr to other adj list
+                curr = graph[curr.val] # this step switch curr to other linked list head in the adj list.
             else:
                 curr = curr.next
         curr = graph[stack.pop()]

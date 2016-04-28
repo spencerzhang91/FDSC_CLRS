@@ -1,4 +1,5 @@
 # Using python to implement a graph data structure
+# Both dfs and bfs are implemented.
 
 class LinkedListNode:
     def __init__(self, val=0):
@@ -64,7 +65,7 @@ graph = [h0, h1, h2, h3, h4, h5, h6, h7]
 visited = [False] * 8
 
 
-def dfs(v):
+def dfs_visit(v):
     """
     This function does depth first search for undirected unweighted graph.
     Parameter v: the entry node number of the graph.
@@ -91,4 +92,4 @@ if __name__ == "__main__":
     print(visited)
     # disLinkedList(h0)
     # disLinkedList(h7)
-    dfs(0)
+    dfs_visit(0)

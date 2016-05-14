@@ -2,7 +2,8 @@
 #define MAX(a, b) ((a)>(b))? (a): (b)
 #define SWAP(x, y, t) (t)=(x);(x)=(y);(y)=(t)
 
-void max_heapify(int array[], int n, int i);
+void max_heapify1(int array[], int n, int i);
+void max_heapify2(int array[], int n, int i);
 void display(int array[], int n);
 
 int main(void)
@@ -65,7 +66,22 @@ void max_heapify2(int array[], int n, int i)
      is n + 1 (first element of the array is not used.)
      */
     if (i > n/2) return;
-    if (array[i] <)
+
+    int temp;
+    int child = MAX(array[i*2], array[i*2+1]);
+    if (child > array[i])
+    {
+        if (array[i*2] == child)
+        {
+            SWAP(array[i], array[i*2], temp);
+            max_heapify2(array, n, i*2);
+        }
+        else if (array[i*2+1] == child)
+        {
+            SWAP(array[i], array[i*2+1], temp);
+            max_heapify2(array, n, i*2+1);
+        }
+    }
 }
 
 

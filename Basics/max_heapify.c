@@ -5,6 +5,7 @@
 void max_heapify1(int array[], int n, int i);
 void max_heapify2(int array[], int n, int i);
 void display(int array[], int n);
+void create_maxheap(int array[], int n);
 
 int main(void)
 {
@@ -93,4 +94,14 @@ void display(int array[], int n)
         printf("%d ", array[i]);
     }
     printf("\n");
+}
+
+void create_maxheap(int array[], int n)
+{
+    int i = n / 2;
+    while (i > 0)
+    {
+        max_heapify2(array, n, i);
+        i--;
+    }
 }

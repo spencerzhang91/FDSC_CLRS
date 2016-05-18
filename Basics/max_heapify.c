@@ -1,10 +1,11 @@
 #include <stdio.h>
 #define MAX(a, b) ((a)>(b))? (a): (b)
 #define SWAP(x, y, t) (t)=(x);(x)=(y);(y)=(t)
+#define N 10
 
 void max_heapify1(int array[], int n, int i);
 void max_heapify2(int array[], int n, int i);
-void display(int array[], int n);
+void display(int array[], int len);
 void create_maxheap(int array[], int n);
 void heapsort(int array[], int n);
 
@@ -12,7 +13,9 @@ int main(void)
 {
     int A[11] = {0, 2, 1, 7, 8, 45, 11, 23, 9, 74, 4};
     display(A, 11);
-    max_heapify1(A, 10, 2);
+    create_maxheap(A, N);
+    // display(A, 11);
+    heapsort(A, N);
     display(A, 11);
 
     return 0;
@@ -70,7 +73,7 @@ void max_heapify2(int array[], int n, int i)
     if (i > n/2) return;
 
     int temp;
-    int child = MAX(array[i*2], array[i*2+1]);
+    int child = MAX(array[i*2], array[i*2+1]); // here exceed error when n = 2
     if (child > array[i])
     {
         if (array[i*2] == child)
@@ -87,15 +90,16 @@ void max_heapify2(int array[], int n, int i)
 }
 
 
-void display(int array[], int n)
+void display(int array[], int len)
 {
     int i = 0;
-    for (; i < n; i++)
+    for (; i < len; i++)
     {
         printf("%d ", array[i]);
     }
     printf("\n");
 }
+
 
 void create_maxheap(int array[], int n)
 {
@@ -107,8 +111,30 @@ void create_maxheap(int array[], int n)
     }
 }
 
+
 void heapsort(int array[], int n)
 {
-    // Not implemented for now
-    printf("TOBEDONE\n");
+    /* n is the total nodes in the heap
+     * i is the start node to call this function
+     * n is also the last suffix of array, though total length of array
+     is n + 1 (first element of the array is not used.)
+     */
+    create_maxheap(array, n);
+    for (int i = n; i > 1; i--)
+    {
+        int temp;
+        SWAP(array[1], array[i], temp);
+
+        printf("i: %d -> %-5d", i, array[i]);
+        
+        display(array, 11);
+        max_heapify2(array, i-1, 1); // max_heapify1 ok but max_heapify2 bug
+
+        printf("             ");
+        display(array, 11);
+        printf("\n");
+        /* decrement array size by 1, the biggest sorted item is put there
+        so that when calls max_heapify from root, the sorted part remain
+        untouched. */
+    }
 }

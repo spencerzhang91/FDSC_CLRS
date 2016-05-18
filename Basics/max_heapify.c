@@ -72,8 +72,11 @@ void max_heapify2(int array[], int n, int i)
      */
     if (i > n/2) return;
 
-    int temp;
-    int child = MAX(array[i*2], array[i*2+1]); // here exceed error when n = 2
+    int temp, child;
+    if (i*2+1 <= n)
+        child = MAX(array[i*2], array[i*2+1]);
+    else
+        child = array[i*2];
     if (child > array[i])
     {
         if (array[i*2] == child)

@@ -127,15 +127,12 @@ void heapsort(int array[], int n)
     {
         int temp;
         SWAP(array[1], array[i], temp);
-
-        printf("i: %d -> %-5d", i, array[i]);
-        
-        display(array, 11);
+        //printf("i: %d -> %-5d", i, array[i]);
+        //display(array, 11);
         max_heapify2(array, i-1, 1); // max_heapify1 ok but max_heapify2 bug
-
-        printf("             ");
-        display(array, 11);
-        printf("\n");
+        //printf("             ");
+        //display(array, 11);
+        //printf("\n");
         /* decrement array size by 1, the biggest sorted item is put there
         so that when calls max_heapify from root, the sorted part remain
         untouched. */

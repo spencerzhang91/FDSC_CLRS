@@ -6,6 +6,7 @@ void max_heapify1(int array[], int n, int i);
 void max_heapify2(int array[], int n, int i);
 void display(int array[], int n);
 void create_maxheap(int array[], int n);
+void heapsort(int array[], int n);
 
 int main(void)
 {
@@ -104,4 +105,10 @@ void create_maxheap(int array[], int n)
         max_heapify2(array, n, i);
         i--;
     }
+}
+
+void heapsort(int array[], int n)
+{
+    // Not implemented for now
+    printf("TOBEDONE\n");
 }

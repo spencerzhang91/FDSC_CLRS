@@ -78,4 +78,3 @@ void preorder(BiTree root)
         preorder(root->right);
     }
 }
-

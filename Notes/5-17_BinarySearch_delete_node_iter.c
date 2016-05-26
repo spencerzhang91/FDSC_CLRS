@@ -48,6 +48,9 @@ void delete_iter(BiTree root, int number) // something wrong here!
     /* Find the node in the tree if node->data == number, and find proper
     replacement node in node's sub tree, let node->data = replace->data, and
     then acutally delete the replacement node. */
+    // This approach has a flaw that may cause problem if somewhere else has
+    // reference to the deleted node(which is not that should be deleted but)
+    // copied away.
     BiTree delptr;
     BiTree parent, child;
     Pairs found;

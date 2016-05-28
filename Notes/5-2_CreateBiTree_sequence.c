@@ -44,6 +44,7 @@ Tree CreateBiTree(char *preseq, char *inseq)
         // TODO:
         // split inorder sequence into two parts
         // split preorder sequence into two parts
+        // NOT DONE YET
         return NULL;
     }
 }

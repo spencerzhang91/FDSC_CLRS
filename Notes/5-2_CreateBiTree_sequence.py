@@ -47,3 +47,4 @@ if __name__ == "__main__":
     inorder = "BCAEDGHFI"
     tree = CreateBiTree(preorder, inorder)
     traversal(tree)
+    

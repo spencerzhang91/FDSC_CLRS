@@ -35,8 +35,8 @@ def CreateBiTree(infoset):
     if not root:
         return None
     else:
-        root.left = CreateBTree(leftsub)
-        root.right = CreateBTree(rightsub)
+        root.left = CreateBiTree(leftsub)
+        root.right = CreateBiTree(rightsub)
     return root
 
 def postorder(root):
@@ -83,4 +83,3 @@ if __name__ == '__main__':
     postorder(test);print()
     levelOrderTraversal(test)
 
-    

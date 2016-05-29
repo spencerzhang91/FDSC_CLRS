@@ -107,8 +107,4 @@ def iter_refinedp2(root):
 if __name__ == '__main__':
     
     test = CreateBiTree(tree)
-
     iter_refinedp2(test)
-
-
-

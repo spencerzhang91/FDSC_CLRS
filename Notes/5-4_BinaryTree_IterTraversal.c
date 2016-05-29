@@ -1,8 +1,6 @@
 /* Preorder, inorder and postorder traversal algorithm of binary tree */
 /* Using stack ADT to implement iteratively */
-/* This file need to be compared with file '5-4_iterBiTreeTraversal.c'
-since this two is identical in nature and comparable in implementation
-I personaly reckon this version as better implemented */
+
 #define MAXSIZE 10                     // the maxsize of tree nodes
 typedef struct treeNode *BiTree;
 struct treeNode {

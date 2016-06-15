@@ -56,6 +56,7 @@ Supports insert, find, and delete-min operations in O(lg n) time.
         self.rebalance(node)
 
     def rebalance(self, node):
+        # start from inserted leaf to root, updating height and rebalancing tree as going up.
         while node is not None:
             update_height(node)
             if height(node.left) >= 2 + height(node.right):
